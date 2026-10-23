@@ -31,8 +31,8 @@ OSI-goedgekeurd, met een rechtsgeldige Nederlandse tekst.
 
 ## Waar we staan
 
-Drie blokken: wat werkt en gemeten is, wat een aanvraag zou betalen, en wat daarna
-komt. Elk cijfer hieronder is terug te vinden in een bestand in deze repo.
+Wat werkt en gemeten is, en wat daarna komt. Elk cijfer hieronder is terug te vinden in
+een bestand in deze repo.
 
 ### Werkt
 
@@ -67,23 +67,6 @@ komt. Elk cijfer hieronder is terug te vinden in een bestand in deze repo.
 - **Toegang en verantwoording.** Elke bron draagt een expliciete harvest- en
   exposure-posture, fail-closed gevalideerd ([Toegangsbeleid](#toegangsbeleid)).
   Modellen: open gewichten, zelf gehost; data op een eigen server in de EU.
-
-### Betaalt de aanvraag
-
-Wat er gevraagd wordt is steeds een nieuw, afgebakend stuk; niets hieronder is al
-gebouwd of betaald. Details per fonds in
-[`funding/samenvatting-financiering-nl.md`](funding/samenvatting-financiering-nl.md).
-
-- **SIDN fonds Pioniers** (≤ €10k, ≤ 6 maanden): één open, herbruikbaar gereedschap. De
-  kandidaten zijn de Nederlandse analyzer met de stemmerfix als OpenSearch- of
-  Elasticsearch-pakket, of een machineleesbaarheidsscan van Woo-publicaties.
-- **MCOIG call 2027** (≤ €50k): een tweede bron van een bestuursorgaan live aansluiten
-  via het onboarding-scherm, met die organisatie als landingsplek, en de cross-corpus
-  zoekopdracht daarna.
-- **Innovatiebudget Digitale Overheid 2027** (via twee overheden, één regiepartij): de
-  roadmap-workstreams die het systeem van één beheerder naar meerdere organisaties
-  brengen: self-healing (W7), scheduling met dagelijks overzicht (W8) en de
-  correctielus op kaartniveau (W9).
 
 ### Komt daarna
 
