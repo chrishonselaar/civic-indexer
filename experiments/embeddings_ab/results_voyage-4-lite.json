@@ -1,0 +1,15 @@
+{
+  "model": "voyage-4-lite",
+  "key": "voyage-4-lite",
+  "dim": 1024,
+  "n_pool": 42892,
+  "n_queries": 3000,
+  "recall_at_10": 0.554,
+  "recall_at_20": 0.622,
+  "recall_at_100": 0.7493,
+  "ndcg_at_10": 0.4038,
+  "mrr_at_100": 0.3643,
+  "embed_passages_s": 1391.8,
+  "embed_queries_s": 12.8,
+  "api": "voyage"
+}

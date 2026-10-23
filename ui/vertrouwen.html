@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>civic-indexer — hoe dit werkt en wat eruit mag</title>
+  <link rel="stylesheet" href="bot.css">
+  <style>
+    table { border-collapse: collapse; width: 100%; margin: 0 0 1rem; font-size: .93rem; }
+    th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    th { font-weight: 600; }
+    .kicker { color: var(--muted); font-size: .85rem; text-transform: uppercase; letter-spacing: .05em; margin: 0 0 .25rem; }
+    .open { border-left: 3px solid var(--accent); padding: .5rem .9rem; margin: 0 0 1rem; color: var(--muted); font-size: .93rem; }
+    .scroll { overflow-x: auto; }
+  </style>
+</head>
+<body>
+<main>
+
+<p class="kicker">civic-indexer · demo · verantwoording</p>
+<h1>Hoe dit werkt en wat eruit mag</h1>
+<p class="lead">
+  Deze pagina beantwoordt de vragen die een jurist, een privacy-officer of een
+  informatiebeheerder stelt voordat hij zijn corpus aansluit: welke modellen draaien er,
+  waar staat de data, wat verlaat het systeem, en hoe krijg je een document eruit.
+  Elk antwoord verwijst naar de plek in de code of het ontwerp waar het is vastgelegd.
+</p>
+
+<h2>Waar het draait</h2>
+<ul>
+  <li><strong>Eén server, in de EU.</strong> Applicatie, zoekindex en de ledger-database
+    staan op een eigen server in Duitsland. Geen cloudzoekdienst, geen beheerde
+    vectordatabase, geen datadeling met een platform.</li>
+  <li><strong>Tekstherkenning op tijdelijke GPU-machines</strong>, gehuurd per klus en na
+    afloop vernietigd. Die machines worden opgevraagd met een landenlijst die tot Europa
+    beperkt is.</li>
+  <li><strong>De ledger is de grondwaarheid, de zoekindex is een afgeleide.</strong> De
+    index kan altijd worden weggegooid en opnieuw gebouwd. Dat is geen detail: het is
+    wat maakt dat een verwijderbeslissing of een strengere instelling ook echt doorwerkt
+    in wat er morgen nog te vinden is.</li>
+</ul>
+
+<h2>Welke modellen, en van wie</h2>
+<table>
+  <thead><tr><th>Waarvoor</th><th>Model</th><th>Waar</th></tr></thead>
+  <tbody>
+    <tr><td>Tekstherkenning van scans</td><td>MinerU 2.5 Pro, open gewichten</td><td>eigen GPU-machine, Europa</td></tr>
+    <tr><td>Betekenisvectoren voor zoeken</td><td>bge-m3, open gewichten</td><td>eigen server</td></tr>
+    <tr><td>Trefwoordzoeken en facetten</td><td>OpenSearch, geen model</td><td>eigen server</td></tr>
+    <tr><td>Herrangschikking (rerank)</td><td>Voyage rerank-2.5, externe dienst</td><td><strong>staat uit op deze demo</strong></td></tr>
+  </tbody>
+</table>
+<p>
+  Er zit <strong>geen taalmodel in de zoekketen</strong>. Een zoekopdracht wordt niet naar
+  een chatmodel gestuurd en er wordt geen antwoord gegenereerd; u krijgt documenten, met
+  vindplaats. Het enige externe onderdeel dat het ontwerp kent is de herrangschikker, en
+  die is <strong>per bron</strong> opt-in: alleen `woo_besluiten` staat hem toe, en op deze
+  demo is er geen sleutel geïnstalleerd, dus hij draait nergens. Wat u hier ziet is
+  hybride zoeken: trefwoorden plus vectoren, allebei lokaal.
+</p>
+
+<h2>Wat er per bron naar buiten mag</h2>
+<p>
+  Elke bron draagt een expliciete, door een mens genomen beslissing op twee assen:
+  mogen we het ophalen, en wat mag ervan getoond worden. De tweede as heeft vier standen,
+  en de stand wordt afgedwongen op twee plaatsen: bij het bouwen van de index en bij het
+  beantwoorden van een zoekopdracht.
+</p>
+<div class="scroll">
+<table>
+  <thead><tr><th>Bron</th><th>Wat het is</th><th>Stand</th><th>Wat een bezoeker krijgt</th></tr></thead>
+  <tbody>
+    <tr><td><code>woo_besluiten</code></td><td>Woo-besluiten van de Rijksoverheid</td><td>T2</td><td>volledige tekst uit onze kopie</td></tr>
+    <tr><td><code>tuchtrecht</code></td><td>tuchtuitspraken, ECLI-gekend</td><td>T2</td><td>volledige tekst uit onze kopie</td></tr>
+    <tr><td><code>haarlem_raad</code></td><td>raadsinformatie Haarlem</td><td>T1</td><td>zoeken en fragmenten, doorlink naar de bron</td></tr>
+    <tr><td><code>vlaardingen_raad</code></td><td>raadsinformatie Vlaardingen</td><td>T1</td><td>zoeken en fragmenten, doorlink naar de bron</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">
+  De twee ongebruikte standen: <strong>T0</strong> toont alleen titel, datum en uitgever met
+  een link terug, geen tekst; <strong>T3</strong> zou ook afgeleide artefacten (OCR-uitvoer,
+  fragmenten, vectoren) via de API herbruikbaar maken en vraagt een uitdrukkelijke licentie.
+  Geen bron staat op T3. Een bron terugzetten naar T0 haalt de tekst en de fragmenten
+  daadwerkelijk uit de index, ook bij een herbouw; dat is getest.
+</p>
+
+<h2>Persoonsgegevens</h2>
+<p>
+  Deze corpora zijn door de uitgever openbaar gemaakt en waar nodig aan de bron gelakt of
+  gepseudonimiseerd. Dat is niet hetzelfde als "er staan geen persoonsgegevens in", en dit
+  project doet daar geen aanname over maar een meting.
+</p>
+<ul>
+  <li>Voor <code>woo_besluiten</code> is een <strong>volledige telling</strong> gedaan over
+    alle documenten waarvan toen tekst was, niet een steekproef. Uitkomst: laag residu, met
+    twee scherpe randgevallen — handhavingsdossiers zijn wél correspondentie met
+    particulieren, en in één publicatie staat een waarschijnlijk niet-gelakt
+    burgerservicenummer. Dat laatste is bij het publicerende ministerie gemeld.</li>
+  <li><code>tuchtrecht</code> betreft <strong>benoemde beroepsbeoefenaren</strong>. Dat is
+    de reden dat deze bron geen enkele externe verwerker toestaat: de tekst mag het systeem
+    niet verlaten, ook niet om beter te ranken.</li>
+  <li>De demo-server staat op <strong>noindex</strong>. Er is een
+    <a href="/robots.txt">robots.txt</a> die alles verbiedt en elk antwoord draagt een
+    header die indexering weert, zodat deze corpora niet via een zoekmachine vindbaar
+    worden.</li>
+</ul>
+
+<h2>Een document eruit halen</h2>
+<p>
+  Wie vindt dat een document hier niet hoort — de uitgever, of iemand die erin voorkomt —
+  meldt het via de <a href="/bot">contactpagina</a>. Het adres daar wordt gelezen en
+  beantwoord door een mens. Een melding wordt met de hand afgehandeld; er is geen
+  automatische verwijderknop en die wordt hier ook niet beloofd.
+</p>
+<p>
+  Technisch is het één opdracht (<code>civic suppress &lt;urn&gt; --reason "..."</code>) die
+  het document uit de zoekindex haalt <strong>en het eruit houdt bij elke latere
+  herbouw</strong>. Dat laatste is de eigenschap die telt: een verwijdering die een
+  herbouw niet overleeft, is geen verwijdering.
+</p>
+
+<h2>Waarom wij deze bronnen ophalen</h2>
+<p>
+  Alle vier de bronnen staan op hosts waarvan het <code>robots.txt</code>-bestand alle
+  robots weert. Dat staat hier omdat het klopt, niet omdat het goed uitkomt. De afweging
+  is per bron opgeschreven en door een mens genomen, niet door de software:
+</p>
+<ul>
+  <li>Het gaat om <strong>wettelijk openbare</strong> documenten, gepubliceerd omdat de wet
+    dat voorschrijft.</li>
+  <li>Bij open.overheid.nl geeft hetzelfde bestand <strong>Googlebot wel</strong> toegang
+    tot precies de pagina's die wij indexeren. Dat is een keuze wélke machine mag, niet
+    een besluit dat machines niet mogen.</li>
+  <li>De crawler <strong>identificeert zich</strong> met een adres dat werkt, houdt zich aan
+    een gedeclareerd tempo (ongeveer één verzoek per seconde), en de contactpagina bevat
+    een kant-en-klare regel waarmee een beheerder ons alsnog blokkeert. Wie dat doet,
+    wordt gevolgd.</li>
+  <li>Bij de twee raadsbronnen is de afweging <strong>smaller</strong> uitgevallen: daar
+    bestaat een aangewezen hergebruikkanaal (Open Raadsinformatie) en dat is de primaire
+    route; de leverancier-API wordt alleen gebruikt voor wat dat kanaal aantoonbaar niet
+    levert.</li>
+</ul>
+<p class="note">
+  De volledige redenering, inclusief de argumenten die ertegen pleiten, staat in
+  <code>design/access-posture.md</code> en per bron in het manifest van die bron.
+</p>
+
+<h2>Wat hier niet af is</h2>
+<div class="open">
+  <p style="margin-bottom:.5rem">
+    Een verantwoordingspagina die alleen het goede nieuws bevat, is geen verantwoording.
+    Dit staat open:
+  </p>
+  <ul style="margin-bottom:0">
+    <li>De telling van persoonsgegevens dekt <strong>niet</strong> de documenten die later
+      zijn overgenomen uit een eerder project. Dat deel is nog niet opnieuw gescand.</li>
+    <li>Voor <code>tuchtrecht</code> en <code>haarlem_raad</code> is zo'n telling
+      <strong>nog niet gedaan</strong>; hun manifest zegt dat ook, met zoveel woorden.</li>
+    <li>Voor geen enkele bron is een <strong>licentie</strong> vastgesteld. Daarom staat
+      geen bron op T3 en wordt niets van hier als herbruikbare dataset aangeboden.</li>
+    <li>Het systeem <strong>repareert zichzelf nog niet</strong> als een bron verandert; het
+      stopt dan veilig en meldt dat. Dat is bewust die kant op gebouwd, maar het is de helft
+      van de belofte.</li>
+  </ul>
+</div>
+
+<p class="note">
+  Bijgewerkt 8 september 2026. <a href="/">Terug naar zoeken</a> ·
+  <a href="/bewijs">Het bewijs</a> · <a href="/bot">Over de crawler</a>
+</p>
+
+</main>
+</body>
+</html>

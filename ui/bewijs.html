@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>civic-indexer — het bewijs, controleerbaar</title>
+  <link rel="stylesheet" href="bot.css">
+  <style>
+    table { border-collapse: collapse; width: 100%; margin: 0 0 1rem; font-size: .93rem; }
+    th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    th { font-weight: 600; }
+    td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    tr.total td { font-weight: 600; }
+    .win { font-weight: 600; }
+    .kicker { color: var(--muted); font-size: .85rem; text-transform: uppercase; letter-spacing: .05em; margin: 0 0 .25rem; }
+    .warn { border-left: 3px solid var(--accent); padding: .5rem .9rem; margin: 0 0 1rem; color: var(--muted); font-size: .93rem; }
+    .scroll { overflow-x: auto; }
+  </style>
+</head>
+<body>
+<main>
+
+<p class="kicker">civic-indexer · demo · bewijs</p>
+<h1>Beter dan het eigen zoekvak van de bron, en hoe je dat zelf nakijkt</h1>
+<p class="lead">
+  Eén meting, geblindeerd beoordeeld, met de vragen, de oordelen en het script erbij.
+  Geen cijfer op deze pagina komt ergens anders vandaan dan uit
+  <code>experiments/external_comparison/</code> in de repo.
+</p>
+
+<h2>Het resultaat</h2>
+<p>
+  Twaalf zoekvragen, gesteld aan onze engine en aan de zoekfunctie van
+  <a href="https://tuchtrecht.overheid.nl/">tuchtrecht.overheid.nl</a>, over dezelfde
+  2.504 tuchtuitspraken uit 2025. De top-10 van elk systeem is samengevoegd tot één pool,
+  elk document in die pool is blind beoordeeld op relevantie (0, 1 of 2), en daarna is
+  elke ranglijst tegen dezelfde oordelen gescoord.
+</p>
+
+<table>
+  <thead><tr><th>Systeem</th><th class="n">nDCG@10</th><th class="n">P@10</th></tr></thead>
+  <tbody>
+    <tr><td>tuchtrecht.overheid.nl, eigen zoekfunctie</td><td class="n">0,383</td><td class="n">0,317</td></tr>
+    <tr><td>civic-indexer, alleen BM25 (trefwoorden)</td><td class="n">0,485</td><td class="n">0,367</td></tr>
+    <tr class="total"><td>civic-indexer, hybride (BM25 + bge-m3-vectoren)</td><td class="n">0,656</td><td class="n">0,450</td></tr>
+  </tbody>
+</table>
+<p class="note">
+  nDCG@10 weegt hoe hoog de relevante documenten in de top-10 staan (1,000 = perfect).
+  P@10 telt alleen documenten met oordeel 2 ("beantwoordt de vraag").
+</p>
+
+<p>
+  Twee cijfers die meer zeggen dan nDCG over wat een gebruiker krijgt: gemiddeld
+  <strong>4,5 duidelijk relevante uitspraken in onze top-10 tegen 3,2</strong> bij hen, en op
+  <strong>3 van de 12 vragen bevatte hun eerste pagina niets relevants</strong>
+  (<em>medicatiefout</em>, <em>dierenarts … laten inslapen</em>, <em>mag een huisarts weigeren een verwijzing te geven</em>).
+  Bij ons was dat 0 van 12.
+</p>
+
+<h2>Waar de winst zit</h2>
+<p>
+  Niet in het herkennen van trefwoorden. Op losse termen vinden beide systemen vrijwel
+  dezelfde documenten (<em>tandarts</em>: 66 om 66; <em>dossiervoering</em>: 77 om 77). Het verschil
+  zit in de vragen die iemand stelt die de vakterm niet kent:
+</p>
+
+<table>
+  <thead><tr><th>Soort vraag</th><th>Voorbeeld</th><th class="n">BM25</th><th class="n">hybride</th><th class="n">zij</th></tr></thead>
+  <tbody>
+    <tr><td>trefwoord</td><td><em>tandarts</em></td><td class="n">0,636</td><td class="n win">0,754</td><td class="n">0,467</td></tr>
+    <tr><td>begrip</td><td><em>onvoldoende dossiervoering</em></td><td class="n">0,701</td><td class="n win">0,730</td><td class="n">0,516</td></tr>
+    <tr><td>gewone taal</td><td><em>klacht over te late diagnose van kanker</em></td><td class="n">0,223</td><td class="n win">0,538</td><td class="n">0,226</td></tr>
+  </tbody>
+</table>
+
+<p>
+  Op vragen in gewone taal zijn onze trefwoordzoeker en hun zoekfunctie even goed, en
+  allebei bijna onbruikbaar (0,223 tegen 0,226). De vectorcomponent verdubbelt dat ruim.
+  Hun <code>text=</code> is bovendien een filter, geen rangschikking: de treffers komen
+  in omgekeerd chronologische volgorde. Wie <em>onvoldoende dossiervoering</em> zoekt, krijgt 67
+  uitspraken op datum en moet ze lezen. Deze vergelijking is dus rangschikking tegen
+  een lijst op datum, niet de ene ranker tegen de andere. Dat staat hier omdat het er hoort.
+</p>
+
+<h2>Per vraag</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>#</th><th>Vraag</th><th>soort</th><th class="n">BM25</th><th class="n">hybride</th><th class="n">zij</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>tandarts</td><td>trefwoord</td><td class="n">1,000</td><td class="n win">1,000</td><td class="n">0,875</td></tr>
+    <tr><td>2</td><td>doorhaling</td><td>trefwoord</td><td class="n">0,907</td><td class="n win">0,596</td><td class="n">0,527</td></tr>
+    <tr><td>3</td><td>medicatiefout</td><td>trefwoord</td><td class="n">0,000</td><td class="n win">0,666</td><td class="n">0,000</td></tr>
+    <tr><td>4</td><td>onvoldoende dossiervoering</td><td>begrip</td><td class="n">0,669</td><td class="n win">0,750</td><td class="n">0,237</td></tr>
+    <tr><td>5</td><td>seksueel grensoverschrijdend gedrag</td><td>begrip</td><td class="n">0,934</td><td class="n win">1,000</td><td class="n">0,909</td></tr>
+    <tr><td>6</td><td>informed consent ontbrak</td><td>begrip</td><td class="n">0,677</td><td class="n win">0,640</td><td class="n">0,414</td></tr>
+    <tr><td>7</td><td>declaratiegeschil advocaat</td><td>begrip</td><td class="n">0,524</td><td class="n win">0,528</td><td class="n">0,504</td></tr>
+    <tr><td>8</td><td>mag een huisarts weigeren een verwijzing te geven</td><td>gewone taal</td><td class="n">0,399</td><td class="n win">0,592</td><td class="n">0,270</td></tr>
+    <tr><td>9</td><td>klacht over te late diagnose van kanker</td><td>gewone taal</td><td class="n">0,400</td><td class="n win">0,457</td><td class="n">0,425</td></tr>
+    <tr><td>10</td><td>notaris passeerde een akte bij belangenverstrengeling</td><td>gewone taal</td><td class="n">0,000</td><td class="n win">0,574</td><td class="n">0,122</td></tr>
+    <tr><td>11</td><td>dierenarts die een paard onnodig heeft laten inslapen</td><td>gewone taal</td><td class="n">0,000</td><td class="n win">0,242</td><td class="n">0,000</td></tr>
+    <tr><td>12</td><td>accountant keurde de jaarrekening goed zonder voldoende controle</td><td>gewone taal</td><td class="n">0,315</td><td class="n win">0,826</td><td class="n">0,315</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">
+  Hybride wint op 10 van de 12 vragen en speelt gelijk op 2 (vraag 7 en 9, verschil
+  onder 0,05); op geen enkele vraag verliest hij. Op vraag 2 (<em>doorhaling</em>) wint
+  onze eigen BM25 van onze hybride. Twaalf vragen is twaalf vragen. De winst is breed,
+  niet gedragen door één uitschieter, maar het is één corpus, één jaar, één
+  beoordelaarsmodel.
+</p>
+
+<h2>Hoe er gemeten is</h2>
+<ul>
+  <li><strong>Zelfde documenten aan beide kanten.</strong> Vóór de meting is voor 2025 de volledige
+    uitspraaktekst opgehaald (mediaan 589 → 26.250 tekens per document). Zonder die stap
+    had de meting onze ontbrekende tekst gemeten, niet onze rangschikking. Het venster
+    telt 2.504 uitspraken, aan beide kanten hetzelfde aantal.</li>
+  <li><strong>Hun sterkste instelling.</strong> <code>ftsscope=uitspraak</code>, zoeken in de volledige
+    tekst, hun eigen standaard.</li>
+  <li><strong>Blind.</strong> De beoordelaar (Claude Haiku 4.5) ziet een vraag en een geschudde zak
+    documenten, en weet niet welk systeem wat vond.</li>
+  <li><strong>Eén tekstbron voor het oordeel.</strong> Elk document in de pool wordt gelezen uit onze
+    geëxtraheerde tekst, ook de documenten die alleen hun zoekfunctie vond.</li>
+  <li><strong>Pooled, TREC-stijl.</strong> Alleen documenten in de pool zijn beoordeeld. De pool
+    bevatte ook de top-10 van een vierde, experimenteel systeem (een open-weights reranker
+    die dit project <em>niet</em> levert); daardoor is de pool groter en de maat strenger voor
+    iedereen, inclusief hen. Cijfers zijn alleen <strong>binnen deze run</strong> vergelijkbaar.</li>
+</ul>
+
+<div class="warn">
+  Wat hier <strong>niet</strong> staat: een cijfer voor herrangschikking (rerank). De gemeten
+  rerank-winst komt van een model dat dit project na een eigen A/B heeft afgewezen, en de
+  reranker die wél geselecteerd is mag op dit corpus niet draaien (het manifest van
+  tuchtrecht staat geen externe verwerker toe). Een demo die met dat cijfer schittert, claimt
+  iets wat niet wordt geleverd. De volledige afweging staat in
+  <code>experiments/external_comparison/FINDINGS.md</code>, §5.
+</div>
+
+<h2>Zelf herhalen</h2>
+<p>
+  Met de repo, een Postgres met het tuchtrecht-corpus voor 2025 en een OpenSearch-projectie
+  (<code>README.md</code>, Quickstart) duurt de meting minder dan een uur. Hun kant wordt op
+  ~1 verzoek per seconde bevraagd, in totaal ~40 verzoeken.
+</p>
+<pre><code># beide kanten ophalen: onze API en hun zoekpagina, zelfde venster
+uv run python experiments/external_comparison/fetch_sides.py
+
+# blind beoordelen (eenmalig, Anthropic-key nodig) en alle runs scoren
+uv run --with anthropic python experiments/external_comparison/judge.py</code></pre>
+<p>
+  Bestanden: <code>queries.jsonl</code> (de twaalf vragen), <code>runs.json</code> (per systeem de
+  top-10 als ECLI's), <code>qrels.json</code> (de oordelen per ECLI, herbruikbaar zonder
+  opnieuw te beoordelen), <code>results.md</code> (de scores). Er staat geen uitspraaktekst
+  in de repo: de oordelen zijn ECLI → cijfer, meer niet.
+</p>
+
+<h2>Tweede, kleiner bewijs: de stemmerfout</h2>
+<p>
+  De vergelijking bracht ook een fout in onze eigen Nederlandse analyzer aan het licht.
+  De standaard Dutch-snowball-stemmer van OpenSearch en Elasticsearch stuurt enkelvoud en
+  meervoud naar <em>verschillende</em> stammen:
+</p>
+<pre><code>tandarts    -&gt; ['tandart']      # de -s wordt gelezen als meervoud
+tandartsen  -&gt; ['tandarts']     # de -en wordt afgehaald</code></pre>
+<p>
+  Ze ontmoeten elkaar dus nooit. Zoeken op <em>tandartsen</em> vond <strong>20 van de 66</strong>
+  documenten die <em>tandarts</em> vindt; het bronportaal vond alle 66. Na de fix
+  (<code>keyword_repeat</code> + <code>remove_duplicates</code> rond de stemmer, zodat de
+  geschreven vorm naast de stam wordt geïndexeerd) is het <strong>66 van 66</strong>, en geen
+  andere regel van de morfologieproef veranderde. De configuratie is elf regels en werkt
+  in elke OpenSearch- of Elasticsearch-index met de Dutch analyzer:
+</p>
+<pre><code>"dutch_analyzer": {
+  "type": "custom",
+  "tokenizer": "standard",
+  "filter": [
+    "lowercase",
+    "dutch_stop",
+    "keyword_repeat",      # geschreven vorm naast de stam
+    "dutch_override",      # de ingebouwde uitzonderingen (kind/kinderen)
+    "dutch_stemmer",
+    "remove_duplicates"    # paar samenvouwen waar stam == geschreven vorm
+  ]
+}</code></pre>
+<p class="note">
+  Bron: <code>engine/project/mappings.py</code>; de proef staat in
+  <code>experiments/external_comparison/morphology.md</code>
+  (<code>morphology_probe.py</code> herhaalt hem). De fix verplaatste het hoofdcijfer niet:
+  de kloof met hun zoekfunctie was nooit vooral morfologisch.
+</p>
+
+<h2>Wat dit wel en niet aantoont</h2>
+<ul>
+  <li><strong>Wel:</strong> onze hybride zoekopdracht verslaat de eigen zoekfunctie van de bron
+    op dezelfde vraag, in hetzelfde venster, onder een blind, gepoold oordeel. De winst is
+    het grootst waar civic zoeken het nuttigst is: bij iemand die zijn probleem in eigen
+    woorden beschrijft.</li>
+  <li><strong>Niet:</strong> dat dit voor elke bron geldt. Eén corpus, één jaar, twaalf vragen.
+    De andere drie bronnen zijn niet tegen hun oorsprong gemeten. Een tweede meting tegen
+    open.overheid.nl (Woo-besluiten, parameter <code>zoektekst</code>) is voorbereid en
+    wacht op dekking van het corpus, niet op een beslissing.</li>
+  <li><strong>Niet:</strong> dat onze trefwoordzoeker beter is. BM25 alleen scoort 0,485 tegen
+    hun 0,383, maar dat is gedragen door trefwoord- en begripvragen; op gewone taal
+    speelt hij gelijk met een systeem dat helemaal niet rangschikt.</li>
+</ul>
+
+<p class="note">
+  Meting van 29 juli 2026. <a href="/">Terug naar zoeken</a> ·
+  <a href="/bot">Over de crawler</a>
+</p>
+
+</main>
+</body>
+</html>

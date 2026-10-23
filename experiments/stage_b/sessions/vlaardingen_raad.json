@@ -1,0 +1,36 @@
+{
+  "source_id": "vlaardingen_raad",
+  "intent": "council decisions findable by residents",
+  "phase": 4,
+  "interventions": [
+    {
+      "category": "DIAGNOSIS",
+      "note": "Probe 0 fetches robots.txt but only greps for \"Sitemap:\" lines; it never inspects Disallow directives. Ad-hoc curl found BOTH vlaardingen.raadsinformatie.nl and api.notubiz.nl (the host we actually harvest) serve \"User-agent: * / Disallow: /\". The flow's Phase 1 requires robots directives be recorded in a manifest policy: block for the admin at the plan gate, but no manifest in the repo (woo_besluiten, tuchtrecht, haarlem_raad, vlaardingen_raad) has a policy: block at all — so 4 prior onboardings shipped without the robots posture ever being surfaced. Battery-extension ticket: probe 0 should parse Disallow/Crawl-delay per host and emit a policy_flags section; manifest validation should require a policy: block whenever any harvested host disallows.",
+      "phase": 1
+    },
+    {
+      "category": "DIAGNOSIS",
+      "note": "Probe 0 is host-scoped: it tests SRU/OAI/CKAN/sitemap/XHR on the provider's own hosts only, so it structurally cannot see a THIRD-PARTY AGGREGATOR that republishes the same corpus. Ad-hoc web search + curl found Open Raadsinformatie (Open State Foundation/VNG) live at https://api.openraadsinformatie.nl/v1/elastic/_search with index ori_vlaardingen_20250514092617 = 168,805 docs, of which 16,583 MediaObjects carry EXTRACTED FULL TEXT plus original_url = api.notubiz.nl/document/{id}/{version} — i.e. joinable on the exact natural_key this manifest uses. Probe 0 reported verdict \"no_bulk_surface\" with recommended=null, which is wrong in substance: a metadata+content-bearing bulk surface for this corpus exists. This is the tuchtrecht SRU lesson recurring one level up (aggregator instead of provider endpoint). Battery-extension ticket: probe 0 needs an aggregator-registry step (ORI/openbesluitvorming, data.overheid.nl, CKAN federations) keyed by corpus type, not just by provider host.",
+      "phase": 1
+    },
+    {
+      "category": "DIAGNOSIS",
+      "note": "Confirmed dead projection field, inherited from haarlem_raad into vlaardingen_raad. engine/strategies/notubiz_events.py:218 hard-codes meeting_context.gremium_name = None with the comment \"gremia lookup joined at enrichment time\", but NO enrichment module exists in engine/ (\"enriched\" appears only as a stage rank in envelope.py:9 and a stage filter in project/projector.py:47). The manifest declares index.projection.publisher = meeting_context.gremium_name AND lists publisher in index.facets, so projector.py:63 reads a permanently-null path: the publisher facet is empty for 100% of documents in both Notubiz manifests. This directly damages the stated intent (residents filtering council decisions by which body decided — Raad vs commissie vs College is the single most useful facet here). gremium_id IS captured (notubiz_events.py:191 from ev.gremium.id), so the remedy is cheap: fetch the per-org gremia list once (endpoint exists; proven by experiments/stage_b/probes/haarlem/gremia.json) and join id->title, either as a manifest enrichment lookup table or in the strategy. Battery-extension ticket: the battery has NO probe that verifies declared projection paths and facets actually populate end-to-end — probe 5 tests filter vocabulary on the SOURCE side only. Add a \"projection liveness\" probe asserting every index.projection path and every index.facets field is non-null for a minimum share of the test slice; this class of defect is invisible to source-side probing and survived a full prior onboarding.",
+      "phase": 1
+    }
+  ],
+  "intervention_count": 3,
+  "gate": {
+    "chosen_surface": "paged_json_api (notubiz_events on api.notubiz.nl, org 262)",
+    "status": "allowed",
+    "acceptable": true,
+    "reason": "surface 'paged_json_api (notubiz_events on api.notubiz.nl, org 262)' allowed (not a scraper; no bulk surface superseded).",
+    "justification": null,
+    "recommended": null,
+    "obligations": []
+  },
+  "cost_eur": 0.02,
+  "cost_projected_eur": 2.0,
+  "agent_cost_usd": 3.4007037499999995,
+  "acceptable": true
+}

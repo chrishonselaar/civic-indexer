@@ -1,0 +1,20 @@
+# v2 = v1 + PyMuPDF + the turnkey PDF wrapper, so a run collapses to:
+#   docker run --rm --gpus all -v "$PWD/pdfs:/data/in" -v "$PWD/out:/data/out" \
+#     ghcr.io/chrishonselaar/ocr-mineru:v2 python ocr_pdf.py /data/in /data/out
+# No bind-mounted script, no boot-time pip install. Model weights still pull from HF on
+# first run (~2.2 GB / ~45 s) — mount -v hf-cache:/root/.cache/huggingface to persist.
+#
+# Built FROM v1 (not rebuilt from scratch) so only these two small layers are new; the
+# 23.9 GB vLLM base is unchanged and reused. Needs healthy PyPI only for the ~20 MB
+# PyMuPDF wheel.
+#
+# Build + push (from a host with Docker + the v1 image pullable):
+#   sudo docker build -f experiments/ocr_ab/Dockerfile.v2 -t ghcr.io/chrishonselaar/ocr-mineru:v2 experiments/ocr_ab
+#   gh auth token | sudo docker login ghcr.io -u chrishonselaar --password-stdin   # write:packages
+#   sudo docker push ghcr.io/chrishonselaar/ocr-mineru:v2
+FROM ghcr.io/chrishonselaar/ocr-mineru:v1
+
+RUN pip install --no-cache-dir pymupdf
+
+COPY ocr_pdf.py /root/ocr_pdf.py
+WORKDIR /root

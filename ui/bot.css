@@ -1,0 +1,85 @@
+/* Operator-facing crawler info page (ui/bot.html, served at /bot).
+   Deliberately plain: this page is read once, in a hurry, by someone who just found an
+   unfamiliar User-Agent in a log file. */
+
+:root {
+  color-scheme: light dark;
+  --fg: #1a1a1a;
+  --muted: #555;
+  --bg: #fff;
+  --rule: #ddd;
+  --code-bg: #f4f4f4;
+  --accent: #14509b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #e8e8e8;
+    --muted: #a8a8a8;
+    --bg: #16181b;
+    --rule: #333;
+    --code-bg: #22252a;
+    --accent: #7fb3f0;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 2.5rem 1.25rem 5rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 .5rem;
+  letter-spacing: -.01em;
+}
+
+h2 {
+  font-size: 1.05rem;
+  margin: 2.25rem 0 .5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+p { margin: 0 0 1rem; }
+
+.lead { color: var(--muted); }
+
+.note {
+  color: var(--muted);
+  font-size: .93rem;
+}
+
+ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+li { margin-bottom: .4rem; }
+
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: .75rem 1rem;
+  margin: 0 0 1rem;
+  overflow-x: auto;
+  font-size: .9rem;
+}
+
+code {
+  background: var(--code-bg);
+  border-radius: 3px;
+  padding: .1em .35em;
+  font-size: .9em;
+}
+
+pre code { background: none; padding: 0; }
+
+a { color: var(--accent); }

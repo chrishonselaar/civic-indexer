@@ -1,0 +1,12 @@
+{"id": "q01", "kind": "lexical", "q": "tandarts"}
+{"id": "q02", "kind": "lexical", "q": "doorhaling"}
+{"id": "q03", "kind": "lexical", "q": "medicatiefout"}
+{"id": "q04", "kind": "concept", "q": "onvoldoende dossiervoering"}
+{"id": "q05", "kind": "concept", "q": "seksueel grensoverschrijdend gedrag"}
+{"id": "q06", "kind": "concept", "q": "informed consent ontbrak"}
+{"id": "q07", "kind": "concept", "q": "declaratiegeschil advocaat"}
+{"id": "q08", "kind": "natural", "q": "mag een huisarts weigeren een verwijzing te geven"}
+{"id": "q09", "kind": "natural", "q": "klacht over te late diagnose van kanker"}
+{"id": "q10", "kind": "natural", "q": "notaris passeerde een akte bij belangenverstrengeling"}
+{"id": "q11", "kind": "natural", "q": "dierenarts die een paard onnodig heeft laten inslapen"}
+{"id": "q12", "kind": "natural", "q": "accountant keurde de jaarrekening goed zonder voldoende controle"}

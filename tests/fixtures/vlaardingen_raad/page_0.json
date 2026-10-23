@@ -1,0 +1,69 @@
+{
+  "pagination": {
+    "next": "organisation_id=262&format=json&version=1.21.1&sort_field=start_date&sort_order=ASC&date_from=2026-06-01+00%3A00%3A00&date_to=2026-07-23+17%3A46%3A34&page=2&per_page=1",
+    "previous": "",
+    "page": 1,
+    "per_page": 1,
+    "total_pages": 18,
+    "items_on_page": 1,
+    "total_items": 18,
+    "has_more_pages": true
+  },
+  "events": [
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1432009",
+        "agenda_item_count": 0,
+        "document_count": 0
+      },
+      "id": 1432009,
+      "self": "api.notubiz.nl/events/1432009",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-11-12 13:50:44",
+      "last_modified": "2025-11-12 13:50:44",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "MRDH Rekeningcommissie"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Vanavond vergadert het lid van de Rekeningcommissie bij de MRDH. De MRDH-klankbordgroep nodigt u graag uit om input te leveren voor hun bijdrage. Schriftelijke pre-advies moet altijd &eacute;&eacute;n week van te voren om 12:00 zijn ingeleverd.</p>\r\n<p>Eventuele vragen, bijdragen of perspectieven kunt via de griffie insturen (iris.zoet@vlaardingen.nl) of direct naar de adviescommissieleden:<br />Economisch Vestigingsklimaat: Stefanie Solleveld en Constantijn Stevens<br />VervoersAutoriteit: Leonie Claessen en Thom van Vugt</p>\r\n<p>Link naar de vergaderingen: https://mrdh.notubiz.nl</p>"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Extern"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-01 20:00:00",
+          "end_date": null
+        }
+      ]
+    }
+  ]
+}

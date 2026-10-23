@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civic Indexer — Pipeline-monitor</title>
+    <link rel="stylesheet" href="/monitor.css">
+</head>
+<body>
+    <div class="m-header">
+        <div class="m-header-left">
+            <h1>📊 Pipeline-monitor</h1>
+            <a href="/" class="m-back">← Terug naar zoeken</a>
+        </div>
+        <div class="m-header-right">
+            <label class="m-auto"><input type="checkbox" id="autoRefresh"> auto-verversen (30s)</label>
+            <span class="m-generated" id="generatedAt"></span>
+            <button class="m-refresh" id="refreshBtn">⟳ Verversen</button>
+        </div>
+    </div>
+
+    <div class="m-container">
+        <div id="alerts" class="m-alerts"></div>
+        <div id="kpis" class="m-kpis"></div>
+
+        <h2 class="m-section-title">Bronnen</h2>
+        <div id="sourceCards" class="m-cards"></div>
+
+        <div class="m-panels">
+            <section class="m-panel m-panel-wide">
+                <h2 class="m-section-title">Recente runs</h2>
+                <div id="runsTable"></div>
+            </section>
+            <section class="m-panel">
+                <h2 class="m-section-title">Wachtrijen</h2>
+                <div id="queues"></div>
+            </section>
+            <!-- PROJ-2: het enige paneel dat OpenSearch aanraakt. Los opgehaald, zodat
+                 een onbereikbare cluster één kaart kost en niet de hele monitor. -->
+            <section class="m-panel">
+                <h2 class="m-section-title">Index-schema</h2>
+                <div id="projection"></div>
+            </section>
+            <section class="m-panel">
+                <h2 class="m-section-title">Blob-retentie</h2>
+                <div id="blobs"></div>
+            </section>
+            <section class="m-panel">
+                <h2 class="m-section-title">Kosten</h2>
+                <div id="costs"></div>
+            </section>
+        </div>
+    </div>
+
+    <div class="m-modal-overlay" id="detailModal">
+        <div class="m-modal">
+            <div class="m-modal-header">
+                <h2 id="detailTitle"></h2>
+                <button class="m-modal-close" id="detailClose">&times;</button>
+            </div>
+            <div class="m-modal-body" id="detailBody"></div>
+        </div>
+    </div>
+
+    <script src="/monitor.js"></script>
+</body>
+</html>

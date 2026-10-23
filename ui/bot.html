@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>civic-indexer — over deze crawler</title>
+  <link rel="stylesheet" href="bot.css">
+</head>
+<body>
+<main>
+
+<h1>civic-indexer</h1>
+<p class="lead">
+  U bent hier waarschijnlijk omdat u deze regel in uw serverlogboek zag staan:
+</p>
+
+<pre>civic-indexer/0.1 (+https://civic-indexer.edubox.nl/bot)</pre>
+
+<p>
+  Deze pagina legt uit wat die crawler is, wat hij ophaalt, hoe u hem tegenhoudt en hoe u
+  een document uit de index laat verwijderen.
+</p>
+
+<h2>Wat dit is</h2>
+<p>
+  Een <strong>individueel onderzoeksproject</strong>, geen bedrijf en geen organisatie. Het
+  bouwt een doorzoekbare index van Nederlandse overheids- en raadsinformatie. Er zit geen
+  commercieel product achter en er worden geen advertenties of abonnementen op verkocht.
+</p>
+<p>
+  Het doel is tweeledig. Ten eerste documenten vindbaar maken die dat nu niet zijn: een
+  aanzienlijk deel van de gepubliceerde stukken bestaat uit scans zonder tekstlaag, en die
+  zijn op hun inhoud niet te doorzoeken. Dit project voert daar zelf tekstherkenning op uit.
+  Ten tweede analyse op collectieniveau — het vergelijken van documenten over bestuursorganen
+  en over de tijd heen. Dat laatste betekent dat er afgeleide representaties van de tekst
+  worden opgeslagen, niet alleen een kopie. Dat staat hier expliciet omdat het meer is dan
+  ophalen en tonen.
+</p>
+
+<h2>Wat de crawler doet</h2>
+<ul>
+  <li>Hij haalt <strong>openbare</strong> documenten op — geen inloggedeelten, geen formulieren,
+    geen pogingen om afscherming te omzeilen.</li>
+  <li>Hij gebruikt <strong>één verbinding tegelijk</strong> per host, met een pauze tussen
+    verzoeken. Hij is ontworpen om traag te zijn, niet om snel te zijn.</li>
+  <li>Hij haalt niets op wat hij al heeft: reeds opgehaalde documenten worden overgeslagen.</li>
+  <li>Bij elk document in de zoekinterface staat de bron en een link naar het origineel op
+    uw eigen site.</li>
+</ul>
+
+<h2>Hoe u hem tegenhoudt</h2>
+<p>
+  Zet dit in uw <code>robots.txt</code>:
+</p>
+<pre>User-agent: civic-indexer
+Disallow: /</pre>
+<p>
+  Wilt u alleen een deel afschermen, of een lager tempo, dan kan dat op dezelfde manier met
+  <code>Disallow:</code>-regels of <code>Crawl-delay:</code>. Een mail werkt ook en is even
+  bindend — zie hieronder. U hoeft geen reden te geven.
+</p>
+
+<h2>Een document uit de index laten verwijderen</h2>
+<p>
+  Stuur een mail met de URL van het document of van de vindplaats. Verwijdering gebeurt op
+  dit moment <strong>met de hand</strong>: er is nog geen geautomatiseerde verwijderroute in
+  het systeem. Dat wordt hier vermeld in plaats van verzwegen, zodat u weet wat u van de
+  termijn kunt verwachten. Een bevestiging volgt zodra het is gebeurd.
+</p>
+
+<h2>Contact</h2>
+<p>
+  <a href="mailto:crawler@civic-indexer.edubox.nl">crawler@civic-indexer.edubox.nl</a>
+</p>
+<p class="note">
+  Vragen over tempo, tijdstip, afscherming of verwijdering komen hier binnen en worden
+  beantwoord. Als u wilt dat de crawler stopt, stopt hij — daar hoeft geen discussie over
+  te ontstaan.
+</p>
+
+</main>
+</body>
+</html>

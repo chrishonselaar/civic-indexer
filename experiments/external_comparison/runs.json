@@ -1,0 +1,833 @@
+{
+  "q01": {
+    "kind": "lexical",
+    "q": "tandarts",
+    "systems": {
+      "ours_bm25": {
+        "ids": [
+          "ECLI:NL:TGZRAMS:2025:251",
+          "ECLI:NL:TGZRAMS:2025:309",
+          "ECLI:NL:TGZRAMS:2025:59",
+          "ECLI:NL:TGZRSHE:2025:77",
+          "ECLI:NL:TGZRAMS:2025:253",
+          "ECLI:NL:TGZRAMS:2025:252",
+          "ECLI:NL:TGZRAMS:2025:132",
+          "ECLI:NL:TGZRAMS:2025:189",
+          "ECLI:NL:TGZRAMS:2025:58",
+          "ECLI:NL:TGZRAMS:2025:311"
+        ],
+        "total": 66
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TGZRSHE:2025:77",
+          "ECLI:NL:TGZRAMS:2025:309",
+          "ECLI:NL:TGZRAMS:2025:59",
+          "ECLI:NL:TGZRAMS:2025:310",
+          "ECLI:NL:TGZRAMS:2025:253",
+          "ECLI:NL:TGZRAMS:2025:133",
+          "ECLI:NL:TGZRAMS:2025:251",
+          "ECLI:NL:TGZRZWO:2025:51",
+          "ECLI:NL:TGZRAMS:2025:7",
+          "ECLI:NL:TGZRAMS:2025:146"
+        ],
+        "total": 109
+      },
+      "theirs": {
+        "ids": [
+          "ECLI:NL:TGZRAMS:2025:310",
+          "ECLI:NL:TGZRAMS:2025:311",
+          "ECLI:NL:TGZRAMS:2025:309",
+          "ECLI:NL:TGZRZWO:2025:170",
+          "ECLI:NL:TGZCTG:2025:223",
+          "ECLI:NL:TGZRSHE:2025:142",
+          "ECLI:NL:TGZRSHE:2025:140",
+          "ECLI:NL:TGZRAMS:2025:286",
+          "ECLI:NL:TGZCTG:2025:206",
+          "ECLI:NL:TGZCTG:2025:207"
+        ],
+        "total": 66,
+        "pub_dates": [
+          "30-12-2025",
+          "30-12-2025",
+          "30-12-2025",
+          "23-12-2025",
+          "17-12-2025",
+          "17-12-2025",
+          "10-12-2025",
+          "02-12-2025",
+          "01-12-2025",
+          "01-12-2025"
+        ]
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TGZRSHE:2025:77",
+          "ECLI:NL:TGZRAMS:2025:253",
+          "ECLI:NL:TGZRAMS:2025:131",
+          "ECLI:NL:TGZRAMS:2025:310",
+          "ECLI:NL:TGZRAMS:2025:59",
+          "ECLI:NL:TGZRAMS:2025:189",
+          "ECLI:NL:TGZRAMS:2025:309",
+          "ECLI:NL:TGZRAMS:2025:167",
+          "ECLI:NL:TGZRAMS:2025:130",
+          "ECLI:NL:TGZRAMS:2025:155"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q02": {
+    "kind": "lexical",
+    "q": "doorhaling",
+    "systems": {
+      "ours_bm25": {
+        "ids": [
+          "ECLI:NL:TACAKN:2025:11",
+          "ECLI:NL:TNORSHE:2025:16",
+          "ECLI:NL:TGZCTG:2025:165",
+          "ECLI:NL:TGZRSHE:2025:121",
+          "ECLI:NL:TGZRSHE:2025:100",
+          "ECLI:NL:TGZRZWO:2025:141",
+          "ECLI:NL:TGZCTG:2025:101",
+          "ECLI:NL:TACAKN:2025:73",
+          "ECLI:NL:TGZRZWO:2025:77",
+          "ECLI:NL:TACAKN:2025:37"
+        ],
+        "total": 86
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TGZRAMS:2025:54",
+          "ECLI:NL:TACAKN:2025:11",
+          "ECLI:NL:TGZRAMS:2025:79",
+          "ECLI:NL:TNORSHE:2025:16",
+          "ECLI:NL:TAHVD:2025:251",
+          "ECLI:NL:TGZCTG:2025:165",
+          "ECLI:NL:TAHVD:2025:62",
+          "ECLI:NL:TGZRSHE:2025:121",
+          "ECLI:NL:TGZRZWO:2025:27",
+          "ECLI:NL:TGZRSHE:2025:27"
+        ],
+        "total": 184
+      },
+      "theirs": {
+        "ids": [
+          "ECLI:NL:TADRAMS:2025:235",
+          "ECLI:NL:TGZCTG:2025:217",
+          "ECLI:NL:TGZCTG:2025:218",
+          "ECLI:NL:TNORDHA:2025:25",
+          "ECLI:NL:TADRARL:2025:270",
+          "ECLI:NL:TACAKN:2025:73",
+          "ECLI:NL:TNORARL:2025:34",
+          "ECLI:NL:TGZRAMS:2025:268",
+          "ECLI:NL:TGZRSHE:2025:122",
+          "ECLI:NL:TGZRZWO:2025:141"
+        ],
+        "total": 78,
+        "pub_dates": [
+          "30-12-2025",
+          "17-12-2025",
+          "17-12-2025",
+          "16-12-2025",
+          "09-12-2025",
+          "02-12-2025",
+          "18-11-2025",
+          "14-11-2025",
+          "12-11-2025",
+          "10-11-2025"
+        ]
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TGZCTG:2025:165",
+          "ECLI:NL:TGZRSHE:2025:100",
+          "ECLI:NL:TGZRSHE:2025:122",
+          "ECLI:NL:TACAKN:2025:11",
+          "ECLI:NL:TGZRAMS:2025:55",
+          "ECLI:NL:TGZRAMS:2025:268",
+          "ECLI:NL:TGZRSHE:2025:121",
+          "ECLI:NL:TGZRZWO:2025:77",
+          "ECLI:NL:TGZRZWO:2025:130",
+          "ECLI:NL:TGZRAMS:2025:54"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q03": {
+    "kind": "lexical",
+    "q": "medicatiefout",
+    "systems": {
+      "ours_bm25": {
+        "ids": [],
+        "total": 0
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TGZRZWO:2025:44",
+          "ECLI:NL:TGZRAMS:2025:160",
+          "ECLI:NL:TGZRZWO:2025:141",
+          "ECLI:NL:TGZRZWO:2025:142",
+          "ECLI:NL:TGZRZWO:2025:53",
+          "ECLI:NL:TGZCTG:2025:87",
+          "ECLI:NL:TGZCTG:2025:38",
+          "ECLI:NL:TGZCTG:2025:117",
+          "ECLI:NL:TGZCTG:2025:78",
+          "ECLI:NL:TGZRAMS:2025:283"
+        ],
+        "total": 100
+      },
+      "theirs": {
+        "ids": [],
+        "total": 0,
+        "pub_dates": []
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TGZCTG:2025:87",
+          "ECLI:NL:TGZRZWO:2025:142",
+          "ECLI:NL:TGZRSHE:2025:21",
+          "ECLI:NL:TGZCTG:2025:156",
+          "ECLI:NL:TGZRAMS:2025:40",
+          "ECLI:NL:TGZCTG:2025:38",
+          "ECLI:NL:TGZCTG:2025:78",
+          "ECLI:NL:TGZRSHE:2025:108",
+          "ECLI:NL:TGZCTG:2025:93",
+          "ECLI:NL:TDIVTC:2025:27"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q04": {
+    "kind": "concept",
+    "q": "onvoldoende dossiervoering",
+    "systems": {
+      "ours_bm25": {
+        "ids": [
+          "ECLI:NL:TGZRZWO:2025:71",
+          "ECLI:NL:TGZRAMS:2025:132",
+          "ECLI:NL:TGZRZWO:2025:85",
+          "ECLI:NL:TGZRZWO:2025:77",
+          "ECLI:NL:TGZCTG:2025:161",
+          "ECLI:NL:TGZRAMS:2025:18",
+          "ECLI:NL:TGZRZWO:2025:84",
+          "ECLI:NL:TGZCTG:2025:23",
+          "ECLI:NL:TGZRZWO:2025:41",
+          "ECLI:NL:TGZRZWO:2025:42"
+        ],
+        "total": 67
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TGZRZWO:2025:77",
+          "ECLI:NL:TGZRAMS:2025:132",
+          "ECLI:NL:TGZRZWO:2025:71",
+          "ECLI:NL:TGZCTG:2025:23",
+          "ECLI:NL:TADRSGR:2025:162",
+          "ECLI:NL:TADRSGR:2025:142",
+          "ECLI:NL:TGZRSHE:2025:90",
+          "ECLI:NL:TGZRZWO:2025:76",
+          "ECLI:NL:TGZRZWO:2025:39",
+          "ECLI:NL:TGZRSHE:2025:27"
+        ],
+        "total": 150
+      },
+      "theirs": {
+        "ids": [
+          "ECLI:NL:TGZRAMS:2025:310",
+          "ECLI:NL:TGZCTG:2025:213",
+          "ECLI:NL:TNORSHE:2025:19",
+          "ECLI:NL:TGZRAMS:2025:286",
+          "ECLI:NL:TGZRZWO:2025:155",
+          "ECLI:NL:TGZRZWO:2025:149",
+          "ECLI:NL:TGZRSHE:2025:125",
+          "ECLI:NL:TNORDHA:2025:19",
+          "ECLI:NL:TGZRAMS:2025:258",
+          "ECLI:NL:TGZRAMS:2025:255"
+        ],
+        "total": 67,
+        "pub_dates": [
+          "30-12-2025",
+          "10-12-2025",
+          "03-12-2025",
+          "02-12-2025",
+          "24-11-2025",
+          "20-11-2025",
+          "12-11-2025",
+          "11-11-2025",
+          "28-10-2025",
+          "28-10-2025"
+        ]
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TGZRZWO:2025:85",
+          "ECLI:NL:TGZRZWO:2025:84",
+          "ECLI:NL:TGZRZWO:2025:71",
+          "ECLI:NL:TGZCTG:2025:77",
+          "ECLI:NL:TGZRAMS:2025:17",
+          "ECLI:NL:TGZRSHE:2025:64",
+          "ECLI:NL:TGZRZWO:2025:40",
+          "ECLI:NL:TGZRZWO:2025:41",
+          "ECLI:NL:TGZRZWO:2025:39",
+          "ECLI:NL:TGZRAMS:2025:18"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q05": {
+    "kind": "concept",
+    "q": "seksueel grensoverschrijdend gedrag",
+    "systems": {
+      "ours_bm25": {
+        "ids": [
+          "ECLI:NL:TGZCTG:2025:101",
+          "ECLI:NL:TGZRAMS:2025:66",
+          "ECLI:NL:TGZRAMS:2025:55",
+          "ECLI:NL:TGZRAMS:2025:124",
+          "ECLI:NL:TGZRSHE:2025:80",
+          "ECLI:NL:TGZRAMS:2025:54",
+          "ECLI:NL:TGZRSHE:2025:121",
+          "ECLI:NL:TGZRAMS:2025:9",
+          "ECLI:NL:TGZRAMS:2025:58",
+          "ECLI:NL:TGZRAMS:2025:303"
+        ],
+        "total": 39
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TGZRSHE:2025:80",
+          "ECLI:NL:TGZRAMS:2025:124",
+          "ECLI:NL:TGZRAMS:2025:66",
+          "ECLI:NL:TGZRSHE:2025:121",
+          "ECLI:NL:TGZCTG:2025:101",
+          "ECLI:NL:TGZRAMS:2025:55",
+          "ECLI:NL:TGZRAMS:2025:303",
+          "ECLI:NL:TGZRSHE:2025:122",
+          "ECLI:NL:TGZRSHE:2025:30",
+          "ECLI:NL:TGZCTG:2025:165"
+        ],
+        "total": 107
+      },
+      "theirs": {
+        "ids": [
+          "ECLI:NL:TGZRAMS:2025:303",
+          "ECLI:NL:TGZRZWO:2025:164",
+          "ECLI:NL:TGZRZWO:2025:163",
+          "ECLI:NL:TGZRZWO:2025:162",
+          "ECLI:NL:TGZCTG:2025:217",
+          "ECLI:NL:TGZCTG:2025:218",
+          "ECLI:NL:TGZRSHE:2025:148",
+          "ECLI:NL:TGZRSHE:2025:122",
+          "ECLI:NL:TGZRSHE:2025:121",
+          "ECLI:NL:TADRSHE:2025:151"
+        ],
+        "total": 43,
+        "pub_dates": [
+          "19-12-2025",
+          "18-12-2025",
+          "18-12-2025",
+          "18-12-2025",
+          "17-12-2025",
+          "17-12-2025",
+          "17-12-2025",
+          "12-11-2025",
+          "05-11-2025",
+          "04-11-2025"
+        ]
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TGZRAMS:2025:55",
+          "ECLI:NL:TGZRZWO:2025:115",
+          "ECLI:NL:TGZRAMS:2025:54",
+          "ECLI:NL:TGZRZWO:2025:34",
+          "ECLI:NL:TGZRSHE:2025:80",
+          "ECLI:NL:TADRSHE:2025:151",
+          "ECLI:NL:TGZRAMS:2025:66",
+          "ECLI:NL:TGZRAMS:2025:9",
+          "ECLI:NL:TGZCTG:2025:101",
+          "ECLI:NL:TADRARL:2025:113"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q06": {
+    "kind": "concept",
+    "q": "informed consent ontbrak",
+    "systems": {
+      "ours_bm25": {
+        "ids": [
+          "ECLI:NL:TGZCTG:2025:127",
+          "ECLI:NL:TGZRAMS:2025:26",
+          "ECLI:NL:TGZRSHE:2025:4",
+          "ECLI:NL:TGZRAMS:2025:275",
+          "ECLI:NL:TGZRAMS:2025:178",
+          "ECLI:NL:TGZRAMS:2025:22",
+          "ECLI:NL:TGZRZWO:2025:53",
+          "ECLI:NL:TAHVD:2025:272"
+        ],
+        "total": 8
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TGZRSHE:2025:4",
+          "ECLI:NL:TGZCTG:2025:127",
+          "ECLI:NL:TGZRAMS:2025:178",
+          "ECLI:NL:TGZRAMS:2025:26",
+          "ECLI:NL:TADRAMS:2025:126",
+          "ECLI:NL:TADRAMS:2025:125",
+          "ECLI:NL:TGZRAMS:2025:275",
+          "ECLI:NL:TACAKN:2025:57",
+          "ECLI:NL:TACAKN:2025:50",
+          "ECLI:NL:TGZRAMS:2025:22"
+        ],
+        "total": 105
+      },
+      "theirs": {
+        "ids": [
+          "ECLI:NL:TADRSGR:2025:263",
+          "ECLI:NL:TGZRAMS:2025:310",
+          "ECLI:NL:TAHVD:2025:272",
+          "ECLI:NL:TGZRAMS:2025:288",
+          "ECLI:NL:TGZRSHE:2025:136",
+          "ECLI:NL:TGZRAMS:2025:275",
+          "ECLI:NL:TGZRZWO:2025:140",
+          "ECLI:NL:TGZRAMS:2025:255",
+          "ECLI:NL:TGZRAMS:2025:256",
+          "ECLI:NL:TGZRAMS:2025:258"
+        ],
+        "total": 34,
+        "pub_dates": [
+          "05-01-2026",
+          "30-12-2025",
+          "29-12-2025",
+          "05-12-2025",
+          "03-12-2025",
+          "21-11-2025",
+          "06-11-2025",
+          "28-10-2025",
+          "28-10-2025",
+          "28-10-2025"
+        ]
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TGZRAMS:2025:26",
+          "ECLI:NL:TGZRAMS:2025:275",
+          "ECLI:NL:TGZCTG:2025:127",
+          "ECLI:NL:TGZRAMS:2025:288",
+          "ECLI:NL:TGZRSHE:2025:4",
+          "ECLI:NL:TGZRSHE:2025:106",
+          "ECLI:NL:TADRAMS:2025:181",
+          "ECLI:NL:TGZRSHE:2025:6",
+          "ECLI:NL:TADRSGR:2025:170",
+          "ECLI:NL:TADRSHE:2025:39"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q07": {
+    "kind": "concept",
+    "q": "declaratiegeschil advocaat",
+    "systems": {
+      "ours_bm25": {
+        "ids": [
+          "ECLI:NL:TADRSHE:2025:136",
+          "ECLI:NL:TADRARL:2025:16",
+          "ECLI:NL:TADRSGR:2025:42",
+          "ECLI:NL:TADRSHE:2025:106",
+          "ECLI:NL:TADRARL:2025:24",
+          "ECLI:NL:TADRARL:2025:83",
+          "ECLI:NL:TAHVD:2025:99",
+          "ECLI:NL:TNORARL:2025:19",
+          "ECLI:NL:TNORSHE:2025:19"
+        ],
+        "total": 9
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TADRARL:2025:83",
+          "ECLI:NL:TADRSHE:2025:106",
+          "ECLI:NL:TADRARL:2025:16",
+          "ECLI:NL:TADRSHE:2025:136",
+          "ECLI:NL:TADRARL:2025:80",
+          "ECLI:NL:TADRARL:2025:163",
+          "ECLI:NL:TADRSGR:2025:42",
+          "ECLI:NL:TADRARL:2025:162",
+          "ECLI:NL:TADRSHE:2025:83",
+          "ECLI:NL:TADRARL:2025:24"
+        ],
+        "total": 106
+      },
+      "theirs": {
+        "ids": [
+          "ECLI:NL:TNORSHE:2025:19",
+          "ECLI:NL:TADRARL:2025:255",
+          "ECLI:NL:TADRSGR:2025:216",
+          "ECLI:NL:TADRSGR:2025:229",
+          "ECLI:NL:TADRAMS:2025:200",
+          "ECLI:NL:TADRSGR:2025:204",
+          "ECLI:NL:TADRSHE:2025:136",
+          "ECLI:NL:TADRARL:2025:188",
+          "ECLI:NL:TADRSHE:2025:106",
+          "ECLI:NL:TNORARL:2025:19"
+        ],
+        "total": 22,
+        "pub_dates": [
+          "03-12-2025",
+          "27-11-2025",
+          "19-11-2025",
+          "19-11-2025",
+          "03-11-2025",
+          "30-10-2025",
+          "01-10-2025",
+          "06-08-2025",
+          "07-07-2025",
+          "27-06-2025"
+        ]
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TADRARL:2025:16",
+          "ECLI:NL:TADRSHE:2025:106",
+          "ECLI:NL:TADRARL:2025:188",
+          "ECLI:NL:TADRARL:2025:252",
+          "ECLI:NL:TADRSHE:2025:173",
+          "ECLI:NL:TADRAMS:2025:153",
+          "ECLI:NL:TADRARL:2025:221",
+          "ECLI:NL:TADRAMS:2025:96",
+          "ECLI:NL:TADRSHE:2025:36",
+          "ECLI:NL:TAHVD:2025:97"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q08": {
+    "kind": "natural",
+    "q": "mag een huisarts weigeren een verwijzing te geven",
+    "systems": {
+      "ours_bm25": {
+        "ids": [
+          "ECLI:NL:TGZRZWO:2025:73",
+          "ECLI:NL:TGZRSHE:2025:88",
+          "ECLI:NL:TGZRAMS:2025:153",
+          "ECLI:NL:TGZRAMS:2025:207",
+          "ECLI:NL:TGZRAMS:2025:152",
+          "ECLI:NL:TGZCTG:2025:204",
+          "ECLI:NL:TGZRAMS:2025:154",
+          "ECLI:NL:TGZRZWO:2025:16",
+          "ECLI:NL:TADRSGR:2025:25",
+          "ECLI:NL:TGZCTG:2025:205"
+        ],
+        "total": 14
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TGZRSHE:2025:88",
+          "ECLI:NL:TGZRZWO:2025:73",
+          "ECLI:NL:TGZCTG:2025:96",
+          "ECLI:NL:TGZRZWO:2025:146",
+          "ECLI:NL:TGZRAMS:2025:153",
+          "ECLI:NL:TGZCTG:2025:37",
+          "ECLI:NL:TGZRAMS:2025:207",
+          "ECLI:NL:TGZRAMS:2025:179",
+          "ECLI:NL:TGZRAMS:2025:152",
+          "ECLI:NL:TGZRZWO:2025:160"
+        ],
+        "total": 112
+      },
+      "theirs": {
+        "ids": [
+          "ECLI:NL:TGZRSHE:2025:145",
+          "ECLI:NL:TGZRSHE:2025:144",
+          "ECLI:NL:TGZRSHE:2025:148",
+          "ECLI:NL:TGZCTG:2025:204",
+          "ECLI:NL:TGZCTG:2025:205",
+          "ECLI:NL:TGZRAMS:2025:266",
+          "ECLI:NL:TGZRZWO:2025:147",
+          "ECLI:NL:TGZRZWO:2025:146",
+          "ECLI:NL:TGZCTG:2025:176",
+          "ECLI:NL:TGZRZWO:2025:99"
+        ],
+        "total": 45,
+        "pub_dates": [
+          "17-12-2025",
+          "17-12-2025",
+          "17-12-2025",
+          "01-12-2025",
+          "01-12-2025",
+          "14-11-2025",
+          "13-11-2025",
+          "13-11-2025",
+          "03-11-2025",
+          "18-09-2025"
+        ]
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TGZCTG:2025:37",
+          "ECLI:NL:TGZRAMS:2025:179",
+          "ECLI:NL:TGZCTG:2025:224",
+          "ECLI:NL:TGZRZWO:2025:88",
+          "ECLI:NL:TGZRAMS:2025:137",
+          "ECLI:NL:TGZCTG:2025:84",
+          "ECLI:NL:TGZRZWO:2025:73",
+          "ECLI:NL:TGZRZWO:2025:70",
+          "ECLI:NL:TGZRZWO:2025:61",
+          "ECLI:NL:TGZRAMS:2025:33"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q09": {
+    "kind": "natural",
+    "q": "klacht over te late diagnose van kanker",
+    "systems": {
+      "ours_bm25": {
+        "ids": [
+          "ECLI:NL:TGZRZWO:2025:150",
+          "ECLI:NL:TGZRAMS:2025:267",
+          "ECLI:NL:TGZRAMS:2025:89",
+          "ECLI:NL:TGZRZWO:2025:99",
+          "ECLI:NL:TGZRZWO:2025:100",
+          "ECLI:NL:TGZRAMS:2025:257",
+          "ECLI:NL:TGZRAMS:2025:73",
+          "ECLI:NL:TGZRAMS:2025:266",
+          "ECLI:NL:TGZRZWO:2025:128",
+          "ECLI:NL:TGZRZWO:2025:101"
+        ],
+        "total": 21
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TGZRZWO:2025:150",
+          "ECLI:NL:TGZRAMS:2025:266",
+          "ECLI:NL:TGZRZWO:2025:99",
+          "ECLI:NL:TGZRAMS:2025:291",
+          "ECLI:NL:TGZRAMS:2025:267",
+          "ECLI:NL:TGZRAMS:2025:89",
+          "ECLI:NL:TGZRAMS:2025:75",
+          "ECLI:NL:TGZRAMS:2025:74",
+          "ECLI:NL:TGZRSHE:2025:27",
+          "ECLI:NL:TGZRZWO:2025:100"
+        ],
+        "total": 108
+      },
+      "theirs": {
+        "ids": [
+          "ECLI:NL:TGZRAMS:2025:291",
+          "ECLI:NL:TGZRZWO:2025:150",
+          "ECLI:NL:TGZRAMS:2025:267",
+          "ECLI:NL:TGZRAMS:2025:266",
+          "ECLI:NL:TGZRAMS:2025:256",
+          "ECLI:NL:TGZRAMS:2025:257",
+          "ECLI:NL:TGZRAMS:2025:255",
+          "ECLI:NL:TGZRZWO:2025:128",
+          "ECLI:NL:TGZRAMS:2025:225",
+          "ECLI:NL:TGZRZWO:2025:99"
+        ],
+        "total": 21,
+        "pub_dates": [
+          "09-12-2025",
+          "20-11-2025",
+          "14-11-2025",
+          "14-11-2025",
+          "28-10-2025",
+          "28-10-2025",
+          "28-10-2025",
+          "27-10-2025",
+          "26-09-2025",
+          "18-09-2025"
+        ]
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TGZRZWO:2025:145",
+          "ECLI:NL:TGZRAMS:2025:47",
+          "ECLI:NL:TGZRAMS:2025:112",
+          "ECLI:NL:TGZRAMS:2025:116",
+          "ECLI:NL:TGZRAMS:2025:115",
+          "ECLI:NL:TGZRAMS:2025:113",
+          "ECLI:NL:TGZRAMS:2025:81",
+          "ECLI:NL:TGZRZWO:2025:150",
+          "ECLI:NL:TGZRAMS:2025:266",
+          "ECLI:NL:TGZRAMS:2025:291"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q10": {
+    "kind": "natural",
+    "q": "notaris passeerde een akte bij belangenverstrengeling",
+    "systems": {
+      "ours_bm25": {
+        "ids": [],
+        "total": 0
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TNORARL:2025:32",
+          "ECLI:NL:TNORDHA:2025:20",
+          "ECLI:NL:TNORSHE:2025:11",
+          "ECLI:NL:TNORARL:2025:8",
+          "ECLI:NL:TNORAMS:2025:6",
+          "ECLI:NL:TNORARL:2025:21",
+          "ECLI:NL:TNORDHA:2025:17",
+          "ECLI:NL:TNORAMS:2025:23",
+          "ECLI:NL:TNORSHE:2025:14",
+          "ECLI:NL:TNORARL:2025:6"
+        ],
+        "total": 100
+      },
+      "theirs": {
+        "ids": [
+          "ECLI:NL:TNORSHE:2025:23",
+          "ECLI:NL:TNORSHE:2025:21",
+          "ECLI:NL:TAHVD:2025:190",
+          "ECLI:NL:TNORSHE:2025:14",
+          "ECLI:NL:TNORDHA:2025:13"
+        ],
+        "total": 5,
+        "pub_dates": [
+          "17-02-2026",
+          "05-01-2026",
+          "13-10-2025",
+          "06-10-2025",
+          "26-06-2025"
+        ]
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TNORDHA:2025:13",
+          "ECLI:NL:TNORARL:2025:42",
+          "ECLI:NL:TNORARL:2025:34",
+          "ECLI:NL:TNORARL:2025:4",
+          "ECLI:NL:TNORSHE:2025:11",
+          "ECLI:NL:TNORARL:2025:14",
+          "ECLI:NL:TNORSHE:2025:23",
+          "ECLI:NL:TNORDHA:2025:4",
+          "ECLI:NL:TNORAMS:2025:27",
+          "ECLI:NL:TNORAMS:2025:4"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q11": {
+    "kind": "natural",
+    "q": "dierenarts die een paard onnodig heeft laten inslapen",
+    "systems": {
+      "ours_bm25": {
+        "ids": [],
+        "total": 0
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TDIVBC:2025:3",
+          "ECLI:NL:TDIVTC:2025:16",
+          "ECLI:NL:TDIVTC:2025:38",
+          "ECLI:NL:TDIVTC:2025:12",
+          "ECLI:NL:TDIVTC:2025:46",
+          "ECLI:NL:TDIVTC:2025:19",
+          "ECLI:NL:TDIVTC:2025:3",
+          "ECLI:NL:TDIVTC:2025:28",
+          "ECLI:NL:TDIVTC:2025:36",
+          "ECLI:NL:TDIVBC:2025:5"
+        ],
+        "total": 100
+      },
+      "theirs": {
+        "ids": [],
+        "total": 0,
+        "pub_dates": []
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TDIVTC:2025:16",
+          "ECLI:NL:TDIVTC:2025:19",
+          "ECLI:NL:TDIVTC:2025:46",
+          "ECLI:NL:TDIVTC:2025:12",
+          "ECLI:NL:TDIVTC:2025:14",
+          "ECLI:NL:TDIVTC:2025:41",
+          "ECLI:NL:TDIVBC:2025:3",
+          "ECLI:NL:TDIVBC:2025:5",
+          "ECLI:NL:TDIVTC:2025:2",
+          "ECLI:NL:TDIVBC:2025:7"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  },
+  "q12": {
+    "kind": "natural",
+    "q": "accountant keurde de jaarrekening goed zonder voldoende controle",
+    "systems": {
+      "ours_bm25": {
+        "ids": [
+          "ECLI:NL:TACAKN:2025:52"
+        ],
+        "total": 1
+      },
+      "ours_hybrid": {
+        "ids": [
+          "ECLI:NL:TACAKN:2025:52",
+          "ECLI:NL:TACAKN:2025:5",
+          "ECLI:NL:TACAKN:2025:59",
+          "ECLI:NL:TACAKN:2025:49",
+          "ECLI:NL:TACAKN:2025:48",
+          "ECLI:NL:TACAKN:2025:9",
+          "ECLI:NL:TACAKN:2025:60",
+          "ECLI:NL:TACAKN:2025:1",
+          "ECLI:NL:TACAKN:2025:6",
+          "ECLI:NL:TACAKN:2025:15"
+        ],
+        "total": 100
+      },
+      "theirs": {
+        "ids": [
+          "ECLI:NL:TACAKN:2025:52"
+        ],
+        "total": 1,
+        "pub_dates": [
+          "30-06-2025"
+        ]
+      },
+      "ours_hybrid_rerank_open": {
+        "ids": [
+          "ECLI:NL:TACAKN:2025:52",
+          "ECLI:NL:TACAKN:2025:54",
+          "ECLI:NL:TACAKN:2025:48",
+          "ECLI:NL:TACAKN:2025:49",
+          "ECLI:NL:TACAKN:2025:65",
+          "ECLI:NL:TACAKN:2025:21",
+          "ECLI:NL:TACAKN:2025:55",
+          "ECLI:NL:TACAKN:2025:15",
+          "ECLI:NL:TACAKN:2025:4",
+          "ECLI:NL:TACAKN:2025:6"
+        ],
+        "total": 100,
+        "reranker": "BAAI/bge-reranker-v2-m3"
+      }
+    }
+  }
+}

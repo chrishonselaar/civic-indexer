@@ -1,0 +1,185 @@
+{
+  "hosts": [
+    "https://api.notubiz.nl"
+  ],
+  "verdict": "bulk_surface_available",
+  "enforceable": true,
+  "policy_flags": {
+    "robots_checked": [
+      "https://api.notubiz.nl"
+    ],
+    "blanket_disallow": [
+      "https://api.notubiz.nl"
+    ],
+    "crawl_delay": {},
+    "undetermined": [],
+    "requires_admin_decision": true,
+    "disallow_avoidable_via": {
+      "https://api.notubiz.nl": [
+        "open_raadsinformatie"
+      ]
+    },
+    "hosts": [
+      {
+        "host": "https://api.notubiz.nl",
+        "url": "https://api.notubiz.nl/robots.txt",
+        "status": "found",
+        "http_status": 200,
+        "user_agent_group": "*",
+        "disallow": [
+          "/"
+        ],
+        "allow": [],
+        "crawl_delay": null,
+        "sitemaps": [],
+        "blanket_disallow": true,
+        "summary": "User-agent: * / Disallow: /",
+        "note": "blanket Disallow: / for our product token — harvesting this host is an ADMIN GATE decision (manifest policy.admin_decision), not an engine or agent one",
+        "error": null
+      }
+    ]
+  },
+  "recommended": {
+    "surface": "aggregator:open_raadsinformatie",
+    "host": "https://api.openraadsinformatie.nl/v1/elastic",
+    "url": "https://api.openraadsinformatie.nl/v1/elastic/ori_haarlem_*/_search",
+    "rank_class": "bulk_content",
+    "evidence": {
+      "aggregator": "open_raadsinformatie",
+      "index": "ori_haarlem_*",
+      "item_count": 71062,
+      "carries": [
+        "metadata",
+        "full_text",
+        "page_text",
+        "original_bytes"
+      ],
+      "natural_key_field": "original_url",
+      "consent_posture": "republished_for_reuse",
+      "license": "not_assessed",
+      "robots": "no robots.txt (HTTP 404, fetched 2026-07-25) — nothing disallowed",
+      "republishes_hosts": [
+        "api.notubiz.nl",
+        "*.ibabs.eu",
+        "*.gemeenteoplossingen.nl"
+      ],
+      "newest_item": "2026-07-02T17:30:00.000000",
+      "freshness_field": "last_discussed_at",
+      "oldest_item": "2014-01-09T16:00:00.000000",
+      "items_per_year": {
+        "2014": 4613,
+        "2015": 6054,
+        "2016": 6945,
+        "2017": 6404,
+        "2018": 5123,
+        "2019": 6054,
+        "2020": 5800,
+        "2021": 7321,
+        "2022": 5487,
+        "2023": 5606,
+        "2024": 4634,
+        "2025": 4842,
+        "2026": 2179
+      }
+    }
+  },
+  "surfaces": [
+    {
+      "surface": "sru",
+      "host": "https://api.notubiz.nl",
+      "url": "https://api.notubiz.nl/sru",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "oai_pmh",
+      "host": "https://api.notubiz.nl",
+      "url": "https://api.notubiz.nl/oai",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "ckan",
+      "host": "https://api.notubiz.nl",
+      "url": "https://api.notubiz.nl/api/3/action/package_search",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "sitemap",
+      "host": "https://api.notubiz.nl",
+      "url": "https://api.notubiz.nl/sitemap.xml",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "frontend_xhr",
+      "host": "https://api.notubiz.nl",
+      "url": "https://api.notubiz.nl",
+      "status": "manual",
+      "http_status": null,
+      "rank_class": null,
+      "evidence": {},
+      "note": "requires headless/DevTools HAR capture — not automatable in probe 0; W6 agent must inspect the site's own XHR calls (private JSON API outranks scraping)."
+    },
+    {
+      "surface": "aggregator:open_raadsinformatie",
+      "host": "https://api.openraadsinformatie.nl/v1/elastic",
+      "url": "https://api.openraadsinformatie.nl/v1/elastic/ori_haarlem_*/_search",
+      "status": "found",
+      "http_status": 200,
+      "rank_class": "bulk_content",
+      "evidence": {
+        "aggregator": "open_raadsinformatie",
+        "index": "ori_haarlem_*",
+        "item_count": 71062,
+        "carries": [
+          "metadata",
+          "full_text",
+          "page_text",
+          "original_bytes"
+        ],
+        "natural_key_field": "original_url",
+        "consent_posture": "republished_for_reuse",
+        "license": "not_assessed",
+        "robots": "no robots.txt (HTTP 404, fetched 2026-07-25) — nothing disallowed",
+        "republishes_hosts": [
+          "api.notubiz.nl",
+          "*.ibabs.eu",
+          "*.gemeenteoplossingen.nl"
+        ],
+        "newest_item": "2026-07-02T17:30:00.000000",
+        "freshness_field": "last_discussed_at",
+        "oldest_item": "2014-01-09T16:00:00.000000",
+        "items_per_year": {
+          "2014": 4613,
+          "2015": 6054,
+          "2016": 6945,
+          "2017": 6404,
+          "2018": 5123,
+          "2019": 6054,
+          "2020": 5800,
+          "2021": 7321,
+          "2022": 5487,
+          "2023": 5606,
+          "2024": 4634,
+          "2025": 4842,
+          "2026": 2179
+        }
+      },
+      "note": "71062 items in ori_haarlem_*, newest 2026-07-02T17:30:00.000000, oldest 2014-01-09T16:00:00.000000"
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+# Gemeenteraad Haarlem via the Notubiz open-data API — Stage B source 1 (archetype path).
+# Instantiates the notubiz archetype (design/notubiz-archetype.md) in Stage-A flat form
+# (no archetype interpreter yet). All probe results dated 2026-07-23, battery artifacts
+# in experiments/stage_b/probes/haarlem/.
+#
+# Probed API facts:
+# - `version` param is REQUIRED or all params are silently ignored (failure-modes API-2).
+# - date_from/date_to REQUIRED, format "YYYY-MM-DD HH:MM:SS" exactly (API-4); server-side
+#   windowing works and is truthful (monthly cross-sums verified).
+# - per_page hard cap 200, rejects loudly with HTTP 400 (CAP-2). pagination.total_items
+#   truthful beyond the cap (1006 for 2020-2026; cross-summed). has_more_pages truthful
+#   on tested windows; ordering stable across double-walk (600/600 ids, 0 dups).
+# - archive starts 2008; documents only ~2013+ (DRIFT-2: 2008/2012 meetings have 0 docs).
+# - documents live in meeting DETAIL responses (events/meetings/{id}) under
+#   agenda_items[].documents[] (recursive) + top-level documents[]; declared
+#   versions[].file_size is byte-exact (8/8 verified); downloads send NO Content-Length.
+# - document `publication_date` LIES (echoes request date) — use meeting planning date.
+# - total corpus: 2,749 events (2008..2026-07); sample avg 21 docs / 78 MB per meeting
+#   for doc-bearing eras => full backfill est. ~40k docs / ~150 GB (phased backfill
+#   recommended; gate-3 decision).
+
+manifest_schema: 1
+
+source:
+  id: haarlem_raad
+  name: "Gemeenteraad Haarlem (Notubiz)"
+  base_url: "https://api.notubiz.nl"
+  archetype: notubiz@1                   # informational in Stage A (no interpreter)
+  # Corpus identity for probe 0's aggregator-registry step (SURF-3). Deliberately
+  # NOT the provider: ORI republishes iBabs/GO/Parlaeus corpora too, so the registry
+  # is keyed by what this corpus IS, not by who serves it.
+  corpus_type: council_information
+  organisation: Haarlem
+  admin_intent: >
+    Raadsstukken, moties, nota's en bijlagen van de gemeente Haarlem doorzoekbaar
+    maken, inclusief commissiestukken; archief vanaf 2008 (documenten feitelijk
+    vanaf ~2013).
+  volatility: persistent                 # 2015 docs still served (probe 9, 2026-07-23)
+  language: nl
+
+# ── Policy (flow Phase 1; POL-1 backfill 2026-07-25) ───────────────────────────────
+# Backfilled after the Vlaardingen re-onboard found robots directives were recorded
+# nowhere in the fleet. This source shares its harvested host (api.notubiz.nl) with
+# vlaardingen_raad, so the two manifests MUST reach the same posture — see the sibling
+# block in manifests/vlaardingen_raad.yaml. Only `robots` is probe-verified this pass
+# (`civic probe-bulk --source haarlem_raad`, policy_flags).
+policy:
+  robots:
+    "api.notubiz.nl": "User-agent: * / Disallow: / (fetched 2026-07-25)"
+    "haarlem.raadsinformatie.nl": "not_assessed — host redirects (HTTP 307); not harvested by this manifest"
+    crawl_delay: none_declared
+    assessment: >
+      Blanket Disallow on the API host this source harvests. GATE decision, not an engine
+      one, and it is the SAME host and the same decision as vlaardingen_raad — one ruling
+      settles both, and a split ruling would be incoherent. Mitigating context:
+      api.notubiz.nl is the same API the municipality's own public raadsinformatie frontend
+      calls, the corpus is statutorily public council information (Wet open overheid /
+      Gemeentewet), and the probed politeness posture is already conservative (concurrency
+      1, 1 rps). Aggravating context: no ToS or open-data licence statement is published on
+      the host, Notubiz has no publicly documented API, and this source is the largest of
+      the four by volume (est. ~40k docs / ~150 GB full backfill) so the traffic a GO would
+      authorise is substantial. Not resolved by the agent.
+    admin_decision: >
+      GO, NARROW — 2026-07-27, admin ruling (gate 1). Applied by extension of the same
+      day's ruling on the two KOOP hosts, at the admin's instruction to close the gate:
+      the posture is that an ambiguous or blanket `Disallow` over statutorily public
+      material does not stop us, and a publisher who wants it enforced can say so — the
+      crawler identifies itself with a resolving contact URL that carries a block rule and
+      an answered address.
+      NARROW, because the case here is genuinely weaker than at KOOP and the shape of the
+      access should follow that (design/access-posture.md §8): there is no asymmetry to
+      point at (`*` is disallowed with no Google exception), a declared reuse channel
+      exists and the supplier itself names it (ORI), and the party being overridden is a
+      commercial BV rather than the bestuursorgaan that owns the documents. So:
+      **Open Raadsinformatie is the primary route and api.notubiz.nl is used only for what
+      ORI provably cannot serve** — the pre-2014 archive (ORI: 0% of the sampled 2008/2012
+      documents) and the lagging recent window (TOT-5). No general backfill through the
+      provider while ORI covers 2014-2025 at 95.6-100%.
+      The declared-consent route stays open and is the better outcome: asking the griffie
+      to let Notubiz unlock the pre-2014 archive to ORI costs the gemeente nothing and is
+      their own documented mechanism. If that lands, this narrows further.
+  # --- access posture, second axis (design/access-posture.md §3) ---
+  exposure: T1
+  # Same corpus type and same narrow acquisition ruling as vlaardingen_raad. Its
+  # `personal_data.smell` is not_assessed rather than measured, which is a reason to be
+  # more careful here, not less.
+  processors: []
+  personal_data:
+    smell: not_assessed        # owed at gate 1; no sampling pass run for this source
+    detail: >
+      Same corpus type as vlaardingen_raad, whose block records the shape of the risk
+      (councillor names = public role; residents named in raadsadressen, bezwaren,
+      inspraakreacties and handhavingsdossiers = higher risk). Not sampled for Haarlem in
+      the POL-1 backfill; carry vlaardingen_raad's finding as the prior, not as evidence.
+    controls: []
+  takedown: not_assessed       # owed at gate 1
+  license: not_assessed        # owed at gate 1; no licence statement located on the host
+
+politeness:
+  delay_seconds: 1.0
+  timeout_seconds: 60
+  concurrency: 1
+  retry:
+    attempts: 3
+    backoff: 1.5
+    retry_on_status: [429, 500, 502, 503, 504]   # NOT 400: cap/param errors are config bugs (CAP-2)
+
+budgets:
+  eur_per_run_cap: 5.0
+  eur_per_gb_downloaded: 0.01
+  ocr: none                              # deferred to ocr_tail queue, as Stage A
+  llm_runtime: none
+
+discovery:
+  transport: http
+  roles:
+    backfill:
+      strategy: notubiz_events
+      request:
+        method: GET
+        url: "https://api.notubiz.nl/events"
+        params:                          # required unlock set (failure-modes API-2)
+          organisation_id: 544
+          format: json
+          version: "1.21.1"
+          sort_field: start_date
+          sort_order: ASC
+      pagination:
+        model: page_number
+        param_page: page
+        param_size: per_page
+        size: 200                        # probed hard cap; >200 => HTTP 400
+      partition:
+        key: date
+        assignment: server_side_window   # date_from/date_to per leaf
+        window_format: "%Y-%m-%d %H:%M:%S"
+        range: {start: "2008-01-01"}     # probed archive depth; end = today
+        bracketing: {max_items: 180, min_days: 1}   # keep every leaf under the 200 cap
+      termination:
+        any_of:
+          - json_flag: {path: "pagination.has_more_pages", equals: false}
+          - empty: {path: "events"}
+      claimed_total:
+        declared: per_leaf
+        field: pagination.total_items
+        unit: events                     # reconciliation unit = events (meetings);
+                                         # documents are children (TOT-4 control)
+      sanity_cap:
+        records: 10000                   # events; claimed corpus 2,749
+      detail:                            # second level: meeting detail per event
+        url_template: "https://api.notubiz.nl/events/meetings/{event_id}"
+        params: {format: json, version: "1.21.1"}
+      items:                             # documentation of parse paths (code mirrors this)
+        path: "agenda_items[].documents[] (recursive) + documents[]"
+        id_field: id
+        fields:
+          title: title
+          published: "meeting.plannings[0].start_date (date part)"   # doc publication_date lies
+          file_url: url
+          file_size: "versions[0].file_size"
+          mime_type: "versions[0].mime_type"
+          document_kind: "types[].value"  # stable-id vocab (id 1247 = BenW Nota, ...)
+    incremental:
+      extends: backfill
+      cutoff:
+        field: "plannings[0].start_date"
+        overlap_pages: 1                 # ordering proved stable; 1 page safety overlap
+
+identity:
+  natural_key: id                        # numeric Notubiz document id
+  natural_key_pattern: "^[0-9]+$"
+  urn_template: "notubiz:544:{natural_key}"
+  merge_policy: keep_separate
+  rejected_candidates:
+    - key: url
+      why: "contains version suffix (/1); a new document version would change the key"
+    - key: file_name
+      why: "not unique across meetings; renamed on republication"
+
+fetch:
+  file_url_source: payload               # file URL from discovery payload, no template
+  validation:
+    magic: true
+    eof: true
+    min_size_bytes: 512
+  max_bytes: 524288000
+  precheck_size_field: file_size         # declared size (byte-exact, probed) replaces
+                                         # absent Content-Length for the oversize gate
+  blob_retention: deleted_after_distill
+
+relationships:
+  group_keys:
+    meeting: payload.meeting_id          # doc -> parent meeting (part_of_dossier)
+  edges:
+    - {type: part_of_dossier, established: crawl, from: document, to: meeting}
+
+extraction:
+  ladder: [native_pdf_text]
+  native_confidence_threshold: 0.5
+  zip_policy: defer
+  title_field: title                     # payload path for distillate title
+
+enrichment:
+  lookup_tables:
+    gremium:                             # the 20 gremia of org 23, from probes/haarlem/
+                                         # gremia.json. Haarlem inherited PROJ-1 from the
+                                         # archetype copy and never recorded it: publisher
+                                         # was listed as a live facet while indexing null
+                                         # for 100% of documents.
+      from: meeting_context.gremium_id   # payload path holding the key (11,616/11,622
+                                         # ledgered items; the 6 gaps are stub payloads)
+      to: publisher                      # the projected field this table OWNS; index
+                                         # .projection must NOT also declare a path for it
+      joined_at: projection              # engine/project/projector.py:lookups_of - no new
+                                         # pipeline stage
+      values:                            # an id absent here projects null, never the raw id
+        525: "gemeenteraad"
+        526: "commissie Samenleving"
+        527: "commissie Ontwikkeling"
+        535: "commissie Bestuur"
+        536: "commissie Beheer"
+        537: "raadsmarkt"
+        906: "gezamenlijke commissies"
+        1266: "Stadsgesprek"
+        5785: "TEST NotuCast"          # vendor test gremium (exclusions_candidate below)
+        12664: "Vragenuur raad/commissies"
+        12718: "Rekenkamercommissie"
+        12719: "Presidium"
+        12720: "Seniorenconvent"
+        12721: "MRA Raadtafel"
+        12722: "Regionale raadsbijeenkomst Zuid-Kennemerland IJmond"
+        12723: "Gecombineerde commissievergadering Ontwikkeling en Samenleving"
+        12761: "BenW Besluitenlijst"
+        13031: "Raadsgroep Omgevingswet"
+        13310: "Archief publiek"
+        13945: "Inspreekuur burgers"
+                                         # Ledger check 2026-07-25: the ids actually present
+                                         # are 12761 / 525 / 527 / 536 / 535 / 526 / 12664 /
+                                         # 13945 - all mapped.
+
+index:
+  dataset: haarlem_raad
+  analyzer: dutch
+  projection:                            # payload paths for projected doc fields
+    title: title                         # publisher is NOT here: it is filled by
+                                         # enrichment.lookup_tables.gremium (one owner per
+                                         # projected field; validate() rejects both)
+    file_type: mime_type
+  facets: [publisher, published_month, file_type, disposition]
+  facet_notes:
+    publisher: >
+      The gremium (besluitvormend orgaan). Silently dead until 2026-07-25 - declared here as a
+      facet while projected from meeting_context.gremium_name, which the strategy hard-coded to
+      null (PROJ-1, inherited from the vlaardingen_raad archetype copy). Revived by the
+      projection-time id->title join above. Verified against the ledger: gremium_id is populated
+      on 11,616/11,622 items and every id present is mapped.
+  dates: [published]
+  chunking: engine_default
+
+health:
+  fixtures:
+    - haarlem_page_0
+    - haarlem_page_1
+  zero_match_policy: alarm
+
+onboarding_probes:                       # battery results, dated (see probes/ dir)
+  probed_at: "2026-07-23"
+  result_cap: {per_page_max: 200, reject_style: "HTTP 400 explicit", tested: "2026-07-23"}
+  claimed_total: {trustworthy: true, cross_summed: "2025 months=200=year; 2020-2026=1006"}
+  partition_holes: {undated_events: none_observed}
+  key_uniqueness: {sample: 600, unique: 600, refetch_stability: "pending (re-check at +30d)"}
+  filter_vocabulary: {date_window: works, required_params: [organisation_id, format, version]}
+  pagination_truth: {double_walk: "600 ids identical order, 0 dups", has_more_pages: truthful}
+  content_type: {sample: 8, all: "PDF magic-verified", content_length_header: absent,
+                 declared_file_size: byte_exact}
+  cost_prediction: {events_total: 2749, docs_per_meeting_avg: 21.2, mb_per_meeting_avg: 78,
+                    backfill_estimate: "~40k docs, ~150 GB", confidence: medium,
+                    note: "doc-bearing eras only (~2013+); 2008-2012 near-zero"}
+  volatility: {class: persistent, evidence: "2015 doc downloads OK 2026-07-23"}
+  access_coverage:
+    gremia: 20
+    exclusions_candidate: ["TEST NotuCast (id 5785, vendor test gremium)"]
+    confidential_flags: "0 in 200-event sample; strategy stubs any confidential item"
+  politeness_ceiling: {observed: "~80 requests at 1 rps, zero 429/5xx", setting: "1 rps, conc 1"}
+  schema_drift:
+    - "2008/2012 meetings: 0 documents (4/4 sampled) — source reality, not extraction failure"
+    - "document types vocab: id 1 'Document' generic; id 1247 'BenW Nota'; 'Raadsstuk'; 'Motie'"
+  relationships:
+    - "meeting -> agenda_items (recursive) -> documents; connections[] edge list on documents"
+    - "documents can recur across meetings (cross-refs); dedup by document id, first context wins"

@@ -1,0 +1,111 @@
+{
+  "hosts": [
+    "https://vlaardingen.raadsinformatie.nl",
+    "https://api.notubiz.nl"
+  ],
+  "verdict": "no_bulk_surface",
+  "enforceable": true,
+  "recommended": null,
+  "surfaces": [
+    {
+      "surface": "sru",
+      "host": "https://vlaardingen.raadsinformatie.nl",
+      "url": "https://vlaardingen.raadsinformatie.nl/sru",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "oai_pmh",
+      "host": "https://vlaardingen.raadsinformatie.nl",
+      "url": "https://vlaardingen.raadsinformatie.nl/oai",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "ckan",
+      "host": "https://vlaardingen.raadsinformatie.nl",
+      "url": "https://vlaardingen.raadsinformatie.nl/api/3/action/package_search",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "sitemap",
+      "host": "https://vlaardingen.raadsinformatie.nl",
+      "url": "https://vlaardingen.raadsinformatie.nl/sitemap.xml",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "frontend_xhr",
+      "host": "https://vlaardingen.raadsinformatie.nl",
+      "url": "https://vlaardingen.raadsinformatie.nl",
+      "status": "manual",
+      "http_status": null,
+      "rank_class": null,
+      "evidence": {},
+      "note": "requires headless/DevTools HAR capture — not automatable in probe 0; W6 agent must inspect the site's own XHR calls (private JSON API outranks scraping)."
+    },
+    {
+      "surface": "sru",
+      "host": "https://api.notubiz.nl",
+      "url": "https://api.notubiz.nl/sru",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "oai_pmh",
+      "host": "https://api.notubiz.nl",
+      "url": "https://api.notubiz.nl/oai",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "ckan",
+      "host": "https://api.notubiz.nl",
+      "url": "https://api.notubiz.nl/api/3/action/package_search",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "sitemap",
+      "host": "https://api.notubiz.nl",
+      "url": "https://api.notubiz.nl/sitemap.xml",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "frontend_xhr",
+      "host": "https://api.notubiz.nl",
+      "url": "https://api.notubiz.nl",
+      "status": "manual",
+      "http_status": null,
+      "rank_class": null,
+      "evidence": {},
+      "note": "requires headless/DevTools HAR capture — not automatable in probe 0; W6 agent must inspect the site's own XHR calls (private JSON API outranks scraping)."
+    }
+  ]
+}

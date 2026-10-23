@@ -1,0 +1,1299 @@
+{
+  "pagination": {
+    "next": "",
+    "previous": "",
+    "page": 1,
+    "per_page": 200,
+    "total_pages": 1,
+    "items_on_page": 22,
+    "total_items": 22,
+    "has_more_pages": false
+  },
+  "events": [
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 12761,
+        "self": "api.notubiz.nl/organisations/544/gremia/12761"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1503269",
+        "agenda_item_count": 7,
+        "document_count": 0
+      },
+      "id": 1503269,
+      "self": "api.notubiz.nl/events/1503269",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-06-04 11:43:52",
+      "last_modified": "2026-06-04 12:07:37",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Besluitenlijst BenW"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Stadhuis"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-02 17:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 12664,
+        "self": "api.notubiz.nl/organisations/544/gremia/12664"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1416312",
+        "agenda_item_count": 1,
+        "document_count": 2
+      },
+      "id": 1416312,
+      "self": "api.notubiz.nl/events/1416312",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-10-09 11:04:46",
+      "last_modified": "2026-06-15 17:56:49",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Vragenuur commissies"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. U kunt deze aanzetten door in de balk onderaan de videoplayer op \"CC\" te klikken.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-04 16:30:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 536,
+        "self": "api.notubiz.nl/organisations/544/gremia/536"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1498310",
+        "agenda_item_count": 24,
+        "document_count": 2
+      },
+      "id": 1498310,
+      "self": "api.notubiz.nl/events/1498310",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-05-21 17:05:56",
+      "last_modified": "2026-07-09 12:58:16",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Commissie Beheer"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Joris Krouwels"
+        },
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Jessica Poulino"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\"><span style=\"border: 0px; text-indent: 35.4pt;\">Bij deze vergadering is ondertiteling beschikbaar. U kunt deze aanzetten door in de balk onderaan de videoplayer op \"CC\" te klikken.</span></p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\"><span style=\"border: 0px;\">U kunt bij deze commissievergadering </span><a style=\"border: 0px; background: transparent; text-decoration-line: none; color: #a2a2a2;\" href=\"../../info/Nieuws_en_Informatie/132\">inspreken</a><span style=\"border: 0px;\"> over onderwerpen die ter bespreking op de agenda staan. Dit kan schriftelijk of voorafgaand aan de behandeling van het agendapunt. U dient zich hiervoor uiterlijk 24 uur v&oacute;&oacute;r aanvang van de vergadering </span><a style=\"border: 0px; background: transparent; text-decoration-line: none; color: #a2a2a2;\" href=\"../../formulieren/inspreken\">aan te melden</a><span style=\"border: 0px;\">.</span></p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">Wilt u over iets spreken dat niet op de agenda staat? Dat kan dat tijdens het Inspreekuur Burgers voorafgaand aan elke raadsvergadering van 18:15 tot 19:15 uur. U dient u zich hiervoor ook uiterlijk 24 uur v&oacute;&oacute;r aanvang van de vergadering <a style=\"border: 0px; background: transparent; text-decoration-line: none; color: #a2a2a2;\" href=\"../../formulieren/inspreken\">aan te melden</a>.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">Wanneer u een niet-geagendeerd onderwerp alleen schriftelijk onder de aandacht van de commissie- of raadsleden wilt brengen, kunt u op elk moment een <a style=\"border: 0px; background: transparent; text-decoration-line: none; color: #a2a2a2;\" href=\"../../info/nieuws_en_informatie/133/brief_e_mail_aan_de_gemeenteraad\">brief of e-mail </a>aan de raad sturen.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">NB. Onderstaande aanvangstijden van de agendapunten zijn indicatief.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-04 17:10:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 526,
+        "self": "api.notubiz.nl/organisations/544/gremia/526"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1498340",
+        "agenda_item_count": 30,
+        "document_count": 1
+      },
+      "id": 1498340,
+      "self": "api.notubiz.nl/events/1498340",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-05-21 18:07:16",
+      "last_modified": "2026-07-10 09:39:46",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Commissie samenleving"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Enschedekamer"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "dhr. E. Aerssens"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p class=\"MsoNormal\">Bij deze vergadering is ondertiteling beschikbaar. U kunt deze aanzetten door in de balk onderaan de videoplayer op \"CC\" te klikken.</p><p class=\"MsoNormal\"><a href=\"../../info/Nieuws_en_Informatie/132\">Inspreken</a> bij de geagendeerde onderwerpen ter advisering en bespreking is mogelijk op het stadhuis of schriftelijk. U dient zich hiervoor <a href=\"../../formulieren/inspreken\">aan te melden</a>. Dit kan tot <span style=\"text-decoration: underline;\">uiterlijk 24 uur</span> voor aanvang van de vergadering.</p><p class=\"MsoNormal\"><a href=\"../../info/Nieuws_en_Informatie/132/Inspreken\">Inspreken</a> op onderwerpen die <u>niet</u> op de agenda staan, kunt u doen voorafgaand aan een raadsvergadering bij het 'Inspreekuur burgers over niet geagendeerde onderwerpen' van 18:15 tot 19:15 uur. U dient zich uiterlijk 24 uur voor aanvang van het inspreekuur aan te melden om in spreken.</p><p class=\"MsoNormal\">Wanneer u een niet-geagendeerd onderwerp alleen schriftelijk onder de aandacht van de commissie- of raadsleden wilt brengen, kunt u op elk moment een <a href=\"../../info/nieuws_en_informatie/133/brief_e_mail_aan_de_gemeenteraad\">brief of e-mail </a>aan de raad sturen (<a href=\"mailto:griffiebureau@haarlem.nl\">griffiebureau@haarlem.nl</a>).&lt;/p  <p class=\"MsoNormal\">NB. Onderstaande aanvangstijden van de agendapunten zijn indicatief.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-04 20:20:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 527,
+        "self": "api.notubiz.nl/organisations/544/gremia/527"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1498452",
+        "agenda_item_count": 23,
+        "document_count": 1
+      },
+      "id": 1498452,
+      "self": "api.notubiz.nl/events/1498452",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-05-22 09:54:16",
+      "last_modified": "2026-07-07 16:41:37",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Commissie Ontwikkeling"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Bowien Wegman"
+        },
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Julika van Drongelen"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">NB. De aanvangstijden van de agendapunten zijn indicatief.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">Bij deze vergadering is ondertiteling beschikbaar. U kunt deze aanzetten door in de balk onderaan de videoplayer op \"CC\" te klikken.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\"><a style=\"border: 0px; background: transparent; color: #e31937;\" href=\"../../info/Nieuws_en_Informatie/132\">Inspreken</a> bij de geagendeerde onderwerpen ter advisering en bespreking is mogelijk op het stadhuis of schriftelijk. U dient zich hiervoor <a style=\"border: 0px; background: transparent; color: #e31937;\" href=\"../../formulieren/inspreken\">aan te melden</a>. Dit kan tot <span style=\"border: 0px; text-decoration-line: underline;\">uiterlijk 24 uur</span> voor aanvang van de vergadering.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\"><a style=\"border: 0px; background: transparent; color: #e31937;\" href=\"../../info/Nieuws_en_Informatie/132/Inspreken\">Inspreken</a> op onderwerpen die <span class=\"underline\" style=\"border: 0px; text-decoration: underline;\">niet</span> op de agenda staan, kunt u doen voorafgaand aan een raadsvergadering bij het 'Inspreekuur burgers over niet geagendeerde onderwerpen' van 18:15 tot 19:15 uur. U dient zich uiterlijk 24 uur voor aanvang van het inspreekuur aan te melden om in spreken.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">Wanneer u een niet-geagendeerd onderwerp alleen schriftelijk onder de aandacht van de commissie- of raadsleden wilt brengen, kunt u op elk moment een <a style=\"border: 0px; background: transparent; color: #e31937;\" href=\"../../info/nieuws_en_informatie/133/brief_e_mail_aan_de_gemeenteraad\">brief of e-mail </a>aan de raad sturen (<a style=\"border: 0px; background: transparent; color: #e31937;\" href=\"mailto:griffiebureau@haarlem.nl\">griffiebureau@haarlem.nl</a>).</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-04 20:20:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 12761,
+        "self": "api.notubiz.nl/organisations/544/gremia/12761"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1506020",
+        "agenda_item_count": 9,
+        "document_count": 0
+      },
+      "id": 1506020,
+      "self": "api.notubiz.nl/events/1506020",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-06-11 10:45:00",
+      "last_modified": "2026-06-11 11:54:41",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Besluitenlijst BenW"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Stadhuis"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-09 17:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 12664,
+        "self": "api.notubiz.nl/organisations/544/gremia/12664"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1416313",
+        "agenda_item_count": 1,
+        "document_count": 1
+      },
+      "id": 1416313,
+      "self": "api.notubiz.nl/events/1416313",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-10-09 11:04:48",
+      "last_modified": "2026-06-23 15:26:41",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Vragenuur commissies"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. U kunt deze aanzetten door in de balk onderaan de videoplayer op \"CC\" te klikken.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-11 16:30:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 535,
+        "self": "api.notubiz.nl/organisations/544/gremia/535"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1500817",
+        "agenda_item_count": 26,
+        "document_count": 1
+      },
+      "id": 1500817,
+      "self": "api.notubiz.nl/events/1500817",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-05-28 20:14:16",
+      "last_modified": "2026-06-22 16:50:13",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Commissie Bestuur"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. U kunt deze aanzetten door in de balk onderaan de videoplayer op \"CC\" te klikken.</p>"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Enschedekamer"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Jesse van der Vliet"
+        },
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Matthijs Duivenvoorden"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-11 17:10:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 536,
+        "self": "api.notubiz.nl/organisations/544/gremia/536"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1501167",
+        "agenda_item_count": 21,
+        "document_count": 2
+      },
+      "id": 1501167,
+      "self": "api.notubiz.nl/events/1501167",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-05-29 12:53:18",
+      "last_modified": "2026-07-09 15:05:36",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Commissie Beheer"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Joris Krouwels"
+        },
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Jessica Poulino"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\"><span style=\"border: 0px; text-indent: 35.4pt;\">Bij deze vergadering is ondertiteling beschikbaar. U kunt deze aanzetten door in de balk onderaan de videoplayer op \"CC\" te klikken.</span></p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\"><span style=\"border: 0px;\">U kunt bij deze commissievergadering </span><a style=\"border: 0px; background: transparent; text-decoration-line: none; color: #a2a2a2;\" href=\"../../info/Nieuws_en_Informatie/132\">inspreken</a><span style=\"border: 0px;\"> over onderwerpen die ter bespreking op de agenda staan. Dit kan schriftelijk of voorafgaand aan de behandeling van het agendapunt. U dient zich hiervoor uiterlijk 24 uur v&oacute;&oacute;r aanvang van de vergadering </span><a style=\"border: 0px; background: transparent; text-decoration-line: none; color: #a2a2a2;\" href=\"../../formulieren/inspreken\">aan te melden</a><span style=\"border: 0px;\">.</span></p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">Wilt u over iets spreken dat niet op de agenda staat? Dat kan dat tijdens het Inspreekuur Burgers voorafgaand aan elke raadsvergadering van 18:15 tot 19:15 uur. U dient u zich hiervoor ook uiterlijk 24 uur v&oacute;&oacute;r aanvang van de vergadering <a style=\"border: 0px; background: transparent; text-decoration-line: none; color: #a2a2a2;\" href=\"../../formulieren/inspreken\">aan te melden</a>.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">Wanneer u een niet-geagendeerd onderwerp alleen schriftelijk onder de aandacht van de commissie- of raadsleden wilt brengen, kunt u op elk moment een <a style=\"border: 0px; background: transparent; text-decoration-line: none; color: #a2a2a2;\" href=\"../../info/nieuws_en_informatie/133/brief_e_mail_aan_de_gemeenteraad\">brief of e-mail </a>aan de raad sturen.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">NB. Onderstaande aanvangstijden van de agendapunten zijn indicatief.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-11 17:10:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 526,
+        "self": "api.notubiz.nl/organisations/544/gremia/526"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1500804",
+        "agenda_item_count": 16,
+        "document_count": 2
+      },
+      "id": 1500804,
+      "self": "api.notubiz.nl/events/1500804",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-05-28 18:14:03",
+      "last_modified": "2026-06-22 16:32:24",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Commissie Samenleving"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Enschedekamer"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "dhr. E. Aerssens "
+        },
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "mevr. M. Weishut Serrao"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p class=\"MsoNormal\">NB. Onderstaande aanvangstijden van de agendapunten zijn indicatief.</p>\r\n<p class=\"MsoNormal\">Bij deze vergadering is ondertiteling beschikbaar. U kunt deze aanzetten door in de balk onderaan de videoplayer op \"CC\" te klikken.</p>\r\n<p class=\"MsoNormal\"><a href=\"../../info/Nieuws_en_Informatie/132\">Inspreken</a> bij de geagendeerde onderwerpen ter advisering en bespreking is mogelijk op het stadhuis of schriftelijk. U dient zich hiervoor <a href=\"../../formulieren/inspreken\">aan te melden</a>. Dit kan tot <span style=\"text-decoration: underline;\">uiterlijk 24 uur</span> voor aanvang van de vergadering.</p>\r\n<p class=\"MsoNormal\"><a href=\"../../info/Nieuws_en_Informatie/132/Inspreken\">Inspreken</a> op onderwerpen die <u>niet</u> op de agenda staan, kunt u doen voorafgaand aan een raadsvergadering bij het 'Inspreekuur burgers over niet geagendeerde onderwerpen' van 18:15 tot 19:15 uur. U dient zich uiterlijk 24 uur voor aanvang van het inspreekuur aan te melden om in spreken.</p>\r\n<p class=\"MsoNormal\">Wanneer u een niet-geagendeerd onderwerp alleen schriftelijk onder de aandacht van de commissie- of raadsleden wilt brengen, kunt u op elk moment een <a href=\"../../info/nieuws_en_informatie/133/brief_e_mail_aan_de_gemeenteraad\">brief of e-mail </a>aan de raad sturen (<a href=\"mailto:griffiebureau@haarlem.nl\">griffiebureau@haarlem.nl</a>).</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-11 20:20:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 527,
+        "self": "api.notubiz.nl/organisations/544/gremia/527"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1500888",
+        "agenda_item_count": 26,
+        "document_count": 1
+      },
+      "id": 1500888,
+      "self": "api.notubiz.nl/events/1500888",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-05-29 08:37:32",
+      "last_modified": "2026-07-09 14:26:05",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Commissie Ontwikkeling"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Bowien Wegman"
+        },
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Julika van Drongelen"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">Bij deze vergadering is ondertiteling beschikbaar. U kunt deze aanzetten door in de balk onderaan de videoplayer op \"CC\" te klikken.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\"><a style=\"border: 0px; background: transparent; color: #e31937;\" href=\"../../info/Nieuws_en_Informatie/132\">Inspreken</a> bij de geagendeerde onderwerpen ter advisering en bespreking is mogelijk op het stadhuis of schriftelijk. U dient zich hiervoor <a style=\"border: 0px; background: transparent; color: #e31937;\" href=\"../../formulieren/inspreken\">aan te melden</a>. Dit kan tot <span style=\"border: 0px; text-decoration-line: underline;\">uiterlijk 24 uur</span> voor aanvang van de vergadering.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\"><a style=\"border: 0px; background: transparent; color: #e31937;\" href=\"../../info/Nieuws_en_Informatie/132/Inspreken\">Inspreken</a> op onderwerpen die <span class=\"underline\" style=\"border: 0px; text-decoration: underline;\">niet</span> op de agenda staan, kunt u doen voorafgaand aan een raadsvergadering bij het 'Inspreekuur burgers over niet geagendeerde onderwerpen' van 18:15 tot 19:15 uur. U dient zich uiterlijk 24 uur voor aanvang van het inspreekuur aan te melden om in spreken.</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">Wanneer u een niet-geagendeerd onderwerp alleen schriftelijk onder de aandacht van de commissie- of raadsleden wilt brengen, kunt u op elk moment een <a style=\"border: 0px; background: transparent; color: #e31937;\" href=\"../../info/nieuws_en_informatie/133/brief_e_mail_aan_de_gemeenteraad\">brief of e-mail </a>aan de raad sturen (<a style=\"border: 0px; background: transparent; color: #e31937;\" href=\"mailto:griffiebureau@haarlem.nl\">griffiebureau@haarlem.nl</a>).</p><p class=\"MsoNormal\" style=\"border: 0px; padding: 0px; background-color: #ffffff;\">NB. De aanvangstijden van de agendapunten zijn indicatief.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-11 20:20:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 12761,
+        "self": "api.notubiz.nl/organisations/544/gremia/12761"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1509171",
+        "agenda_item_count": 8,
+        "document_count": 0
+      },
+      "id": 1509171,
+      "self": "api.notubiz.nl/events/1509171",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-06-18 12:34:36",
+      "last_modified": "2026-06-18 13:02:29",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Besluitenlijst BenW"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Stadhuis"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-16 17:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 12664,
+        "self": "api.notubiz.nl/organisations/544/gremia/12664"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1498600",
+        "agenda_item_count": 1,
+        "document_count": 2
+      },
+      "id": 1498600,
+      "self": "api.notubiz.nl/events/1498600",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-05-22 12:37:27",
+      "last_modified": "2026-06-26 16:39:27",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Vragenuur Raad"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. Nadat de player is gestart kunt u de ondertiteling aanzetten door onderaan de player op 'CC' te klikken.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-17 17:45:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 525,
+        "self": "api.notubiz.nl/organisations/544/gremia/525"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1505724",
+        "agenda_item_count": 77,
+        "document_count": 1
+      },
+      "id": 1505724,
+      "self": "api.notubiz.nl/events/1505724",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-06-10 15:07:03",
+      "last_modified": "2026-07-06 14:43:00",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Vergadering Raad"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Jos Wienen"
+        },
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Marnix Philips"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. Nadat de player is gestart kunt u de ondertiteling aanzetten door onderaan de player op 'CC' te klikken.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-17 18:30:00",
+          "end_date": "2026-06-17 23:00:00"
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 537,
+        "self": "api.notubiz.nl/organisations/544/gremia/537"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1475397",
+        "agenda_item_count": 0,
+        "document_count": 0
+      },
+      "id": 1475397,
+      "self": "api.notubiz.nl/events/1475397",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-03-11 23:52:10",
+      "last_modified": "2026-06-10 13:59:34",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Cursus \"Hoe werkt de gemeenteraad?'"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Enschedekamer"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p><span style=\"font-size: 11pt; line-height: 110%; font-family: Calibri, sans-serif;\">Ter afsluiting van de cursus &lsquo;Hoe werkt de gemeenteraad?&rsquo; voor inwoners van Haarlem gaan deelnemers dieper in op de rollen, taken en instrumenten van de gemeenteraad. De besluitvorming, begroting en de manier waarop zij invloed kunnen uitoefenen komen ook aan bod.</span></p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-17 21:00:00",
+          "end_date": "2026-06-17 22:00:00"
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 13945,
+        "self": "api.notubiz.nl/organisations/544/gremia/13945"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1416343",
+        "agenda_item_count": 3,
+        "document_count": 1
+      },
+      "id": 1416343,
+      "self": "api.notubiz.nl/events/1416343",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-10-09 11:14:26",
+      "last_modified": "2026-07-01 10:48:08",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Inspreekuur burgers"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. Nadat de player is gestart kunt u de ondertiteling aanzetten door onderaan de player op 'CC' te klikken.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-18 18:15:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 525,
+        "self": "api.notubiz.nl/organisations/544/gremia/525"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1502728",
+        "agenda_item_count": 8,
+        "document_count": 1
+      },
+      "id": 1502728,
+      "self": "api.notubiz.nl/events/1502728",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-06-03 10:32:41",
+      "last_modified": "2026-07-01 11:29:09",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Vergadering Raad"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Jos Wienen"
+        },
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Marnix Philips"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. Nadat de player is gestart kunt u de ondertiteling aanzetten door onderaan de player op 'CC' te klikken.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-18 19:30:00",
+          "end_date": "2026-06-18 23:00:00"
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 12761,
+        "self": "api.notubiz.nl/organisations/544/gremia/12761"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1511651",
+        "agenda_item_count": 3,
+        "document_count": 0
+      },
+      "id": 1511651,
+      "self": "api.notubiz.nl/events/1511651",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-06-25 11:21:59",
+      "last_modified": "2026-06-25 11:58:06",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Besluitenlijst BenW"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Stadhuis"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-23 17:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 525,
+        "self": "api.notubiz.nl/organisations/544/gremia/525"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1510194",
+        "agenda_item_count": 9,
+        "document_count": 3
+      },
+      "id": 1510194,
+      "self": "api.notubiz.nl/events/1510194",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-06-22 12:42:03",
+      "last_modified": "2026-07-20 13:36:16",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Raad Kaderbrief 2027"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal "
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Jos Wienen"
+        },
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Marnix Philips"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. Nadat de player is gestart kunt u de ondertiteling aanzetten door onderaan de player op 'CC' te klikken.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-29 19:30:00",
+          "end_date": "2026-06-29 23:00:00"
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 12761,
+        "self": "api.notubiz.nl/organisations/544/gremia/12761"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1514276",
+        "agenda_item_count": 9,
+        "document_count": 0
+      },
+      "id": 1514276,
+      "self": "api.notubiz.nl/events/1514276",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-07-02 11:24:30",
+      "last_modified": "2026-07-02 11:48:27",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Besluitenlijst BenW"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Stadhuis"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-30 17:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 525,
+        "self": "api.notubiz.nl/organisations/544/gremia/525"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1510276",
+        "agenda_item_count": 28,
+        "document_count": 6
+      },
+      "id": 1510276,
+      "self": "api.notubiz.nl/events/1510276",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-06-22 14:23:03",
+      "last_modified": "2026-07-14 09:10:45",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Raad Kaderbrief 2027"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadzaal "
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Jos Wienen"
+        },
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Marnix Philips"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. Nadat de player is gestart kunt u de ondertiteling aanzetten door onderaan de player op 'CC' te klikken.</p>"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-07-02 19:30:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 544,
+        "self": "api.notubiz.nl/organisations/544"
+      },
+      "gremium": {
+        "id": 12761,
+        "self": "api.notubiz.nl/organisations/544/gremia/12761"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1517176",
+        "agenda_item_count": 11,
+        "document_count": 0
+      },
+      "id": 1517176,
+      "self": "api.notubiz.nl/events/1517176",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-07-09 10:56:03",
+      "last_modified": "2026-07-09 11:32:23",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Besluitenlijst BenW"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Stadhuis"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-07-07 17:00:00",
+          "end_date": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,535 @@
+# Gemeenteraad Vlaardingen via the Notubiz open-data API (org 262).
+#
+# HISTORY. First onboarded 2026-07-23 as a "params-swap" copy of haarlem_raad.yaml on the
+# archetype-leverage claim (0 interventions). That pass INHERITED five site-scoped probes the
+# notubiz archetype explicitly marks as non-inheritable (site_probes_required:
+# access_coverage, volume_and_archive_depth, politeness_ceiling, content_type_sample,
+# schema_drift) and recorded key_uniqueness with sample: 0. Re-onboarded live 2026-07-25:
+# every inherited placeholder below is now replaced by a measured result for org 262, and the
+# re-onboard surfaced three defects the first pass could not see (see known_defects).
+#
+# WHAT THE RE-ONBOARD CHANGED (all evidence in experiments/stage_b/probes/vlaardingen_raad/):
+#  - policy: block added. BOTH hosts serve "Disallow: /" — never previously recorded anywhere.
+#  - Open Raadsinformatie found: a real full-content bulk surface probe 0 structurally missed.
+#  - publisher facet was DEAD (gremium_name hard-coded None, no enrichment stage exists).
+#    FIXED 2026-07-25: joined from gremium_id at projection time; 100% non-null, facet live.
+#  - docs/meeting was 24 from a single meeting; true mean is ~15.7 over 50 meetings.
+#  - non-PDF payloads exist (msword, empty mime, 'directory') that the ladder cannot extract.
+
+manifest_schema: 1
+
+source:
+  id: vlaardingen_raad
+  name: "Gemeenteraad Vlaardingen (Notubiz)"
+  base_url: "https://api.notubiz.nl"
+  archetype: notubiz@1                   # informational in Stage A (no interpreter)
+  # Corpus identity for probe 0's aggregator-registry step (SURF-3). Deliberately
+  # NOT the provider: ORI republishes iBabs/GO/Parlaeus corpora too, so the registry
+  # is keyed by what this corpus IS, not by who serves it.
+  corpus_type: council_information
+  organisation: Vlaardingen
+  admin_intent: >
+    Raadsbesluiten van Vlaardingen vindbaar maken voor inwoners: moties, amendementen,
+    raadsvoorstellen, besluitenlijsten en verordeningen doorzoekbaar op onderwerp, op
+    besluitvormend orgaan (raad / commissie / college) en op datum, met de bijbehorende
+    bijlagen; archief vanaf 2008. Inwoner-eerst: het antwoord op "wat heeft de raad
+    hierover besloten en wanneer" moet in één zoekopdracht te vinden zijn.
+  volatility: persistent                 # probe 9 VERIFIED for org 262 (was: inherited)
+  language: nl
+
+# ── Policy (flow Phase 1; was entirely absent from all four manifests) ──────────────
+policy:
+  robots:
+    "vlaardingen.raadsinformatie.nl": "User-agent: * / Disallow: / (fetched 2026-07-25)"
+    "api.notubiz.nl": "User-agent: * / Disallow: / (fetched 2026-07-25)"
+    crawl_delay: none_declared
+    assessment: >
+      Blanket Disallow on both hosts, including the API host we actually harvest. This is a
+      GATE decision, not an engine one, and it is deliberately surfaced to the admin rather
+      than silently resolved. Mitigating context: api.notubiz.nl is the same API the site's
+      own public frontend calls (organisation-id="262" captured from the page), the corpus is
+      statutorily public council information (Wet open overheid), and the same corpus is
+      already republished by a VNG/Open State Foundation aggregator (see bulk_surfaces).
+      Aggravating context: no ToS or open-data licence statement is published on either host,
+      and Notubiz has no publicly documented API. Not resolved by the agent.
+    admin_decision: >
+      GO, NARROW — 2026-07-27, admin ruling (gate 1). Applied by extension of the same
+      day's ruling on the two KOOP hosts, at the admin's instruction to close the gate:
+      the posture is that an ambiguous or blanket `Disallow` over statutorily public
+      material does not stop us, and a publisher who wants it enforced can say so — the
+      crawler identifies itself with a resolving contact URL that carries a block rule and
+      an answered address.
+      NARROW, because the case here is genuinely weaker than at KOOP and the shape of the
+      access should follow that (design/access-posture.md §8): there is no asymmetry to
+      point at (`*` is disallowed with no Google exception), a declared reuse channel
+      exists and the supplier itself names it (ORI), and the party being overridden is a
+      commercial BV rather than the bestuursorgaan that owns the documents. So:
+      **Open Raadsinformatie is the primary route and api.notubiz.nl is used only for what
+      ORI provably cannot serve** — the pre-2014 archive (ORI: 0% of the sampled 2008/2012
+      documents) and the lagging recent window (TOT-5). No general backfill through the
+      provider while ORI covers 2014-2025 at 95.6-100%.
+      The declared-consent route stays open and is the better outcome: asking the griffie
+      to let Notubiz unlock the pre-2014 archive to ORI costs the gemeente nothing and is
+      their own documented mechanism. If that lands, this narrows further.
+  # --- access posture, second axis (design/access-posture.md §3) ---
+  exposure: T1
+  # Searchable with snippets; the document itself is read at the publisher. Deliberately
+  # one tier below the KOOP sources for two independent reasons: the acquisition ruling
+  # here is NARROW rather than plain GO, and `personal_data.smell` is `present` — this
+  # corpus names residents in raadsadressen, bezwaren and handhavingsdossiers. Showing no
+  # more than the publisher already shows is the conservative half of that ruling, and
+  # raising it later is a re-projection.
+  processors: []
+  # Never, while the tier is T1 and the personal-data smell is present.
+  personal_data:
+    smell: present
+    detail: >
+      Council documents routinely carry names of councillors (public role, low risk) but also
+      names/addresses of residents in raadsadressen, bezwaren, inspraakreacties and
+      handhavingsdossiers (higher risk). No BSNs observed in the 785-document sample.
+      "College van B&W (Woo)" gremium indicates Woo-verzoek material, which is the highest
+      personal-data-density category in this corpus.
+    controls: [confidential_flag_respected, no_confidential_content_fetched]
+  takedown: >
+    No rectification/takedown mechanism published on the source. Escalation route is the
+    gemeente's own privacy/AVG contact. Engine-side: URN-level suppression list —
+    `civic suppress <urn> --reason ...` (migrations/0004, engine/suppress.py). Built
+    2026-07-27; before that this line promised a mechanism that did not exist.
+    Requests reach us at the address on https://civic-indexer.edubox.nl/bot. Suppression
+    removes the document from the OpenSearch projection and keeps it out of every later
+    rebuild; it does not delete the ledger row or the fetched bytes.
+  license: not_stated
+
+politeness:
+  delay_seconds: 1.0
+  timeout_seconds: 60
+  concurrency: 1                         # probe 11: kept at 1 given Disallow posture
+  retry:
+    attempts: 3
+    backoff: 1.5
+    retry_on_status: [429, 500, 502, 503, 504]   # NOT 400: cap/param errors are config bugs (CAP-2)
+    # NOT 401 either: probe 10b saw an isolated 401 on one 2026 meeting detail; retrying an
+    # authorization refusal is pointless. The strategy already degrades it to a stub.
+
+budgets:
+  eur_per_run_cap: 5.0
+  eur_per_gb_downloaded: 0.01
+  ocr: none                              # deferred to ocr_tail queue, as Stage A
+  llm_runtime: none
+
+discovery:
+  transport: http
+  roles:
+    backfill:
+      strategy: notubiz_events
+      request:
+        method: GET
+        url: "https://api.notubiz.nl/events"
+        params:                          # required unlock set (failure-modes API-2)
+          organisation_id: 262
+          format: json
+          version: "1.21.1"
+          sort_field: start_date
+          sort_order: ASC
+      pagination:
+        model: page_number
+        param_page: page
+        param_size: per_page
+        size: 200                        # probe 1 VERIFIED on org 262: 201 and 500 => HTTP 400
+      partition:
+        key: date
+        assignment: server_side_window   # date_from/date_to per leaf
+        window_format: "%Y-%m-%d %H:%M:%S"
+        range: {start: "2008-01-01"}     # probed: first event 2008-01-10; end = today
+        bracketing: {max_items: 180, min_days: 1}   # keep every leaf under the 200 cap
+        window_required: true            # probe 5: omitting date_from/date_to => HTTP 400 at
+                                         # ANY per_page. The window is not optional; it is part
+                                         # of the unlock set. Never emit an unwindowed request.
+      termination:
+        any_of:
+          - json_flag: {path: "pagination.has_more_pages", equals: false}
+          - empty: {path: "events"}
+      claimed_total:
+        declared: per_leaf
+        field: pagination.total_items
+        unit: events                     # reconciliation unit = events (meetings);
+                                         # documents are children (TOT-4 control)
+        semantics: >
+          probe 3 VERIFIED, no holes: sum of per-year claimed 2008..2026 = 1264, which equals
+          the windowed all-time figure 1243 (date_to=2026-07-23) plus exactly 21 events
+          scheduled after that date. The two figures differ only by future-dated meetings, and
+          an unwindowed query cannot be used to cross-check because it 400s.
+      empty_by_design:                   # reconciliation rule earned by this re-onboard
+        rule: >
+          A zero-document event is NOT a harvest miss. Two classes are legitimately empty:
+          type=assembly events (probe: agenda_items=0 and documents=0 in every sample, e.g.
+          events 1147017, 1290874, 1290883 under gremium 10157) and events with canceled=true.
+          Reconciliation must classify these as reconciled-empty, or ~20-25% of events will
+          report as gaps forever.
+        signals: [ "type == 'assembly'", "canceled == true" ]
+      sanity_cap:
+        records: 10000                   # events; claimed corpus 1,264 incl. future
+      detail:                            # second level: meeting detail per event
+        url_template: "https://api.notubiz.nl/events/meetings/{event_id}"
+        params: {format: json, version: "1.21.1"}
+      items:                             # documentation of parse paths (code mirrors this)
+        path: "agenda_items[].documents[] (recursive) + documents[]"
+        id_field: id
+        fields:
+          title: title
+          published: "meeting.plannings[0].start_date (date part)"   # doc publication_date lies
+          file_url: url
+          file_size: "versions[0].file_size"
+          mime_type: "versions[0].mime_type"
+          document_kind: "types[].value"  # stable-id vocab (id 1247 = BenW Nota, ...)
+          gremium_id: "gremium.id"        # joins enrichment.lookup_tables.gremium
+    incremental:
+      extends: backfill
+      cutoff:
+        field: "plannings[0].start_date"
+        overlap_pages: 1                 # ordering proved stable on Haarlem; 1 page safety overlap
+
+identity:
+  natural_key: id                        # numeric Notubiz document id
+  natural_key_pattern: "^[0-9]+$"
+  urn_template: "notubiz:262:{natural_key}"
+  merge_policy: keep_separate
+  rejected_candidates:
+    - key: url
+      why: "contains version suffix (/1); a new document version would change the key"
+    - key: file_name
+      why: "not unique across meetings; renamed on republication"
+    - key: case_code
+      why: "probe 4 (n=785): present on every document but frequently blank/shared across a
+             dossier; not unique per document"
+
+fetch:
+  file_url_source: payload               # file URL from discovery payload, no template
+  validation:
+    magic: true
+    eof: true
+    min_size_bytes: 512
+  max_bytes: 524288000
+  precheck_size_field: file_size         # probe 7: Content-Length is ABSENT on all 18 sampled
+                                         # payloads, so the declared size is the only oversize
+                                         # gate available.
+  precheck_size_missing: fetch_with_streaming_cap
+                                         # probe 4/7: file_size is null for 11/785 (1.4%) of
+                                         # documents. Absent declared size must not mean
+                                         # "unbounded"; stream under max_bytes instead.
+  blob_retention: deleted_after_distill
+
+relationships:
+  group_keys:
+    meeting: payload.meeting_id          # doc -> parent meeting (part_of_dossier)
+  edges:
+    - {type: part_of_dossier, established: crawl, from: document, to: meeting}
+    - {type: attachment_of, established: crawl, from: document, to: document,
+       note: "probe 13: 'Bijlage' is the 3rd most common type (117/785). Parent is the
+              sibling document under the same agenda_item; ordering within agenda_items[]
+              .documents[] is the only available signal, so this edge is advisory."}
+
+extraction:
+  ladder: [native_pdf_text]
+  native_confidence_threshold: 0.5
+  zip_policy: defer
+  title_field: title                     # payload path for distillate title
+  format_router:                         # probe 7 (n=785): the corpus is NOT pure PDF
+    "application/pdf": native_pdf_text   # 770/785 (98.1%)
+    "application/msword": defer          # 5/785 - .doc, ladder has no handler => deferred(format)
+    "": magic_bytes_then_route           # 9/785 - empty declared mime; engine invariant is to
+                                         # trust magic bytes, never the declared type
+    "directory": skip                    # 1/785 - mime_type "directory" is a folder placeholder,
+                                         # not a fetchable payload; ledger as skipped(not_a_file)
+    on_unknown: defer
+  ocr_expectation:
+    near_empty_native_text_rate: 0.30
+    basis: >
+      probe 8 via the ORI oracle (free, no downloads): of a 120-document sample of Vlaardingen
+      MediaObjects carrying an extracted text field, 36 (30%) strip to <50 characters -
+      i.e. scanned or unextractable. Text-length deciles: three of ten deciles are 0.
+      Ambiguity recorded honestly: near-empty may mean "scanned" OR "ORI never processed it";
+      the Phase 5 test slice must confirm against our own extraction before this rate is used
+      for an OCR budget.
+
+enrichment:
+  lookup_tables:
+    gremium:                             # probe 10: the 19 gremia of org 262, enumerated
+                                         # 2026-07-25. Never done in the first onboarding.
+                                         # This is the data that revives the publisher facet.
+      from: meeting_context.gremium_id   # payload path holding the key (100% populated:
+                                         # 89/89 ledgered items, verified 2026-07-25)
+      to: publisher                      # the projected field this table OWNS; index
+                                         # .projection must NOT also declare a path for it
+      joined_at: projection              # engine/project/projector.py:lookups_of - no new
+                                         # pipeline stage (known_defects
+                                         # .dead_publisher_facet.remedy)
+      values:                            # an id absent here projects null, never the raw id
+        94: "Gemeenteraad"
+        254: "commissie Stad"
+        255: "commissie Samenleving"
+        860: "gemeenteraadsverkiezingen"
+        3593: "Oriënterende raadsavond"
+        3594: "Werkbezoek"
+        5404: "Test NotuCast"
+        5732: "Overige evenementen"
+        9418: "Raadskamer raadzaal"
+        9419: "Raadskamer informerend"
+        10157: "Raadscommissie"
+        10313: "Agendacommissie"
+        10314: "Raadskamer burgerzaal"
+        14474: "Werkgeverscommissie"
+        15189: "College van B&W (2026)"
+        15253: "Auditcommissie"
+        15372: "College van B&W (Yurie)"
+        15599: "College van B&W (raad / openbaar)"
+        15600: "College van B&W (Woo)"
+                                         # Ledger check 2026-07-25: the only gremium ids
+                                         # actually present are 94 / 5732 / 10313 - all mapped.
+
+index:
+  dataset: vlaardingen_raad
+  analyzer: dutch
+  projection:                            # payload paths for projected doc fields
+    title: title                         # publisher is NOT here: it is filled by
+                                         # enrichment.lookup_tables.gremium (one owner per
+                                         # projected field; validate() rejects both)
+    file_type: mime_type
+    document_kind: document_kind
+  facets: [publisher, document_kind, published_month, file_type, disposition]
+  facet_notes:
+    publisher: >
+      The gremium (besluitvormend orgaan) - raad vs commissie vs college - and the direct
+      answer to admin_intent. Dead in the first onboarding (PROJ-1: projected from
+      meeting_context.gremium_name, which the strategy hard-coded to null); revived
+      2026-07-25 by the projection-time id->title join declared in enrichment
+      .lookup_tables.gremium. Verified against the ledger, not assumed: gremium_id is
+      populated on 89/89 items and every id present is mapped.
+    document_kind: >
+      probe 13 (n=785): the resident-facing win, and the answer to admin_intent. Meaningful
+      decision types are present and well populated - Motie 58, Brief 54, Raadsvoorstel 23,
+      Amendement 15, Antwoord 15, Besluitenlijst 13, Verslag 9, Presentatie 6, Verordening 5,
+      Raadsbesluit 5, Besluit 3, Notulen 2. Caveat: 550/785 (70%) carry only generic values
+      (Document 262, Pdf 171, Bijlage 117), so useful coverage is ~30% - just above the weak
+      -facet threshold. Recommend collapsing Document/Pdf to "overig" in the TBL rules so the
+      facet does not present a meaningless dominant bucket. NOT declared as a facet in the
+      first onboarding despite being extracted.
+  dates: [published]
+  chunking: engine_default
+
+health:
+  fixtures:
+    - vlaardingen_page_0
+    - vlaardingen_page_1
+  zero_match_policy: alarm
+  checks:
+    - {name: publisher_non_null, expect: "share > 0.9",
+       why: "regression guard for known_defects.dead_publisher_facet (FIXED 2026-07-25).
+             health.checks are declarative only - no runner executes them yet - so this is a
+             standing intent, not a live gate; the live guard is tests/test_project.py"}
+    - {name: document_kind_meaningful, expect: "share of non-generic types > 0.20"}
+    - {name: pdf_share, expect: "share > 0.95", basis: "probe 7: 98.1% of 785"}
+
+# ── Defects found by the re-onboard (negative knowledge; do not rediscover) ─────────
+known_defects:
+  dead_publisher_facet:
+    severity: high
+    scope: fleet                         # affects haarlem_raad too, and every future Notubiz site
+    status: FIXED 2026-07-25             # kept as negative knowledge, not deleted
+    fixed_by: >
+      The remedy below, exactly as prescribed: enrichment.lookup_tables.gremium now declares
+      from/to/values and engine/project/projector.py joins it at projection time. The strategy
+      no longer emits the null gremium_name key that invited the dead path. Re-project to
+      populate: `uv run civic validate-manifest manifests/vlaardingen_raad.yaml` (re-stores the
+      manifest the projector reads) then `uv run civic project vlaardingen_raad --recreate`.
+      NOTE the battery_gap below is NOT closed by this - the instance is fixed, the detection
+      gap that let it ship is still open (W6.5 item 3).
+    what: >
+      engine/strategies/notubiz_events.py:218 sets meeting_context.gremium_name = None with the
+      comment "gremia lookup joined at enrichment time". No enrichment module exists in engine/;
+      "enriched" appears only as a stage rank (envelope.py:9) and a projector stage filter
+      (project/projector.py:47). Every manifest projecting publisher from gremium_name therefore
+      indexes null, and the publisher facet is empty for the whole dataset.
+    impact: >
+      Directly defeats admin_intent: "op besluitvormend orgaan" (raad vs commissie vs college)
+      is the single most useful filter for a resident, and it silently does not work.
+    remedy: >
+      gremium_id IS captured (notubiz_events.py:191). Join it against
+      enrichment.lookup_tables.gremium. Cheapest correct fix is a projector-time lookup; no new
+      pipeline stage is needed, so this stays inside the "strategies inside existing hooks" rule.
+    battery_gap: >
+      No probe verifies that declared index.projection paths and index.facets actually populate.
+      Probe 5 tests filter vocabulary on the SOURCE side only. Add a projection-liveness probe.
+  probe0_blind_to_aggregators:
+    severity: medium
+    scope: engine
+    what: >
+      probe 0 is host-scoped (SRU/OAI/CKAN/sitemap/XHR against provider hosts) and returned
+      verdict "no_bulk_surface", recommended=null - which is wrong in substance, because a
+      full-content bulk surface for this exact corpus exists at a third party (see
+      bulk_surfaces.open_raadsinformatie). This is the tuchtrecht SRU lesson recurring one level
+      up: aggregator instead of provider endpoint.
+    remedy: "probe 0 needs an aggregator-registry step keyed by corpus type, not just by host."
+  probe0_ignores_disallow:
+    severity: medium
+    scope: engine
+    what: >
+      probe 0 fetches robots.txt but only greps for "Sitemap:" lines; it never inspects Disallow
+      or Crawl-delay. Four manifests shipped with no policy: block and no record of the robots
+      posture of the hosts they harvest.
+    remedy: >
+      Parse Disallow/Crawl-delay per host into policy.robots; validation should require a
+      policy: block whenever a harvested host disallows.
+
+onboarding_probes:
+  probed_at: "2026-07-25"                # live re-onboard; supersedes the 2026-07-23 light probe
+  requests_used: ~150                    # whole battery, read-only, 1 rps
+  bulk_surfaces:                         # probe 0
+    verdict_from_tool: no_bulk_surface
+    verified_absent:
+      "vlaardingen.raadsinformatie.nl": {sru: 404, oai_pmh: 404, ckan: 404, sitemap: 404}
+      "api.notubiz.nl": {sru: 404, oai_pmh: 404, ckan: 404, sitemap: 404}
+    frontend_xhr:                        # obligation discharged
+      finding: >
+        The site's own frontend calls api.notubiz.nl with organisation-id="262" (both
+        organisation-id="262" and organisation_id: '262' appear in the delivered HTML). The
+        chosen surface IS the frontend's own API, so there is no better private API to find and
+        no HTML scraping anywhere in this manifest.
+    open_raadsinformatie:                # the surface probe 0 missed - PRESENT, not absent
+      endpoint: "https://api.openraadsinformatie.nl/v1/elastic/ori_vlaardingen*/_search"
+      operator: "Open State Foundation / VNG Realisatie"
+      index: ori_vlaardingen_20250514092617
+      docs_total: 168805
+      media_objects: 16877
+      with_extracted_text: 16583
+      content_class: full_content        # content_completeness obligation discharged
+      joinable_on: "original_url = api.notubiz.nl/document/{id}/{version} = our natural_key"
+      freshness: "current; MediaObjects in every month through 2026-07-09 (~2 week lag).
+                  The index NAME timestamp (2025-05) is a red herring - it is creation time,
+                  not data recency."
+      coverage_holes: >
+        ZERO docs of any @type for 2011 and 2012, and nothing before 2010, while Notubiz claims
+        65/71/56/58 events for 2008/2009/2011/2012. That is ~250 of 1264 events (~20% of the
+        corpus) invisible in ORI. Verified by date_histogram over all @types: 2010=384,
+        2011=0, 2012=0, 2013=1006.
+      rejected_as_primary_because: >
+        (1) the ~20% archive hole is disqualifying for a findability product whose intent is a
+        complete answer to "what did the council decide"; (2) it is a third party's
+        re-extraction, which violates this project's raw-artifact-as-ground-truth principle;
+        (3) its own documentation host (docs.openraadsinformatie.nl) no longer resolves and
+        most indices have not been rebuilt since 2025, so it is not a dependency to bet
+        production freshness on.
+      retained_roles: [reconciliation_oracle, free_ocr_rate_predictor,
+                       optional_text_backfill_accelerator_2013_2026]
+  result_cap:                            # probe 1 - now VERIFIED on org 262, not inherited
+    per_page_max: 200
+    reject_style: "HTTP 400 explicit"
+    tested: "per_page=201 => 400, per_page=500 => 400 (org 262, 2026-07-25)"
+  claimed_total:                         # probe 2
+    trustworthy: true
+    evidence: "per-year page-1 item counts equal pagination.total_items exactly for all six
+               sampled eras (2008:65, 2012:58, 2016:83, 2020:43, 2024:71, 2026:78)"
+    alltime_windowed_2008_to_2026_07_23: 1243
+    sum_per_year_2008_to_2026_12_31: 1264
+  partition_holes:                        # probe 3 - PASS, difference fully explained
+    reconciles: true
+    detail: "1264 - 1243 = 21 = exactly the events scheduled after 2026-07-23 (verified by
+             querying 2026-07-24..2026-12-31 => total_items 21). No dateless-document hole:
+             every document hangs off an event that carries a planning date."
+  key_uniqueness:                         # probe 4 - was sample: 0, now properly run
+    sample: 785
+    distinct: 785
+    duplicates: 0
+    all_numeric: true
+    null_keys: 0
+    stability: "re-fetch of meeting 92761 returned an identical document-id set (n=6)"
+    meetings_sampled: 50
+    eras_covered: [2008, 2012, 2014, 2016, 2018, 2020, 2021, 2024, 2026]
+  filter_vocabulary:                      # probe 5
+    date_window: works
+    required_params: [organisation_id, format, version, date_from, date_to]
+    correction: >
+      The first onboarding recorded the unlock set as [organisation_id, format, version]. That
+      is incomplete: omitting date_from/date_to returns HTTP 400 at any per_page. Recorded in
+      discovery.partition.window_required.
+  pagination_truth:                       # probe 6
+    inherited: "Haarlem double-walk 600/600 identical; ordering stable under sort_field=start_date"
+    local_check: "every sampled year fits on one page (max 88 events/yr << 200 cap), so
+                  multi-page walking is not exercised at year granularity for org 262 at all;
+                  the bracketing ladder exists purely as a safety margin"
+  content_type:                           # probe 7 - was 1 meeting, now 785 docs + 18 payloads
+    docs_inspected: 785
+    payloads_downloaded: 18
+    mime_spread: {"application/pdf": 770, "": 9, "application/msword": 5, "directory": 1}
+    magic_vs_declared: "18/18 agree (all %PDF); zero disagreements, no hidden ZIPs in sample"
+    content_length_header: absent_on_all_18
+    declared_file_size_present: "774/785 (11 missing)"
+    size_distribution: {mean_kb: 938, median_kb: 92, p90_kb: 1722, max_mb: 43.6}
+    note: "heavy right skew - the mean is ~10x the median, so byte projections must be
+            mean-based to be safe, not median-based"
+  cost_prediction:                        # probe 8 - confidence raised from low to medium
+    events_total: 1264
+    docs_per_doc_bearing_meeting: 15.7
+    superseded: "the first onboarding's 24 docs/meeting came from ONE meeting (1396405) and
+                 is ~1.5x too high as a corpus average"
+    documents_estimate: "~19,000 (range 17k-21k)"
+    estimate_method: >
+      Cross-checked two ways. (a) ORI oracle: 16,877 MediaObjects over the 1,014 events in
+      ORI-covered years = 16.6 docs/event, plus ~250 events in the four ORI-missing years at
+      the sparser old-era rate (2008 sampled at 5.6 docs/meeting) => ~18.9k. (b) own sample:
+      15.7 docs per doc-bearing meeting over 50 meetings, discounted for empty-by-design
+      assembly/canceled events => ~17k-19k.
+    bytes_estimate_gb: "~17 (mean-based, 19k x 938KB); ~1.8 if median-based - use 17"
+    backfill_eur: "~0.20 download at eur_per_gb_downloaded 0.01"
+    backfill_wall_clock: "~5.6 h: ~40 listing + ~1,264 meeting-detail + ~19,000 document
+                          requests at 1 rps, concurrency 1. Wall clock, not euros, is the
+                          binding constraint."
+    ocr_deferred_eur: "~1.50 for ~5,700 near-empty docs (30% rate) at ~4 pages each,
+                       RunPod open-weights rate ~$0.069/1k pages; NOT in this run's budget"
+    daily_incremental: "~88 events/yr and ~1,400 docs/yr (2025 actuals) => ~0.25 events and
+                        ~4 docs per day; pennies"
+    confidence: medium
+  volatility:                             # probe 9 - VERIFIED for org 262, was inherited
+    class: persistent
+    evidence: "2008-era documents (4774562, 2753821, 2753822) and 2012-era documents
+               (4775048, 2755602, 2755603) all still return HTTP 200 with valid PDF magic
+               bytes in 2026. 18-year-old payloads are live; no TTL, no evaporation."
+  access_coverage:                        # probe 10 - was "not enumerated", now enumerated
+    gremia_total: 19
+    gremia_enumerated: true
+    confidential_documents_in_sample: "0/785"
+    non_public_looking_gremia:
+      - {id: 5404, title: "Test NotuCast", note: "vendor test body; exclude from publisher facet"}
+      - {id: 15372, title: "College van B&W (Yurie)", note: "looks like an internal/named
+          workspace rather than a public body; confirm with the gemeente before indexing"}
+    isolated_401: >
+      Meeting detail for event 1441391 (2026) returned HTTP 401 once; a follow-up sample of 10
+      other 2026 meetings returned 200/200. Treated as occasional, not systematic. The strategy
+      already degrades a failed detail fetch to a stub, so coverage loss is ledgered not silent.
+    coverage_estimate: >
+      No forbidden module space here (unlike Amsterdam's 4-of-12): the events API exposes all 19
+      gremia and the archive is complete from 2008. Estimated coverage ~99%+ of the public
+      corpus, with losses limited to isolated 401s and the 1.9% non-PDF payloads deferred at
+      extraction.
+  schema_drift:                           # probe 12 - NEVER RUN before; clean negative result
+    stable: true
+    finding: >
+      The document object carries an IDENTICAL 16-field set in every sampled era from 2008 to
+      2026 (case_code, category, confidential, connections, date, description, id,
+      last_modified, policy_field, publication_date, self, title, types, url, version,
+      versions). No per-era field availability differences, so no partial-indexing plan and no
+      per-era EXPR variants are needed. This is the opposite of the Vergunningen lesson
+      (terinzageleggingBG existing only since ~2024) and is worth recording precisely because
+      a null result here removes a whole class of planned complexity.
+    eras: [2008, 2012, 2016, 2020, 2024, 2026]
+  relationships:                          # probe 13
+    part_of_dossier: "every document reachable only via its meeting; meeting_id always present"
+    attachment_of: "advisory only - 'Bijlage' (117/785) has no explicit parent pointer; sibling
+                    order within agenda_items[].documents[] is the only signal"
+    document_kind_vocab_size: 16
+  politeness_ceiling:                     # probe 11
+    observed: "~150 requests at 1 rps across api.notubiz.nl and api.openraadsinformatie.nl:
+               zero 429s, zero throttling, no latency degradation"
+    setting: "1 rps, concurrency 1"
+    headroom: "not raised above concurrency 1 despite no observed limit, because of the
+               Disallow: / posture - politeness here is a policy choice, not a capacity one"

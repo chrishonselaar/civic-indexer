@@ -1,0 +1,263 @@
+# Tuchtrecht uitspraken (tuchtrecht.overheid.nl) — Stage B source 2 (bespoke path).
+# Battery probed 2026-07-23; artifacts in experiments/stage_b/probes/tuchtrecht/.
+#
+# Probed facts:
+# - Corpus: 47,942 uitspraken, ECLI-keyed, 9 domeinen / ~200 instanties, dates 1994+.
+# - The `zoekterm` URL param is a DECOY (ignored; nonsense query returns full corpus —
+#   failure-modes API-3). The real full-text field is `text`.
+# - Server-side date windows work (datumvan/datumtot + datumtype), both DD-MM-YYYY and
+#   ISO accepted; monthly cross-sums EXACT (2025: 12 months = 2,504 = year window).
+# - Probe 3 found a partition hole: year-sums 2008-2026 = 47,464 vs 47,942 claimed;
+#   the 478 missing are dated 1994-2007 => partition range starts 1990 (safety floor).
+# - No deep-paging cap: last page (4795) serves; past-end page graceful/empty.
+# - Double-walk sort=date-asc: 150/150 ids identical order, 0 dups.
+# - DISCOVERY surface = HTML search; FETCH surface = KOOP FRBR repository:
+#   https://repository.overheid.nl/frbr/tuchtrecht/{ecli_year}/{ECLI}/1/xml/{ECLI_}.xml
+#   serves OWMS metadata + FULL body text as XML (3/3 eras verified) => no PDF, no OCR
+#   tail, ~25 KB/doc => full corpus ~1.2 GB transient, near-zero resident (text only).
+# - Old records (pre-~2010) can have "*" placeholder titles and unreliable
+#   publicatiedatum (e.g. pub 2001 on an ECLI:2011 record) — uitspraakdatum is the
+#   trusted axis (temporal-authority note).
+
+manifest_schema: 1
+
+source:
+  id: tuchtrecht
+  name: "Tuchtrecht uitspraken (tuchtrecht.overheid.nl)"
+  base_url: "https://tuchtrecht.overheid.nl"
+  admin_intent: >
+    Alle Nederlandse tuchtrechtuitspraken (gezondheidszorg, advocatuur, notariaat,
+    accountancy, gerechtsdeurwaarders, diergeneeskunde, scheepvaart e.a.) doorzoekbaar
+    met volledige tekst, vanaf 1994.
+  volatility: persistent                 # 2009 XML still served (probed)
+  language: nl
+
+# ── Policy (flow Phase 1; POL-1 backfill 2026-07-25) ───────────────────────────────
+# Backfilled after the Vlaardingen re-onboard found robots directives were recorded
+# nowhere in the fleet. Only the `robots` sub-block is probe-verified this pass
+# (`civic probe-bulk --source tuchtrecht`, policy_flags); the rest is marked
+# not_assessed rather than guessed.
+policy:
+  robots:
+    # This source's two hosts differ in posture — the split-host rule cuts both ways.
+    "tuchtrecht.overheid.nl": "no robots.txt (HTTP 404, fetched 2026-07-25) — nothing disallowed"
+    "repository.overheid.nl": "User-agent: * / Disallow: / (fetched 2026-07-25)"
+    crawl_delay: none_declared            # the ~1 rps ceiling below is MEASURED, not declared
+    assessment: >
+      Split posture. The DISCOVERY host (tuchtrecht.overheid.nl, HTML search) serves no
+      robots.txt at all — a verified absence, so nothing is disallowed there. The BULK/FETCH
+      host (repository.overheid.nl, KOOP's SRU + FRBR repository) serves a blanket
+      Disallow: / . That host is the one probe 0 recommends and the one the deferred
+      full-text pass would hammer, so the gate decision binds the upgrade path even though
+      the ACTIVE tier (fetch.transport: none) currently makes no request to it beyond SRU
+      discovery. Mitigating context: repository.overheid.nl is KOOP's designated bulk/reuse
+      surface — SRU is a machine-access protocol with no other purpose, so a blanket
+      Disallow reads as boilerplate over an intentionally machine-readable endpoint; the
+      corpus is statutorily public, ECLI-keyed case law. Aggravating context: no ToS or
+      licence statement was located on either host, and the measured ~1 rps limit on the
+      FRBR host (see fetch.politeness) shows the operator does actively rate-police it.
+      Not resolved by the agent.
+    admin_decision: >
+      GO — 2026-07-27, admin ruling (gate 1). Same ruling as woo_besluiten and for the
+      same reason: the blanket Disallow on repository.overheid.nl is not applied. SRU and
+      FRBR are machine-access protocols with no other purpose, so a blanket Disallow over
+      them reads as ops boilerplate rather than a reuse decision, and this source's own
+      discovery host serves no robots.txt at all. The corpus is statutorily public,
+      ECLI-keyed case law. The operator can opt this crawler out at any time: it carries a
+      resolving contact URL, that page carries a block rule for our token, and mail to the
+      address it gives is answered.
+      Binds the deferred FRBR full-text upgrade, not only the current SRU discovery tier.
+      The measured ~1 rps ceiling (fetch.politeness) is respected as a hard limit — the
+      operator rate-polices this host, which is a declaration we can actually read.
+      Conditions as for woo_besluiten. Framework: design/access-posture.md.
+  # --- access posture, second axis (design/access-posture.md §3) ---
+  exposure: T2
+  # ECLI-keyed case law, already published in full by KOOP and pseudonymised at source.
+  # T3 is probably correct here — data.overheid.nl lists this corpus as CC-0 — but
+  # `license` below still reads not_assessed, so declaring T3 would outrun the evidence.
+  processors: []
+  # Nothing leaves to a third party. Tuchtrecht decisions concern named professionals;
+  # the Voyage default terms (perpetual training licence, no retention period, no GDPR
+  # basis) are not a defensible place to send them.
+  personal_data:
+    smell: not_assessed        # owed at gate 1; no sampling pass run for this source
+    detail: >
+      Tuchtrecht uitspraken are published by the colleges in already-anonymised form, but
+      the degree of anonymisation varies by domein and era (pre-2010 records are the
+      likeliest outliers — see the "*" placeholder titles noted above). Not sampled in the
+      POL-1 backfill.
+    controls: []
+  takedown: not_assessed       # owed at gate 1
+  license: not_assessed        # owed at gate 1; no licence statement located on either host
+
+politeness:
+  delay_seconds: 1.0
+  timeout_seconds: 60
+  concurrency: 1
+  retry:
+    attempts: 3
+    backoff: 1.5
+    retry_on_status: [429, 500, 502, 503, 504]
+
+budgets:
+  eur_per_run_cap: 5.0
+  eur_per_gb_downloaded: 0.01
+  ocr: none                              # born-digital XML: no OCR tail exists
+  llm_runtime: none
+
+discovery:
+  transport: http
+  # BULK SRU harvest (probed 2026-07-24) — supersedes the original paged_html_search
+  # walk of tuchtrecht.overheid.nl. repository.overheid.nl/sru returns full OWMS metadata
+  # + a dcterms:description abstract for up to 1000 records/request with NO rate limit
+  # (the FRBR *file* host caps at ~1 rps; the SRU service does not), so the whole ~48k
+  # corpus discovers in ~48 requests. The abstract rides inline in each item's payload and
+  # is distilled by the extract phase (fetch.transport: none) — no per-doc fetch. The FRBR
+  # XML URL is still recorded (role='file') so full body text can be backfilled later as a
+  # deferred upgrade (items carry missing=['fulltext']). The retired HTML-scrape strategy
+  # (paged_html_search) and its friction log remain in git history at f4e9a80~.
+  roles:
+    backfill:
+      strategy: sru_records
+      request:
+        method: GET
+        url: "https://repository.overheid.nl/sru"
+        params:
+          operation: searchRetrieve
+          version: "2.0"
+          query: "c.product-area==tuchtrecht"
+      pagination:
+        param_start: startRecord         # 1-based; SRU nextRecordPosition drives paging
+        param_size: maximumRecords
+        size: 1000                        # max page size (probed 2026-07-24)
+      claimed_total:
+        declared: per_walk
+        source: sru_number_of_records    # <sru:numberOfRecords> == 47,966 for tuchtrecht
+      sanity_cap:
+        records: 60000                   # claimed corpus ~47,966
+      record:
+        key_field: "dcterms:identifier"  # the ECLI
+        published_field: uitspraakdatum  # trusted temporal axis (leaf = year)
+        file_url_field: "gzd:url"        # FRBR XML — kept for the deferred full-text backfill
+        landing_url_field: "gzd:preferredUrl"
+        fields:                          # payload_key: SRU record tag (namespaced local)
+          title: "dcterms:title"
+          description: "dcterms:description"
+          instantie: "dcterms:creator"
+          type: "dcterms:type"
+          subject: "dcterms:subject"
+          uitspraakdatum: "overheidwetgeving:uitspraakdatum"
+          instantieDomein: "overheidwetgeving:instantieDomein"
+          instantiePlaats: "overheidwetgeving:instantiePlaats"
+          subonderwerp: "overheidwetgeving:subonderwerp"
+          zaaknummer: "overheidwetgeving:zaaknummer"
+          beslissing: "overheidwetgeving:beslissing"
+          modified: "dcterms:modified"
+      delay_seconds: 0.2                  # polite spacing between the ~48 bulk pages
+    incremental:
+      extends: backfill
+      cutoff:
+        field: uitspraakdatum
+        overlap_pages: 0
+
+identity:
+  natural_key: ecli
+  natural_key_pattern: "ECLI:NL:[A-Z0-9]+:[0-9]{4}:[A-Za-z0-9]+"
+  urn_template: "tuchtrecht:{natural_key}"
+  merge_policy: keep_separate
+  rejected_candidates:
+    - key: zaaknummer
+      why: "not unique (appeals reuse; multiple uitspraken per zaak); S-project lesson"
+
+fetch:
+  # ACTIVE TIER: no fetch. SRU discovery carries the abstract inline, so the extract
+  # phase distils straight from the payload (see engine/process.py _extract_from_payload).
+  # DEFERRED full-text upgrade: declared below as `fetch.upgrade`, taken only by
+  # `civic run tuchtrecht --mode upgrade`, which re-fetches the FRBR XML (fetch.file_url
+  # per item) and replaces each abstract with the real body. The FRBR-host politeness
+  # below governs THAT pass. Config, not prose: the upgrade has to be reproducible, and
+  # declaring it here means an ordinary run of this manifest still costs nothing.
+  transport: none
+  file_url_source: payload
+  # Overlaid onto fetch/extraction for `--mode upgrade` runs (engine/process.py
+  # apply_upgrade_tier). The cohort is the items already carrying missing=['fulltext'].
+  upgrade:
+    transport: http
+    ladder: [xml_text]
+  # Fetch surface = repository.overheid.nl (KOOP's FRBR file repository), a different
+  # host from the rate-sensitive search app that discovery walks — so it gets its own
+  # politeness block. PROBE 2026-07-24 (see onboarding_probes.fetch_rate_ceiling): this
+  # host enforces a ~1 rps request-rate limit, NOT a concurrency limit. Measured 429
+  # rates over ~300-item batches: 1 rps → 0%; ~3.6 rps @ concurrency 2 → 47%; ~3.7 rps @
+  # concurrency 1 (single connection) → 69%. It is not connection-bound (1 conn fast
+  # failed worse than 2), so parallelism cannot help here; ~1 rps (~13 h for 48k docs)
+  # is the polite ceiling. Retries amplify load 3× when over the limit — stay at 1 rps.
+  politeness:
+    concurrency: 1
+    delay_seconds: 0.85                   # ~1 rps net incl. ~0.15s fetch; proven clean
+  validation:
+    magic: true
+    eof: false                           # XML has no %%EOF; well-formedness is the check
+    min_size_bytes: 512
+  max_bytes: 52428800                    # 50 MB cap; observed XMLs 20-36 KB
+  blob_retention: deleted_after_distill
+
+relationships:
+  group_keys:
+    zaak: payload.zaaknummer             # sibling uitspraken (eerste aanleg / beroep)
+  edges: []                              # CTG->RTG appeal edges: Stage C candidate
+
+extraction:
+  # ACTIVE: distil the searchable text from the SRU payload (fetch.transport: none).
+  # payload_text_fields are joined (after the title) into the distillate; deferred
+  # full-text swaps this to [xml_text] once the FRBR body is fetched.
+  ladder: [payload_text]
+  title_field: title
+  payload_text_fields: [description, subonderwerp, subject, beslissing]
+
+index:
+  dataset: tuchtrecht
+  analyzer: dutch
+  projection:
+    title: title
+    publisher: instantie                 # enriched from XML at extract time (or ECLI college code)
+    file_type: mime_type
+  facets: [publisher, published_month, disposition]
+  dates: [published]
+  chunking: engine_default
+
+health:
+  fixtures:
+    - tuchtrecht_page_0
+    - tuchtrecht_page_1
+  zero_match_policy: alarm
+
+onboarding_probes:
+  probed_at: "2026-07-23"
+  result_cap: {paging_cap: none_found, evidence: "page 4795 (last) serves; 4796 graceful empty"}
+  claimed_total: {trustworthy: true, cross_summed: "2025: 12 months = 2504 = year; years 1994-2026 + pre-2008 tail = 47942 exact"}
+  partition_holes: {found: "478 records dated pre-2008 (1994-2007) — caught by probe 3 year-sum", fix: "range starts 1990"}
+  key_uniqueness: {sample: 150, unique: 150, registry: "ECLI (nationally issued)"}
+  filter_vocabulary:
+    zoekterm: "DECOY — ignored entirely (API-3); use `text`"
+    text: "works (nonsense=0, arts=11500)"
+    date_params: "datumvan/datumtot/datumtype work; both DD-MM-YYYY and ISO accepted"
+    domein: "9 domains"
+    instantie: "~200 colleges"
+  pagination_truth: {double_walk: "150 ids identical, 0 dups", sort: "date-asc stable"}
+  content_type: {fetch_surface: "FRBR repository XML", sample: "3/3 eras well-formed with full body text", sizes: "20-36 KB"}
+  cost_prediction: {backfill: "~48k XML x ~25KB = ~1.2 GB transient, ~960 discovery pages; resident = text distillates only", confidence: high}
+  volatility: {class: persistent, evidence: "2009 repo XML served 2026-07-23"}
+  access_coverage: {domains: 9, note: "repository tree 1994-2026 matches search era range"}
+  politeness_ceiling: {observed: "~140 requests at 1 rps, zero 429/5xx (discovery/search host)"}
+  fetch_rate_ceiling:
+    host: "repository.overheid.nl (FRBR file repo)"
+    probed_at: "2026-07-24"
+    finding: "rate-limited to ~1 rps; NOT connection-bound (token-bucket-like)"
+    evidence: "429 rate over ~300-item batches — 1 rps: 0%; conc2 ~3.6 rps: 47% (159/300 ok); conc1 ~3.7 rps: 69% (93/300 ok). Retries amplify load 3x over the limit."
+    consequence: "parallelism cannot speed the 48k backfill; ~13 h at 1 rps is the polite floor. Backfill is resumable (failed=retryable, select_candidates re-attempts), so chunk it."
+  schema_drift:
+    - "pre-~2010 records: '*' placeholder titles; publicatiedatum unreliable (pub 2001 on ECLI:2011)"
+    - "XML schema stable across 2009/2010/2026 samples (owmskern + instantie + uitspraak body)"
+  relationships:
+    - "zaaknummer groups eerste aanleg + beroep; CTG/RTG appeal edges derivable later"

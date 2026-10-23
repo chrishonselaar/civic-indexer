@@ -1,0 +1,117 @@
+# MinerU2.5-Pro OCR-burst image — SLIM multi-stage rebuild of ocr-mineru:v1.
+#
+# WHY: v1 is FROM runpod/pytorch:...-devel-ubuntu22.04 = 23.9 GB. That base carries the
+# full CUDA *toolkit* (nvcc, headers, static libs — build-time only) plus its own torch,
+# then `pip install vllm==0.11.2` pulls a SECOND, self-contained torch + nvidia-*-cu12
+# CUDA wheels. So the runtime ships a multi-GB CUDA toolkit it never uses and a duplicate
+# torch. Cold-pulling 23.9 GB cost 6–23 min on Vast (bandwidth-bound; auth does NOT help —
+# see results/dpi-ab-and-provider-cost.md §2). This rebuild keeps ONLY vLLM's self-contained
+# CUDA wheels on a slim runtime base. Expected ~23.9 GB -> ~8–10 GB (torch+CUDA wheels are
+# the ~6–7 GB irreducible floor). Halves every cold-start pull on every provider.
+#
+# !!! NOT BUILT/VALIDATED IN THE SESSION THAT WROTE THIS — build + output-validate before
+# !!! production use. Two things to verify on first boot (checklist at bottom):
+# !!!   (a) real page OUTPUT matches v1 (vLLM 0.11.2 pin is load-bearing: newer vLLM emits
+# !!!       "!!!!" garbage for Qwen2-VL — see README "Traps"). Diff against a known-good page.
+# !!!   (b) SSH still works on your target provider (this stage adds its own sshd; v1
+# !!!       inherited RunPod's). If RunPod SSH breaks, fall back to keeping the runpod base.
+
+# ---- Stage 1: builder — full toolkit available to build/resolve any wheels ----------
+FROM nvidia/cuda:12.4.1-devel-ubuntu22.04 AS builder
+
+ENV DEBIAN_FRONTEND=noninteractive PIP_NO_CACHE_DIR=1 PIP_DISABLE_PIP_VERSION_CHECK=1
+# Use the base's default python3 (3.10 on ubuntu22.04) — python minor version does not
+# affect model output, and 3.11 isn't in 22.04's repos without a PPA. BOTH stages share
+# the 22.04 base so the copied venv's /usr/bin/python3.10 symlink resolves in runtime.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      python3 python3-venv python3-dev python3-pip \
+      build-essential ninja-build git && \
+    rm -rf /var/lib/apt/lists/*
+
+# One venv we copy wholesale to the runtime stage — keeps the runtime free of pip/apt cruft.
+RUN python3 -m venv /opt/venv
+ENV PATH=/opt/venv/bin:$PATH
+RUN pip install --upgrade pip
+
+# PINNED, VALIDATED stack (do NOT bump vllm without re-validating page output — README Traps).
+# vllm==0.11.2 pulls its own torch + nvidia-*-cu12 CUDA wheels => the venv is self-contained
+# w.r.t. CUDA, so the runtime stage needs no CUDA toolkit.
+RUN pip install \
+      vllm==0.11.2 \
+      mineru-vl-utils \
+      pymupdf \
+      pillow
+
+# ---- Stage 2: slim runtime — CUDA *runtime* base (no toolkit), venv copied in --------
+# nvidia/cuda:...-runtime (not -devel) is ~1/3 the size and matches the 12.4.1 the venv
+# wheels expect. (Even smaller: python:3.11-slim relying solely on the pip CUDA wheels —
+# swap the FROM if you confirm no missing system CUDA lib at runtime.)
+FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# venv FIRST (the big ~9GB layer) so editing the small runtime-deps layer below never
+# re-pushes it. The venv is self-contained (vLLM's own CUDA wheels); the base + apt below
+# only supply the system libs it dlopens + a C compiler for Triton's runtime JIT.
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH=/opt/venv/bin:$PATH
+
+# Runtime shared libs the wheels dlopen: libgomp (torch), libGL/glib (opencv via mineru),
+# plus sshd for direct `ssh -p <port> root@<ip>`.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      python3 python3-distutils python3-dev gcc \
+      libgomp1 libgl1 libglib2.0-0 \
+      openssh-server && \
+    mkdir -p /run/sshd && ssh-keygen -A && \
+    rm -rf /var/lib/apt/lists/*
+# Two runtime deps the slim base is missing (both verified on the FR Vast run):
+#  - python3-distutils: the copied venv's setuptools imports distutils.core from the base
+#    python stdlib; Ubuntu ships it in this separate package the `python3` metapackage skips.
+#    Without it LLM() dies: "ModuleNotFoundError: No module named 'distutils.core'".
+#  - gcc + python3-dev: vLLM's Triton backend JIT-COMPILES CUDA kernels at runtime and needs
+#    a C compiler + Python.h. Without them engine init dies: "Failed to find C compiler".
+#    (build-essential in the builder stage does NOT carry over — the runtime is a fresh base.)
+
+# Worker + turnkey scripts (kept identical to v1/v2 so the runbooks are unchanged).
+COPY ocr_pdf.py mineru_pages.py /root/
+# ocr_worker.py lives in ../ocr_drain — copy it in at build time (see build cmd below) or
+# scp it at run time as the runbook already does. Left out of COPY to avoid a cross-dir build
+# context; the drain runbook scps it anyway.
+WORKDIR /root
+
+# Portable SSH bring-up (see entrypoint.sh): inject PUBLIC_KEY if set, start sshd
+# non-fatally, then idle. Vast provides its own ssh via --ssh; RunPod uses PUBLIC_KEY.
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Optional weights bake (LAST layer, so :slim and :slim-weights share every layer above and
+# a :slim-weights push only uploads this one). BAKE_WEIGHTS=1 pre-downloads the ~2.2GB
+# MinerU2.5-Pro weights into the HF cache => the worker boots with ZERO network (no ~45s HF
+# pull, no HF rate-limit when fanning out N pods). Trade: +2.2GB image (13.1 -> ~15.3GB) =>
+# a longer cold pull, so it only wins for N-pod bursts / flaky-HF / repeated use on a host
+# that caches the image. Default 0 keeps :slim lean; build the zero-network variant with:
+#   docker build -f Dockerfile.slim --build-arg BAKE_WEIGHTS=1 \
+#     -t ghcr.io/chrishonselaar/ocr-mineru:slim-weights experiments/ocr_ab
+ARG BAKE_WEIGHTS=0
+RUN if [ "$BAKE_WEIGHTS" = "1" ]; then \
+      python3 -c "from huggingface_hub import snapshot_download; \
+        snapshot_download('opendatalab/MinerU2.5-Pro-2605-1.2B')"; \
+    fi
+ENTRYPOINT ["/entrypoint.sh"]
+
+# ---- Build + VALIDATE + push (from a host with Docker + healthy PyPI) ---------------
+#   # build context = repo root so we can also grab ../ocr_drain/ocr_worker.py if wanted:
+#   cp experiments/ocr_drain/ocr_worker.py experiments/ocr_ab/   # optional, or scp at runtime
+#   docker build -f experiments/ocr_ab/Dockerfile.slim -t ghcr.io/chrishonselaar/ocr-mineru:slim experiments/ocr_ab
+#   docker images ghcr.io/chrishonselaar/ocr-mineru:slim        # confirm ~8–10 GB, not ~24
+#
+#   # VALIDATE output parity before trusting it (this is the load-bearing step):
+#   docker run --rm --gpus all -v "$PWD/data/ocr_testset:/in" -v "/tmp/slimout:/out" \
+#     ghcr.io/chrishonselaar/ocr-mineru:slim \
+#     python ocr_pdf.py /in/vuurwerkramp_typemachine_1989_gemeentepolitie.pdf /out
+#   #   -> diff /tmp/slimout/*.md against a v1 run of the same PDF; text must match (no "!!!!").
+#
+#   gh auth token | docker login ghcr.io -u chrishonselaar --password-stdin   # write:packages
+#   docker push ghcr.io/chrishonselaar/ocr-mineru:slim
+#
+# Then point pod.py / vast create --image at ...:slim. Keep :v1 until :slim is validated.

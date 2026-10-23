@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civic Indexer — Bron onboarden</title>
+    <link rel="stylesheet" href="/onboard.css">
+</head>
+<body>
+    <div class="o-header">
+        <div class="o-header-left">
+            <h1>🧭 Bron onboarden</h1>
+            <a href="/" class="o-back">← Zoeken</a>
+            <a href="/monitor" class="o-back">Pipeline-monitor</a>
+        </div>
+        <div class="o-header-right">
+            <span class="o-generated" id="pollState"></span>
+            <button class="o-refresh" id="refreshBtn">⟳ Verversen</button>
+        </div>
+    </div>
+
+    <div class="o-container">
+        <aside class="o-side">
+            <section class="o-panel">
+                <h2 class="o-section-title">Nieuwe onboarding</h2>
+                <form id="intakeForm" class="o-form">
+                    <label>Bron-URL
+                        <input type="url" id="url" placeholder="https://…" required>
+                    </label>
+                    <label>Intentie — één zin (fase 0)
+                        <textarea id="intent" rows="3"
+                                  placeholder="waarvoor moet deze bron vindbaar zijn?" required></textarea>
+                    </label>
+                    <label>Source id
+                        <input type="text" id="sourceId" placeholder="afgeleid uit de URL">
+                    </label>
+                    <label>Driver
+                        <select id="driver">
+                            <option value="replay">replay — opgenomen sessie, geen kosten</option>
+                            <option value="sdk">sdk — echte agent (~$3,40, live verzoeken)</option>
+                        </select>
+                    </label>
+                    <p class="o-hint" id="driverHint"></p>
+                    <button type="submit" class="o-primary" id="startBtn">Start onboarding</button>
+                    <p class="o-error" id="intakeError"></p>
+                </form>
+            </section>
+
+            <section class="o-panel">
+                <h2 class="o-section-title">Sessies</h2>
+                <div id="sessionList" class="o-sessions"></div>
+            </section>
+        </aside>
+
+        <main class="o-main" id="main">
+            <div class="o-empty" id="emptyState">
+                <p>Geen sessie geselecteerd.</p>
+                <p class="o-hint">Start een onboarding of kies er een uit de lijst. De agent
+                   doorloopt de 8 fasen en stopt bij elke verificatiepoort (4, 6, 7); daar
+                   beslist u — goedkeuren, wijzigingen vragen of weigeren.</p>
+            </div>
+
+            <div id="runView" hidden>
+                <section class="o-run-header">
+                    <div class="o-run-title">
+                        <h2 id="runSource"></h2>
+                        <span class="o-badge" id="runStatus"></span>
+                        <span class="o-badge driver" id="runDriver"></span>
+                    </div>
+                    <p class="o-intent" id="runIntent"></p>
+                    <div class="o-stats" id="runStats"></div>
+                    <div class="o-phases" id="phaseRail"></div>
+                    <div class="o-actions">
+                        <button class="o-danger-ghost" id="stopBtn">Run stoppen</button>
+                    </div>
+                </section>
+
+                <section id="gateCard" class="o-gate" hidden></section>
+
+                <div id="acceptance" class="o-acceptance"></div>
+
+                <div class="o-panels">
+                    <section class="o-panel o-panel-wide">
+                        <h2 class="o-section-title">Verloop</h2>
+                        <div id="events" class="o-events"></div>
+                    </section>
+                    <section class="o-panel">
+                        <h2 class="o-section-title">Interventies</h2>
+                        <div id="interventions"></div>
+                    </section>
+                    <section class="o-panel">
+                        <h2 class="o-section-title">Oppervlak-poort (probe 0)</h2>
+                        <div id="surfaceGate"></div>
+                    </section>
+                    <section class="o-panel o-panel-wide">
+                        <h2 class="o-section-title">Probe-rapporten</h2>
+                        <div id="probes"></div>
+                    </section>
+                    <section class="o-panel o-panel-wide">
+                        <h2 class="o-section-title">Concept-manifest</h2>
+                        <div id="manifest"></div>
+                    </section>
+                    <section class="o-panel o-panel-wide">
+                        <h2 class="o-section-title">Poortbesluiten</h2>
+                        <div id="gateHistory"></div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/onboard.js"></script>
+</body>
+</html>

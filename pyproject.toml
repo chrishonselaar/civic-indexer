@@ -1,0 +1,50 @@
+[project]
+name = "civic-indexer"
+version = "0.1.0"
+license = "EUPL-1.2"
+license-files = ["LICENSE"]
+description = "Universal crawl -> extract -> index engine for Dutch civic datasets (Stage A walking skeleton)"
+requires-python = ">=3.12"
+dependencies = [
+    "psycopg[binary]>=3.2",
+    "requests>=2.32",
+    "pyyaml>=6.0",
+    "pymupdf>=1.24",
+    "opensearch-py>=2.6",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+ui = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+]
+embed = [
+    "sentence-transformers>=3.0",
+]
+# W6 onboarding-agent runtime (engine/onboarding_agent.py). Also needs the `claude` CLI
+# on PATH and an API key; `civic onboard --dry-run` needs neither.
+agent = [
+    "claude-agent-sdk>=0.1",
+]
+
+[project.scripts]
+civic = "engine.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    # starlette >=1.3 TestClient needs httpx2; a clean clone with only `--group dev`
+    # otherwise fails 8 test modules at collection (found 2026-09-08 on a fresh clone)
+    "httpx2>=2.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["engine"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

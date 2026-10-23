@@ -1,0 +1,999 @@
+{
+  "pagination": {
+    "next": "",
+    "previous": "",
+    "page": 1,
+    "per_page": 200,
+    "total_pages": 1,
+    "items_on_page": 18,
+    "total_items": 18,
+    "has_more_pages": false
+  },
+  "events": [
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1432009",
+        "agenda_item_count": 0,
+        "document_count": 0
+      },
+      "id": 1432009,
+      "self": "api.notubiz.nl/events/1432009",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-11-12 13:50:44",
+      "last_modified": "2025-11-12 13:50:44",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "MRDH Rekeningcommissie"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Vanavond vergadert het lid van de Rekeningcommissie bij de MRDH. De MRDH-klankbordgroep nodigt u graag uit om input te leveren voor hun bijdrage. Schriftelijke pre-advies moet altijd &eacute;&eacute;n week van te voren om 12:00 zijn ingeleverd.</p>\r\n<p>Eventuele vragen, bijdragen of perspectieven kunt via de griffie insturen (iris.zoet@vlaardingen.nl) of direct naar de adviescommissieleden:<br />Economisch Vestigingsklimaat: Stefanie Solleveld en Constantijn Stevens<br />VervoersAutoriteit: Leonie Claessen en Thom van Vugt</p>\r\n<p>Link naar de vergaderingen: https://mrdh.notubiz.nl</p>"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Extern"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-01 20:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1476262",
+        "agenda_item_count": 2,
+        "document_count": 0
+      },
+      "id": 1476262,
+      "self": "api.notubiz.nl/events/1476262",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-03-13 16:57:59",
+      "last_modified": "2026-04-03 10:31:25",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Inhoudelijke bijeenkomst - Sport & Cultuur"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadszaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-02 20:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 10157,
+        "self": "api.notubiz.nl/organisations/262/gremia/10157"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/assemblies/1396403",
+        "meetings_count": 2,
+        "document_count": 0
+      },
+      "id": 1396403,
+      "self": "api.notubiz.nl/events/1396403",
+      "type": "assembly",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": true,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-08-20 11:24:32",
+      "last_modified": "2026-06-10 14:12:43",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Raadscommissie"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadszaal/Burgerzaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-04 20:30:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1476264",
+        "agenda_item_count": 3,
+        "document_count": 0
+      },
+      "id": 1476264,
+      "self": "api.notubiz.nl/events/1476264",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-03-13 17:00:19",
+      "last_modified": "2026-06-10 21:18:10",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Inhoudelijke bijeenkomst P&C-cyclus"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p><em>Met training van accountant over lezen van de jaarrekening.</em></p>\r\n<p><em>Voorafgaand kennismaking met de Rekenkamer Vlaardingen.</em></p>"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadszaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-10 20:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 94,
+        "self": "api.notubiz.nl/organisations/262/gremia/94"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1396405",
+        "agenda_item_count": 53,
+        "document_count": 0
+      },
+      "id": 1396405,
+      "self": "api.notubiz.nl/events/1396405",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": true,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-08-20 11:25:30",
+      "last_modified": "2026-07-09 16:17:11",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Dhr. R. Pfoster"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "dhr. E.F.A. Zevenbergen"
+        },
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Raadsvergadering"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. Nadat de player is gestart kunt u de ondertiteling aanzetten door onderaan de player op 'CC' te klikken.</p>"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadszaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-11 20:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1432012",
+        "agenda_item_count": 0,
+        "document_count": 0
+      },
+      "id": 1432012,
+      "self": "api.notubiz.nl/events/1432012",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-11-12 13:51:31",
+      "last_modified": "2025-11-12 13:51:31",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "MRDH adviescommissies"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Vanavond vergaderen de adviescommissieleden bij de MRDH. De MRDH-klankbordgroep nodigt u graag uit om input te leveren voor hun bijdrage. Schriftelijke pre-advies moet altijd &eacute;&eacute;n week van te voren om 12:00 zijn ingeleverd.</p>\r\n<p>Eventuele vragen, bijdragen of perspectieven kunt via de griffie insturen (iris.zoet@vlaardingen.nl) of direct naar de adviescommissieleden:<br />Economisch Vestigingsklimaat: Stefanie Solleveld en Constantijn Stevens<br />VervoersAutoriteit: Leonie Claessen en Thom van Vugt</p>\r\n<p>Link naar de vergaderingen: https://mrdh.notubiz.nl<br />EV 18:00-20:00<br />VA 19:00-21:00</p>"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Extern"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-17 18:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1476265",
+        "agenda_item_count": 1,
+        "document_count": 0
+      },
+      "id": 1476265,
+      "self": "api.notubiz.nl/events/1476265",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-03-13 17:01:16",
+      "last_modified": "2026-06-15 15:20:41",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Thema-avond P&C-stukken (inhoudelijk)"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Burgerzaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-17 20:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 94,
+        "self": "api.notubiz.nl/organisations/262/gremia/94"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1507480",
+        "agenda_item_count": 20,
+        "document_count": 0
+      },
+      "id": 1507480,
+      "self": "api.notubiz.nl/events/1507480",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-06-15 14:05:13",
+      "last_modified": "2026-06-19 15:14:59",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Dhr. R. Pfoster"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Dhr. E.F.A. Zevenbergen"
+        },
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Extra raadsvergadering - Installatie nieuwe wethouders en raadsleden"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": " Bij deze vergadering is ondertiteling beschikbaar. Nadat de player is gestart kunt u de ondertiteling aanzetten door onderaan de player op 'CC' te klikken."
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadszaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-18 20:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1476266",
+        "agenda_item_count": 0,
+        "document_count": 1
+      },
+      "id": 1476266,
+      "self": "api.notubiz.nl/events/1476266",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-03-13 17:01:59",
+      "last_modified": "2026-06-22 09:57:49",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Werkbezoek Rogplus"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Westlandseweg 1 Maassluis"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-23 20:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1441378",
+        "agenda_item_count": 18,
+        "document_count": 0
+      },
+      "id": 1441378,
+      "self": "api.notubiz.nl/events/1441378",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": true,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-12-02 10:48:06",
+      "last_modified": "2026-06-25 12:13:05",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Auditcommissie"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Burgerzaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-24 20:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 10313,
+        "self": "api.notubiz.nl/organisations/262/gremia/10313"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1396402",
+        "agenda_item_count": 26,
+        "document_count": 0
+      },
+      "id": 1396402,
+      "self": "api.notubiz.nl/events/1396402",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": true,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-08-20 11:24:01",
+      "last_modified": "2026-07-07 09:14:55",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Agendacommissie"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Koffiekamer"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Mw. J.K. van Huizen- den Ouden"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-25 18:45:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 10157,
+        "self": "api.notubiz.nl/organisations/262/gremia/10157"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/assemblies/1396408",
+        "meetings_count": 1,
+        "document_count": 0
+      },
+      "id": 1396408,
+      "self": "api.notubiz.nl/events/1396408",
+      "type": "assembly",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": true,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-08-20 11:27:25",
+      "last_modified": "2026-06-30 09:32:14",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Raadscommissie"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadszaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-25 20:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1396409",
+        "agenda_item_count": 27,
+        "document_count": 0
+      },
+      "id": 1396409,
+      "self": "api.notubiz.nl/events/1396409",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": true,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-08-20 11:28:20",
+      "last_modified": "2026-06-25 16:31:26",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Presidium"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Burgerzaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-06-29 19:30:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1441383",
+        "agenda_item_count": 3,
+        "document_count": 0
+      },
+      "id": 1441383,
+      "self": "api.notubiz.nl/events/1441383",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-12-02 10:52:27",
+      "last_modified": "2026-07-08 11:18:13",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Sprekersplein"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Tijdens het sprekersplein zullen er een omwonende (zijn visie geven op het voorstel om van de tijdelijke nachtopvang een permanente voorziening te maken) en de bestuurder van Naut (voorheen Stoed en Seniorenwelzijn) aangevuld met twee gebruikers van de winteropvang.</p>Bij deze vergadering is ondertiteling beschikbaar. U kunt deze aanzetten door in de balk onderaan de videoplayer op \"CC\" te klikken."
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Oude Hal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-07-02 19:30:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 10157,
+        "self": "api.notubiz.nl/organisations/262/gremia/10157"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/assemblies/1396411",
+        "meetings_count": 2,
+        "document_count": 0
+      },
+      "id": 1396411,
+      "self": "api.notubiz.nl/events/1396411",
+      "type": "assembly",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": true,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-08-20 11:29:26",
+      "last_modified": "2026-07-02 16:57:58",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Raadscommissie"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadszaal/Burgerzaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-07-02 20:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 94,
+        "self": "api.notubiz.nl/organisations/262/gremia/94"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1396413",
+        "agenda_item_count": 51,
+        "document_count": 0
+      },
+      "id": 1396413,
+      "self": "api.notubiz.nl/events/1396413",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": true,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2025-08-20 11:30:03",
+      "last_modified": "2026-07-14 08:05:21",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "dhr. R. Pfoster"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "dhr. E.F.A. Zevenbergen"
+        },
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Raadsvergadering - Voorjaarsnota"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": "<p>Bij deze vergadering is ondertiteling beschikbaar. Nadat de player is gestart kunt u de ondertiteling aanzetten door onderaan de player op 'CC' te klikken.</p>"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadszaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-07-07 19:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 94,
+        "self": "api.notubiz.nl/organisations/262/gremia/94"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1516051",
+        "agenda_item_count": 41,
+        "document_count": 0
+      },
+      "id": 1516051,
+      "self": "api.notubiz.nl/events/1516051",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-07-07 12:03:43",
+      "last_modified": "2026-07-10 11:10:27",
+      "order": null,
+      "live": true,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 68,
+          "reference_model": null,
+          "value": "Dhr. R. Pfoster"
+        },
+        {
+          "id": 72,
+          "reference_model": null,
+          "value": "Dhr. E.F.A. Zevenbergen"
+        },
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Raadsvergadering - vervolg 7 juli"
+        },
+        {
+          "id": 3,
+          "reference_model": null,
+          "value": " Bij deze vergadering is ondertiteling beschikbaar. Nadat de player is gestart kunt u de ondertiteling aanzetten door onderaan de player op 'CC' te klikken."
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadszaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-07-09 19:00:00",
+          "end_date": null
+        }
+      ]
+    },
+    {
+      "organisation": {
+        "id": 262,
+        "self": "api.notubiz.nl/organisations/262"
+      },
+      "gremium": {
+        "id": 5732,
+        "self": "api.notubiz.nl/organisations/262/gremia/5732"
+      },
+      "event_type_data": {
+        "self": "api.notubiz.nl/events/meetings/1476267",
+        "agenda_item_count": 0,
+        "document_count": 2
+      },
+      "id": 1476267,
+      "self": "api.notubiz.nl/events/1476267",
+      "type": "meeting",
+      "permission_group": "public",
+      "body": "council",
+      "confidential": 0,
+      "announcement": false,
+      "canceled": false,
+      "inactive": false,
+      "creation_date": "2026-03-13 17:03:51",
+      "last_modified": "2026-07-15 16:08:00",
+      "order": null,
+      "live": false,
+      "archive_state": "unarchived",
+      "archive_state_last_modified": null,
+      "allow_subscriptions": false,
+      "subscriptions": [],
+      "attributes": [
+        {
+          "id": 1,
+          "reference_model": null,
+          "value": "Debattraining"
+        },
+        {
+          "id": 50,
+          "reference_model": null,
+          "value": "Raadszaal"
+        }
+      ],
+      "plannings": [
+        {
+          "start_date": "2026-07-14 20:00:00",
+          "end_date": null
+        }
+      ]
+    }
+  ]
+}

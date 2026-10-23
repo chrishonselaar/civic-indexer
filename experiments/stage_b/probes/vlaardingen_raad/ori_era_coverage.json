@@ -1,0 +1,151 @@
+{
+  "probe": "ori_era_coverage",
+  "purpose": "TOT-5 follow-up: measure ORI's coverage of the provider corpus PER ERA, not only in the recent window. The prior 401/401 figure measured text presence among items ORI carries, which is not a coverage measurement at all.",
+  "at": "2026-07-25",
+  "endpoint": "https://api.openraadsinformatie.nl/v1/elastic/ori_vlaardingen_*/_search",
+  "method": "Provider side = the 785 documents already in battery_sample.json (era-stratified, harvested during the 2026-07-25 re-onboard). Aggregator side = a full paged walk of ORI's MediaObjects requesting only original_url + last_discussed_at, reduced to a set of provider document ids. Coverage is a local set operation. ZERO requests to api.notubiz.nl.",
+  "ori_side": {
+    "media_objects_claimed": 16877,
+    "rows_walked": 16877,
+    "distinct_provider_doc_ids": 16778,
+    "unkeyable_media_objects": 99,
+    "per_year_last_discussed_at": {
+      "2010": 133,
+      "2013": 599,
+      "2014": 1373,
+      "2015": 1310,
+      "2016": 1451,
+      "2017": 1645,
+      "2018": 997,
+      "2019": 1084,
+      "2020": 1110,
+      "2021": 1377,
+      "2022": 1074,
+      "2023": 1563,
+      "2024": 1236,
+      "2025": 1396,
+      "2026": 430
+    }
+  },
+  "provider_sample": {
+    "source": "battery_sample.json (785 docs)",
+    "sampled": 785,
+    "carried_by_ori": 693,
+    "coverage_pct": 88.3,
+    "content_check": "The uncovered eras are NOT empty placeholders: era 2008 = 23 PDFs + 5 msword (median 23 KB, max 1.77 MB, e.g. 'Kadernota Parkeerbeleid' 648 KB); era 2012 = 58 PDFs (median 407 KB, max 13.1 MB). ORI carries none of them."
+  },
+  "per_era": {
+    "2008": {
+      "sampled": 28,
+      "in_ori": 0,
+      "missing_ids": [
+        "4774562",
+        "524119",
+        "2753821",
+        "2753822",
+        "2753823",
+        "4774597",
+        "524721",
+        "2753933"
+      ],
+      "coverage_pct": 0.0,
+      "missing": 28
+    },
+    "2012": {
+      "sampled": 58,
+      "in_ori": 0,
+      "missing_ids": [
+        "4775048",
+        "2755602",
+        "2755603",
+        "2755604",
+        "2755605",
+        "2755606",
+        "2755607",
+        "2755608"
+      ],
+      "coverage_pct": 0.0,
+      "missing": 58
+    },
+    "2014": {
+      "sampled": 39,
+      "in_ori": 39,
+      "missing_ids": [],
+      "coverage_pct": 100.0,
+      "missing": 0
+    },
+    "2016": {
+      "sampled": 91,
+      "in_ori": 87,
+      "missing_ids": [
+        "2904390",
+        "2904396",
+        "3700649",
+        "3700624"
+      ],
+      "coverage_pct": 95.6,
+      "missing": 4
+    },
+    "2018": {
+      "sampled": 136,
+      "in_ori": 135,
+      "missing_ids": [
+        "6102394"
+      ],
+      "coverage_pct": 99.3,
+      "missing": 1
+    },
+    "2020": {
+      "sampled": 127,
+      "in_ori": 127,
+      "missing_ids": [],
+      "coverage_pct": 100.0,
+      "missing": 0
+    },
+    "2021": {
+      "sampled": 297,
+      "in_ori": 296,
+      "missing_ids": [
+        "9653705"
+      ],
+      "coverage_pct": 99.7,
+      "missing": 1
+    },
+    "2024": {
+      "sampled": 4,
+      "in_ori": 4,
+      "missing_ids": [],
+      "coverage_pct": 100.0,
+      "missing": 0
+    },
+    "2026": {
+      "sampled": 5,
+      "in_ori": 5,
+      "missing_ids": [],
+      "coverage_pct": 100.0,
+      "missing": 0
+    }
+  },
+  "pre_2014_volume_estimate": {
+    "estimate_documents": "~2,000-3,000",
+    "method_a": "events/yr from battery_sample.era_event_counts (2008: 65, 2012: 58) x ~6 years (2008-2013) x era docs/meeting from the same sample (2008: 5.6, 2012: 11.6) => ~2,000-4,200",
+    "method_b": "corpus residual: ORI holds 16,778 distinct provider doc ids for 2013+; the manifest's own full-backfill estimate is ~19,000 documents => ~2,200-3,000 outside ORI's range",
+    "confidence": "low-medium — two independent routes agree on the order of magnitude, but docs/meeting is sampled from 5 meetings per era and grows sharply over time (2008: 5.6 -> 2021: 74.2), so this is an order estimate, not a count",
+    "why_it_matters": "it is the size of the api.notubiz.nl backfill the ORI route CANNOT remove, i.e. the residual POL-1 exposure for this source"
+  },
+  "ori_archive_start_per_municipality": {
+    "vlaardingen": {
+      "oldest_item": "2010-01-07",
+      "shape": "sparse head — 133 items in 2010, ZERO in 2011-2012, 606 in 2013, ~1,000-1,650/yr from 2014",
+      "provider_has_pre_2014_docs": true
+    },
+    "haarlem": {
+      "oldest_item": "2014-01-09",
+      "shape": "dense from the start (4,613 in 2014)",
+      "provider_has_pre_2014_docs": false,
+      "note": "manifests/haarlem_raad.yaml already records DRIFT-2: 2008/2012 meetings carry 0 documents, documents only ~2013+. So ORI's 2014 start costs Haarlem little or nothing — the SAME aggregator has a materially different coverage cost per municipality, which is why archive depth must be probed per source, not read off the registry."
+    }
+  },
+  "corrects": "The '401/401 carrying page text over 2010-2013' figure recorded against TOT-5 as archival reassurance measured TEXT PRESENCE AMONG ITEMS ORI CARRIES. It never compared against the provider, so it was not a coverage measurement and cannot support 'the deficit is recent-window, not archival'. This probe is the coverage measurement, and it says the opposite: the deficit has TWO ends.",
+  "reading": "ORI's coverage of Vlaardingen is excellent in the middle and absent at both ends. 2014-2026: 95.6-100% (393/396 sampled; scattered single misses in 2016/2018/2021). 2008-2013: 0% (0/86 sampled) — a hard archival cutoff, ~2,000-3,000 real documents. Recent window: lagging (TOT-5, 28 of 30 absentees inside the covered window). CONSEQUENCE for aggregator-registry.md §8 step 4: the honest split is THREE roles, not two — provider for the pre-2014 backfill, ORI for 2014-2025, provider for the recent window/incremental. The ORI route removes ~85% of api.notubiz.nl traffic, not 100%, so it SHRINKS the POL-1 question for this host rather than dissolving it. Note also that an ORI-only route cannot even DISCOVER pre-2014 items, so the project's scoping rule ('discover all, process scoped, defer the rest as metadata stubs') cannot be honoured on that route without touching the provider."
+}

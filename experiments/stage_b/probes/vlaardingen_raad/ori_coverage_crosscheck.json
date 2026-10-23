@@ -1,0 +1,69 @@
+{
+  "probe": "ori_coverage_crosscheck",
+  "purpose": "Does the ORI aggregator carry what the provider harvest already ledgered? Tests design/aggregator-registry.md §7 item 3 (ORI-complete != publisher-complete) with a measurement instead of a caution, and proves URN equality against REAL ledger rows rather than fixtures.",
+  "at": "2026-07-25",
+  "endpoint": "https://api.openraadsinformatie.nl/v1/elastic/ori_vlaardingen_*/_search",
+  "method": "For every ledgered vlaardingen_raad item, prefix-match its provider document id against ORI's original_url, then re-derive the natural key with OriElasticStrategy._parse and compare URNs.",
+  "ledger_sample": {
+    "source_id": "vlaardingen_raad",
+    "items": 89,
+    "published_range": [
+      "2026-06-02",
+      "2026-07-14"
+    ],
+    "caveat": "This is the Stage-B recent test slice, NOT a full backfill: it is exactly the window where aggregator lag is most likely, so the miss rate below must NOT be read as ORI's overall coverage. A separate 401-item spot walk over 2010-2013 found 401/401 carrying page text."
+  },
+  "urn_equality": {
+    "carried_by_ori": 59,
+    "urn_matches": 59,
+    "result": "EXACT: every document ORI carries re-derives to the same URN the Notubiz harvest assigned. Switching routes re-keys nothing."
+  },
+  "coverage_gap": {
+    "ledgered_not_in_ori": 30,
+    "of_which_inside_oris_covered_window": 28,
+    "oris_newest_meeting": "2026-07-09",
+    "missing_published_range": [
+      "2026-06-10",
+      "2026-07-14"
+    ],
+    "examples": [
+      {
+        "key": "17040277",
+        "published": "2026-06-10",
+        "title": "Podcast \"Grip op gemeentefinanciën: Hoe verloopt de P&C-cyclus\" van de",
+        "mime": "directory"
+      },
+      {
+        "key": "17116933",
+        "published": "2026-06-11",
+        "title": "20260611 Besluitenlijst raadsvergadering 19 mei 2026",
+        "mime": "application/pdf"
+      },
+      {
+        "key": "17116934",
+        "published": "2026-06-11",
+        "title": "20260611 Besluitenlijst raadsvergadering 31 maart 2026",
+        "mime": "application/pdf"
+      },
+      {
+        "key": "17116935",
+        "published": "2026-06-11",
+        "title": "20260611 Besluitenlijst raadsvergadering 1 april 2026",
+        "mime": "application/pdf"
+      },
+      {
+        "key": "17116932",
+        "published": "2026-06-11",
+        "title": "20260611 Besluitenlijst raadsvergadering 15 april 2026",
+        "mime": "application/pdf"
+      },
+      {
+        "key": "17116945",
+        "published": "2026-06-11",
+        "title": "20260611 RB Benoemen leden Auditcommissie",
+        "mime": "application/pdf"
+      }
+    ],
+    "reading": "28 of 89 are absent from ORI despite being dated INSIDE the window ORI covers, and they are ordinary PDFs (besluitenlijsten, raadsbesluiten). Two mechanisms fit and this probe does NOT distinguish them: (a) ORI harvested those meetings before the documents were attached and has not reindexed, (b) a genuine harvest gap. Either way the aggregator's recent-window coverage is materially incomplete, so discovery.completeness_claim: aggregator is a substantive declaration, not a formality."
+  }
+}

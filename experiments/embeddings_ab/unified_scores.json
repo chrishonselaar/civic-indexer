@@ -1,0 +1,68 @@
+[
+  {
+    "key": "voyage-4-large",
+    "dim": 1024,
+    "n_pool": 42892,
+    "n_queries": 3000,
+    "recall_at_10": 0.5977,
+    "recall_at_20": 0.661,
+    "recall_at_100": 0.783,
+    "ndcg_at_10": 0.448,
+    "mrr_at_100": 0.4084
+  },
+  {
+    "key": "voyage-4-lite",
+    "dim": 1024,
+    "n_pool": 42892,
+    "n_queries": 3000,
+    "recall_at_10": 0.5537,
+    "recall_at_20": 0.6213,
+    "recall_at_100": 0.7497,
+    "ndcg_at_10": 0.404,
+    "mrr_at_100": 0.3646
+  },
+  {
+    "key": "voyage-law-2",
+    "dim": 1024,
+    "n_pool": 42892,
+    "n_queries": 3000,
+    "recall_at_10": 0.521,
+    "recall_at_20": 0.593,
+    "recall_at_100": 0.7283,
+    "ndcg_at_10": 0.3783,
+    "mrr_at_100": 0.3421
+  },
+  {
+    "key": "qwen4b",
+    "dim": 2560,
+    "n_pool": 42892,
+    "n_queries": 3000,
+    "recall_at_10": 0.505,
+    "recall_at_20": 0.576,
+    "recall_at_100": 0.72,
+    "ndcg_at_10": 0.3725,
+    "mrr_at_100": 0.3392
+  },
+  {
+    "key": "bgem3",
+    "dim": 1024,
+    "n_pool": 42892,
+    "n_queries": 3000,
+    "recall_at_10": 0.4447,
+    "recall_at_20": 0.5153,
+    "recall_at_100": 0.6737,
+    "ndcg_at_10": 0.3179,
+    "mrr_at_100": 0.2869
+  },
+  {
+    "key": "arctic",
+    "dim": 1024,
+    "n_pool": 42892,
+    "n_queries": 3000,
+    "recall_at_10": 0.4487,
+    "recall_at_20": 0.5147,
+    "recall_at_100": 0.6593,
+    "ndcg_at_10": 0.3165,
+    "mrr_at_100": 0.2834
+  }
+]

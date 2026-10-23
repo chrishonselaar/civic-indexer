@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civic Indexer — overheidsdocumenten zoeken</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header rl_header62_component">
+        <div class="rl_header62_spacing-block-3">
+            <h1>🔍 Overheidsdocumenten zoeken</h1>
+            <a href="/monitor" class="header-nav-link">📊 Pipeline-monitor →</a>
+        </div>
+        <div class="rl_header62_spacing-block-2">
+            <p>Doorzoek alle bronnen tegelijk — Woo-besluiten, tuchtrecht en raadsinformatie — op volledige tekst</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tab-content active" id="searchTab">
+        <div class="search-section">
+            <div class="search-box">
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="Zoek op trefwoord, onderwerp, organisatie..."
+                    id="searchInput"
+                />
+                <span class="search-icon">🔍</span>
+            </div>
+            <!-- W11(a): what the operators were read as, and what was repaired.
+                 Shown above the chips, because when operators are used the chips
+                 deliberately stay out of the way (design/search-operators.md §4). -->
+            <div class="operator-note" id="operatorNote"></div>
+            <!-- W4: what the query was understood as — editable, removable chips -->
+            <div class="chip-bar" id="chipBar"></div>
+            <details class="operator-help">
+                <summary>Zoekoperatoren</summary>
+                <ul>
+                    <li><code>"exacte zin"</code> — woorden in deze volgorde</li>
+                    <li><code>a EN b</code> · <code>a AND b</code> — beide (ook zonder operator: spaties betekenen EN)</li>
+                    <li><code>a OF b</code> · <code>a OR b</code> — één van beide</li>
+                    <li><code>-woord</code> · <code>NIET woord</code> · <code>NOT woord</code> — sluit uit</li>
+                    <li><code>(a OF b) EN c</code> — haakjes groeperen</li>
+                    <li><code>veror*</code> — jokerteken aan het eind van een woord</li>
+                </ul>
+                <p>Operatoren moeten met HOOFDLETTERS. Zonder operatoren verandert er
+                   niets aan het zoeken.</p>
+            </details>
+            <div class="quick-stats">
+                <div class="stat">⚡ <strong id="totalDocs">...</strong> documenten doorzoekbaar</div>
+                <div class="stat">🗂️ <strong id="totalSources">...</strong> bronnen tegelijk</div>
+                <div class="stat">🎯 <strong>Volledige tekst</strong> incl. PDF-inhoud</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <aside class="filters">
+                <!-- The corpus switcher is a facet: cross-corpus is the default, and
+                     narrowing to two of four sources is the same gesture as narrowing
+                     to two publishers (design/cross-corpus-search.md). -->
+                <!-- PROJ-3: in hybride modus tellen de facetten binnen de gefuseerde
+                     pool, niet over de hele index. Dat staat er dan bij — kleinere
+                     getallen mogen niet als bug gelezen worden. -->
+                <div class="facet-scope-note" id="facetScopeNote"></div>
+
+                <div class="filter-section" id="sourceFilter">
+                    <div class="filter-title">Bron</div>
+                </div>
+
+                <div class="filter-section" id="publisherFilter">
+                    <div class="filter-title">Publisher</div>
+                </div>
+
+                <div class="filter-section" id="fileTypeFilter">
+                    <div class="filter-title">Bestandstype</div>
+                </div>
+
+                <div class="filter-section" id="dispositionFilter">
+                    <div class="filter-title">Verwerkingsstatus</div>
+                </div>
+
+                <div class="filter-section" id="monthFilter">
+                    <div class="filter-title">Maand</div>
+                    <div class="year-filter" id="monthButtons"></div>
+                </div>
+
+                <button class="clear-filters" id="clearFilters">✕ Wis alle filters</button>
+            </aside>
+
+            <main class="results">
+                <div class="results-header">
+                    <div class="results-count" id="resultsCount">Voer een zoekopdracht in</div>
+                    <select class="sort-select" id="modeSelect" title="Rangschikking">
+                        <option value="hybrid_rerank">Slim (hybride + herordening)</option>
+                        <option value="hybrid">Hybride (BM25 + semantisch)</option>
+                        <option value="bm25">Klassiek (BM25)</option>
+                    </select>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="relevance">Relevantie</option>
+                        <option value="date_desc">Nieuwste eerst</option>
+                        <option value="date_asc">Oudste eerst</option>
+                    </select>
+                </div>
+                <!-- Why a mode was not the one asked for. Never silent: a quality
+                     drop that looks like a bug gets "fixed" by removing the check. -->
+                <div class="notice" id="rerankNote"></div>
+                <div id="resultsList"></div>
+                <div class="pagination" id="pagination"></div>
+            </main>
+        </div>
+        </div>
+    </div>
+
+    <!-- Document detail modal -->
+    <div class="modal-overlay" id="docModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

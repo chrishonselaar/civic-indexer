@@ -1,0 +1,50 @@
+[
+  {
+    "model": "voyage-4-large",
+    "success_at_10": 0.996,
+    "success_at_100": 1.0,
+    "ndcg_at_10_pooled": 0.612,
+    "recall_at_100_pooled": 0.814,
+    "ndcg_at_10_singlegold": 0.45
+  },
+  {
+    "model": "voyage-4-lite",
+    "success_at_10": 0.968,
+    "success_at_100": 1.0,
+    "ndcg_at_10_pooled": 0.559,
+    "recall_at_100_pooled": 0.801,
+    "ndcg_at_10_singlegold": 0.394
+  },
+  {
+    "model": "qwen4b",
+    "success_at_10": 0.964,
+    "success_at_100": 1.0,
+    "ndcg_at_10_pooled": 0.557,
+    "recall_at_100_pooled": 0.779,
+    "ndcg_at_10_singlegold": 0.341
+  },
+  {
+    "model": "voyage-law-2",
+    "success_at_10": 0.972,
+    "success_at_100": 0.996,
+    "ndcg_at_10_pooled": 0.545,
+    "recall_at_100_pooled": 0.732,
+    "ndcg_at_10_singlegold": 0.373
+  },
+  {
+    "model": "bgem3",
+    "success_at_10": 0.972,
+    "success_at_100": 0.992,
+    "ndcg_at_10_pooled": 0.532,
+    "recall_at_100_pooled": 0.733,
+    "ndcg_at_10_singlegold": 0.298
+  },
+  {
+    "model": "arctic",
+    "success_at_10": 0.948,
+    "success_at_100": 0.996,
+    "ndcg_at_10_pooled": 0.436,
+    "recall_at_100_pooled": 0.673,
+    "ndcg_at_10_singlegold": 0.285
+  }
+]

@@ -1,0 +1,125 @@
+{
+  "hosts": [
+    "https://tuchtrecht.overheid.nl",
+    "https://repository.overheid.nl"
+  ],
+  "verdict": "bulk_surface_available",
+  "enforceable": true,
+  "recommended": {
+    "surface": "sru",
+    "host": "https://repository.overheid.nl",
+    "url": "https://repository.overheid.nl/sru",
+    "rank_class": "bulk_metadata",
+    "evidence": {
+      "protocol": "SRU",
+      "explain": true,
+      "maximum_records": 100
+    }
+  },
+  "surfaces": [
+    {
+      "surface": "sru",
+      "host": "https://tuchtrecht.overheid.nl",
+      "url": "https://tuchtrecht.overheid.nl/sru",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "oai_pmh",
+      "host": "https://tuchtrecht.overheid.nl",
+      "url": "https://tuchtrecht.overheid.nl/oai",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "ckan",
+      "host": "https://tuchtrecht.overheid.nl",
+      "url": "https://tuchtrecht.overheid.nl/api/3/action/package_search",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "sitemap",
+      "host": "https://tuchtrecht.overheid.nl",
+      "url": "https://tuchtrecht.overheid.nl/sitemap.xml",
+      "status": "absent",
+      "http_status": 404,
+      "rank_class": null,
+      "evidence": {},
+      "note": "HTTP 404"
+    },
+    {
+      "surface": "frontend_xhr",
+      "host": "https://tuchtrecht.overheid.nl",
+      "url": "https://tuchtrecht.overheid.nl",
+      "status": "manual",
+      "http_status": null,
+      "rank_class": null,
+      "evidence": {},
+      "note": "requires headless/DevTools HAR capture — not automatable in probe 0; W6 agent must inspect the site's own XHR calls (private JSON API outranks scraping)."
+    },
+    {
+      "surface": "sru",
+      "host": "https://repository.overheid.nl",
+      "url": "https://repository.overheid.nl/sru",
+      "status": "found",
+      "http_status": 200,
+      "rank_class": "bulk_metadata",
+      "evidence": {
+        "protocol": "SRU",
+        "explain": true,
+        "maximum_records": 100
+      },
+      "note": "SRU explainResponse present"
+    },
+    {
+      "surface": "oai_pmh",
+      "host": "https://repository.overheid.nl",
+      "url": "https://repository.overheid.nl/oai",
+      "status": "absent",
+      "http_status": 200,
+      "rank_class": null,
+      "evidence": {},
+      "note": "no protocol signal"
+    },
+    {
+      "surface": "ckan",
+      "host": "https://repository.overheid.nl",
+      "url": "https://repository.overheid.nl/api/3/action/package_search",
+      "status": "absent",
+      "http_status": 200,
+      "rank_class": null,
+      "evidence": {},
+      "note": "no protocol signal"
+    },
+    {
+      "surface": "sitemap",
+      "host": "https://repository.overheid.nl",
+      "url": "https://repository.overheid.nl/sitemap.xml",
+      "status": "absent",
+      "http_status": 200,
+      "rank_class": null,
+      "evidence": {},
+      "note": "no protocol signal"
+    },
+    {
+      "surface": "frontend_xhr",
+      "host": "https://repository.overheid.nl",
+      "url": "https://repository.overheid.nl",
+      "status": "manual",
+      "http_status": null,
+      "rank_class": null,
+      "evidence": {},
+      "note": "requires headless/DevTools HAR capture — not automatable in probe 0; W6 agent must inspect the site's own XHR calls (private JSON API outranks scraping)."
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+data/ocr_testset/*.pdf
+data/ocr_ab/
+__pycache__/
+
+# engine (Stage A walking skeleton)
+.venv/
+# W6 onboarding runtime state (live session artifacts + event logs). Product state, not
+# evidence: the recorded Stage-B sessions stay under experiments/stage_b/sessions/.
+var/
+data/blobs/
+data/texts/
+*.egg-info/
+
+# personal_data: hit CONTEXTS contain the personal data being measured and must never be
+# committed. scan.py already refuses to write them inside the repo; this is the second lock.
+experiments/personal_data/*context*
+experiments/personal_data/*.jsonl
+
+# embeddings_ab: secrets, venv, and regenerable large artifacts
+.env
+experiments/embeddings_ab/.venv/
+experiments/embeddings_ab/slim_pool.jsonl
+experiments/embeddings_ab/embeddings/
+experiments/embeddings_ab/results_*_ranks.jsonl
+experiments/embeddings_ab/*.log
+experiments/embeddings_ab/*.flag
+experiments/embeddings_ab/rerank_bgem3.json
+experiments/embeddings_ab/slim_pool.jsonl.gz
+experiments/embeddings_ab/keyword_rankings.json
+experiments/embeddings_ab/rerank_input_*.json
+
+# Rerank pool payload: full decision text (tuchtrecht is exposure T2, named
+# professionals). Regenerate with `rerank_pool.py export`; never commit it.
+experiments/external_comparison/rerank_input.jsonl

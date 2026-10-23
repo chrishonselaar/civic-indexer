@@ -1,0 +1,218 @@
+# Woo-besluiten via the open.overheid.nl public search API.
+# Stage A: validated YAML read by hand-written strategy code (no DSL interpreter).
+# API facts probed 2026-07-23: totaal present; NO server-side date filter (partition
+# assignment is client-side on one newest-first stream); no deep-paging cap; tail
+# sort anomaly => incremental cutoff needs overlap_pages.
+
+manifest_schema: 1
+
+source:
+  id: woo_besluiten
+  name: "Woo-besluiten (open.overheid.nl)"
+  base_url: "https://open.overheid.nl"
+  admin_intent: >
+    Full national corpus of Woo-verzoeken en -besluiten as published on
+    open.overheid.nl, including federated metadata stubs (recorded, deferred).
+  volatility: low          # source keeps documents; no TTL pressure
+  language: nl
+
+# ── Policy (flow Phase 1; POL-1 backfill 2026-07-25) ───────────────────────────────
+# Backfilled after the Vlaardingen re-onboard found robots directives were recorded
+# nowhere in the fleet. Only the `robots` sub-block is probe-verified this pass
+# (`civic probe-bulk --source woo_besluiten`, policy_flags); the rest is marked
+# not_assessed rather than guessed.
+policy:
+  robots:
+    "open.overheid.nl": "User-agent: * / Disallow: / (fetched 2026-07-25)"
+    crawl_delay: none_declared
+    assessment: >
+      Blanket Disallow on the only host this source touches — it serves both the
+      /overheid/openbaarmakingen/api/v0/zoek discovery API and the /documenten/{id}/file
+      downloads. GATE decision, not an engine one. Mitigating context: the posture is an
+      allowlist rather than a no-crawl stance — the same file names `User-agent: Googlebot`
+      with `Allow: /home|/over|/verwijzingen|/details/*` and no Disallow, so the operator
+      does grant a named crawler read access to exactly the detail pages this source
+      indexes; the corpus is statutorily public (Wet open overheid) and published by KOOP
+      for onward use; the API is the site's own public search API. Aggravating context: our
+      product token is not on that allowlist, and no ToS or licence statement was located
+      on the host (see license below). Not resolved by the agent.
+    admin_decision: >
+      GO — 2026-07-27, admin ruling (gate 1). The blanket Disallow is not applied to this
+      host. Reasoning: the same file grants Googlebot the entire site with no Disallow, so
+      the operator is not declining machine access as such but choosing which crawlers get
+      it; the corpus is statutorily public; and since 2026-04-28 this host is the only
+      channel for Rijksoverheid Woo-besluiten (SRU `woo`: 0 records, no bulk alternative
+      exists). The operator can opt this crawler out at any time: it identifies itself with
+      a contact URL that resolves, the page there carries a copy-pasteable robots.txt block
+      rule for our product token, and mail to the address it gives is answered.
+      Conditions, all mechanically in place at the time of this ruling:
+      identifying User-Agent (engine/config.py, tests/test_crawler_identity.py), declared
+      politeness ceiling (fetch.politeness below), and URN-level takedown on request
+      (`civic suppress`, migrations/0004). Framework: design/access-posture.md (the
+      evidence and option memos behind it are internal).
+    probed_not_harvested:
+      # probe 0 also tests the KOOP bulk host for any *.overheid.nl source. It likewise
+      # serves "Disallow: /", but this manifest never requests it — recorded so a future
+      # switch to the FRBR/SRU surface inherits the finding instead of rediscovering it.
+      "repository.overheid.nl": "User-agent: * / Disallow: / (fetched 2026-07-25)"
+  # --- access posture, second axis (design/access-posture.md §3) ---
+  exposure: T2
+  # Full text served from our copy. Statutorily public Rijksoverheid Woo-besluiten,
+  # published by KOOP for onward use, and since 2026-04-28 this host is the only channel
+  # that carries them — withholding the text would reproduce the retrieval problem this
+  # project exists to fix. T3 (redistributable derived artefacts) waits on a licence:
+  # `license` below is still not_assessed.
+  processors: [voyage_rerank]
+  # Opt-in, and the only source that gets one. Conditional on the Voyage account having
+  # the training opt-out set — see design/access-posture.md §4; without it their default
+  # terms take a perpetual licence to train on whatever is sent.
+  # The justification used to read "government decisions written for publication, no
+  # residents' correspondence". The 2026-07-28 census (personal_data.smell below) says
+  # that is true of the bulk and wrong at the edges: LNV handhaving files ARE
+  # correspondence with private parties, and one release carries a probable unredacted
+  # BSN. The opt-in is left standing because the measured residual is low and the axis is
+  # the admin's to move — but it now rests on a measurement, not on the sentence above.
+  personal_data:
+    smell: low                 # measured 2026-07-28, experiments/personal_data/findings.md
+    detail: >
+      Census (not a sample) over all 409 documents we hold text for — 26.2M characters,
+      10 ministries, the set that is projected and therefore shipped to the reranker.
+      The bronhouders' lakwerk is heavy and privacy-directed: 102,042 redaction markers
+      across 338 of 409 documents, 91,829 of them (90%) citing art. 5.1.2e, de
+      persoonlijke levenssfeer. Residual personal data is rare but not nil. Two findings:
+      (1) one probable unredacted BSN — an XML <SofiNummer>, valid 11-proef, corroborated
+      by its sibling message identifier, in one ministry release (identifier deliberately
+      not recorded in this public file);
+      (2) private third parties named in LNV CITES handhaving letters, which redact the
+      addressee but not everyone their file mentions. Everything else adjudicated benign:
+      the 481 BSN candidates are KOOP page-ID footers, livestock ear tags and one RSIN;
+      the 1,530 phone hits are ear tags and document IDs; the 13 IBANs are organisations'
+      letterhead accounts; the 9 private e-mails have their local part already redacted;
+      the 45 named persons are ~40 office-holders acting officially. No residential
+      address found. Known floor, not a total: names lacking a dhr./mevr. marker are not
+      detected (no NER pass), and this covers only the corpus we hold today — Rijkswaterstaat,
+      75% of discovered items, is stub-only with no text and must be re-measured if a
+      per-portal scraper is ever built.
+    controls: [redaction_markers_observed, no_residential_address_found]
+  takedown: not_assessed       # owed at gate 1
+  license: not_assessed        # owed at gate 1; no licence statement located on the host
+
+politeness:
+  delay_seconds: 0.25
+  timeout_seconds: 30
+  concurrency: 1
+  retry:
+    attempts: 3
+    backoff: 1.5
+    retry_on_status: [429, 500, 502, 503, 504]
+
+budgets:
+  eur_per_run_cap: 5.0
+  eur_per_gb_downloaded: 0.01   # nominal bandwidth/storage accounting; exercises the gate
+  ocr: none                # Stage A: native extraction only; tail defers to queue
+  llm_runtime: none
+
+discovery:
+  transport: http
+  roles:
+    backfill:
+      strategy: paged_json_api
+      request:
+        method: GET
+        url: "https://open.overheid.nl/overheid/openbaarmakingen/api/v0/zoek"
+        params:
+          informatiecategorie: "Woo-verzoeken en -besluiten"
+      pagination:
+        model: record_offset
+        param_start: start
+        param_size: aantal
+        size: 20
+      partition:
+        key: date
+        field: document.openbaarmakingsdatum
+        ladder: [month]
+        assignment: client_side_stream   # no server-side date filter exists
+      termination:
+        empty_results: true
+      claimed_total:
+        declared: global                 # per-leaf totals NOT available
+        field: totaal
+        compensating_controls:
+          - cutoff_walk
+          - facet_cross_check: filters.beschikbaarSinds
+          - sanity_cap
+      sanity_cap:
+        records: 40000
+      items:
+        path: resultaten
+        id_field: document.id
+        fields:
+          title: document.titel
+          publisher: document.publisher
+          published: document.openbaarmakingsdatum
+          landing_url: document.pid
+          aanbieder: document.aanbieder
+          weblocatie: document.weblocatie
+          pages: aantalPaginas           # OCR cost knowable before any download
+          file_type: bestandsType
+    incremental:
+      extends: backfill
+      cutoff:
+        field: document.openbaarmakingsdatum
+        overlap_pages: 5                 # tail sort anomaly: page past the cutoff
+
+identity:
+  natural_key: document.id               # open.overheid UUID
+  natural_key_pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  urn_template: "woo_besluiten:{natural_key}"
+  merge_policy: keep_separate
+  rejected_candidates:
+    - key: document.pid
+      why: "pid landing URLs are not stable across republication"
+  federated_stub:                        # non-UUID ids = federated metadata stubs
+    id_prefix: "woo-idx-"
+    aanbieder: "Harvester"
+    disposition: stub
+    # Corrected 2026-07-30. This used to end "(needs per-portal scraper)", which was
+    # wrong and cost 78% of the corpus a year of nobody asking: every one of the 20,712
+    # carries a direct `weblocatie` PDF URL, and they live on FOUR hosts, not twenty
+    # thousand portals. The real blocker is ACCESS, not engineering — one of those hosts
+    # disallows `*` on exactly our path tree while allowing a named `Wooharvester`, and
+    # two publish DiWoo sitemaps. Filed as gate 2 in design/access-posture.md §10; an
+    # admin ruling, never agent-resolved. Until then these stay stubs.
+    reason: "federated portal record; file lives on the publisher's own host (access-posture.md §10)"
+
+fetch:
+  file_url_template: "https://open.overheid.nl/documenten/{natural_key}/file"
+  validation:
+    magic: true
+    eof: true
+    min_size_bytes: 1024
+  max_bytes: 524288000                   # 500 MB per-file streaming cap
+  blob_retention: deleted_after_distill  # keep only partial/deferred blobs
+
+relationships:
+  group_keys: {}                         # open.overheid exposes no dossier bundle here
+  edges: []                              # crawl-established edges dormant for this source
+
+extraction:
+  ladder: [native_pdf_text]
+  native_confidence_threshold: 0.5       # below => partial + missing:[ocr_tail] + deferred_queue
+  zip_policy: defer                      # ZIP dossiers => deferred(zip_dossier), blob kept
+
+enrichment:
+  fail_open: true
+  tables: {}
+
+index:
+  dataset: woo_besluiten
+  analyzer: dutch
+  facets: [publisher, published_month, file_type, disposition]
+  dates: [published]
+  chunking: engine_default
+
+health:
+  fixtures:
+    - woo_page_0
+    - woo_page_1
+  zero_match_policy: alarm

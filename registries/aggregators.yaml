@@ -1,0 +1,81 @@
+# Aggregator registry — probe 0's corpus-scoped step (SURF-3).
+#
+# Design: ../design/aggregator-registry.md. This is DATA, not code: adding an aggregator is
+# a reviewable diff, the same principle as the vocab lookup tables (new values are INSERTs,
+# never migrations).
+#
+# The lookup key is `corpus_types` + the source's declared organisation — deliberately NOT
+# the provider host. Matching on api.notubiz.nl would have missed the point: ORI republishes
+# iBabs, GemeenteOplossingen, Parlaeus and Tweede Kamer corpora too. `matches_provider_hosts`
+# is a REPORT hint only ("you were about to harvest X; this aggregator republishes it"), never
+# the lookup key.
+#
+# Every entry is probed and recorded found/absent/error like any other surface. A registry
+# entry that answers cleanly with zero hits is `absent` — verified knowledge that this
+# aggregator does not carry this corpus, which is the EXPECTED outcome for most pairings.
+
+- id: open_raadsinformatie
+  name: "Open Raadsinformatie (Open State Foundation / VNG Realisatie / Ontola)"
+  corpus_types: [council_information]
+  coverage: dutch_municipalities          # 310 ori_* indices, measured 2026-07-25
+  probe:
+    kind: elasticsearch
+    base_url: "https://api.openraadsinformatie.nl/v1/elastic"
+    index_pattern: "ori_{slug}_*"
+    item_type_field: "@type"
+    item_type_value: MediaObject
+    # ⚠️ TRAP (design §2): freshness is `max(last_discussed_at)` over the ITEM type.
+    # `start_date` lives on Meeting/AgendaItem and aggregates to null on MediaObject; the
+    # date in the INDEX NAME is a reindex stamp, not a data cutoff
+    # (ori_vlaardingen_20250514... was current to 2026-07-09 when measured).
+    freshness_field: last_discussed_at
+    harvest_recency_field: date_modified  # when ORI last touched the record, not civic time
+  join:
+    natural_key_field: original_url       # api.notubiz.nl/document/{id}/{version}
+    matches_provider_hosts:               # report hint only — see header
+      - api.notubiz.nl
+      - "*.ibabs.eu"
+      - "*.gemeenteoplossingen.nl"
+  carries: [metadata, full_text, page_text, original_bytes]
+  content_fields:
+    # ⚠️ TRAP (design §2): `text` and `md_text` are per-page LISTS, not flat strings, and all
+    # three text fields carry the whole body once each — a full _source averages ~125 KB and
+    # a 1000-hit page weighs 23 MB. Request `pages` only; never fetch the triplicate.
+    text: text
+    markdown: md_text
+    pages: text_pages                     # [{page_number, text}] — our OCR-tail shape
+    bytes_url: url                        # /v1/resolve/<provider path> — serves the PDF itself
+    provenance: was_generated_by          # {app_semver, ended_at_time, ...} — second-hand text
+  robots: "no robots.txt (HTTP 404, fetched 2026-07-25) — nothing disallowed"
+  consent_posture: republished_for_reuse  # declared, not inferred (Notubiz feeds ORI itself)
+  license: not_assessed                   # OWED — the repo's MIT licence covers the SOFTWARE
+                                          # only; per-municipality data licence unresolved.
+  # ⚠️ COVERAGE IS THIS AGGREGATOR'S OWN HARVEST, and it is NOT wholesale (TOT-5). Do not read
+  # the counts below as the publisher's corpus, and do not read `newest` as coverage: ORI is
+  # current to within weeks AND starts years after some publishers' archives. Archive depth is
+  # per municipality, so it is PROBED per source (min/max of freshness_field + items_per_year)
+  # and never declared here. Vlaardingen measured: 88.3% per era, 0% before 2014.
+  coverage_caveat: aggregator_harvest_probe_per_source
+  measured:
+    at: 2026-07-25
+    indices: 310
+    samples:
+      vlaardingen:
+        media_objects: 16877
+        with_text: 16583
+        pdfs: 16583
+        newest: 2026-07-09
+        oldest: 2010-01-07                # sparse head: 133 in 2010, ZERO 2011-12, 606 in 2013
+        dense_from: 2014
+        provider_coverage: "88.3% of an 785-doc era-stratified provider sample; 2008 0/28,
+                            2012 0/58, 2014-2026 95.6-100%. Recent window lags (28 of 30
+                            absentees inside the covered window)."
+      haarlem:
+        media_objects: 71062
+        with_text: 70160
+        pdfs: 70163
+        newest: 2026-07-02
+        oldest: 2014-01-09                # dense at once (4,613 in 2014)
+        dense_from: 2014
+        provider_coverage: "not cross-checked. The 2014 start costs little here: the manifest
+                            records DRIFT-2 — Haarlem's 2008/2012 meetings carry 0 documents."
